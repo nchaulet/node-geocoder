@@ -1,6 +1,6 @@
 (function() {
     var chai = require('chai'),
-        should = chai.should()
+        should = chai.should(),
         expect = chai.expect;
 
     var GoogleAdapter = require('../../lib/geocoder/googleadapter.js');
@@ -10,10 +10,6 @@
     };
 
     describe('GoogleAdapter', function() {
-
-        beforeEach(function() {
-
-        });
 
         describe('#constructor' , function() {
 
