@@ -1,0 +1,29 @@
+{
+  "name": "node-geocoder",
+  "version": "0.0.1",
+  "description": "node geocoding library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nchaulet/node-geocoder.git"
+  },
+  "keywords": [
+    "geocoder",
+    "geo"
+  ],
+  "author": "nchaulet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nchaulet/node-geocoder/issues"
+  },
+  "dependencies": {
+    "requestify": "~0.1.14",
+    "iz": "~0.2.0"
+  },
+  "dependencies-dev": {
+    "chai": "~1.7.2"
+  }
+}
