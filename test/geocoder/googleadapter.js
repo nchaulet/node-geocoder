@@ -1,6 +1,5 @@
 (function() {
-    var mocha = require('mocha'),
-        chai = require('chai'),
+    var chai = require('chai'),
         should = chai.should()
         expect = chai.expect;
 
