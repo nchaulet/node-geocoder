@@ -21,10 +21,10 @@
   },
   "dependencies": {
     "requestify": "~0.1.14",
-    "iz": "~0.2.0",
-    "mocha": "~1.12.0"
+    "iz": "~0.2.0"
   },
-  "dependencies-dev": {
-    "chai": "~1.7.2"
+  "devDependencies": {
+    "chai": "~1.7.2",
+    "mocha": "~1.12.0"
   }
 }
