@@ -1,12 +1,13 @@
 (function() {
     var chai = require('chai'),
         should = chai.should(),
-        expect = chai.expect;
+        expect = chai.expect,
+        sinon = require('sinon');
 
     var GoogleAdapter = require('../../lib/geocoder/googleadapter.js');
 
     var mockedHttpAdapter = {
-
+        get: function() {}
     };
 
     describe('GoogleAdapter', function() {
@@ -50,6 +51,19 @@
                     err.message.should.equal('Google adapter no suport geocoding ip');
                     done();
                 });
+
+            });
+
+            it('Should call httpAdapter get method', function() {
+
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().returns({then: function() {}});
+
+                var googleAdapter = new GoogleAdapter(mockedHttpAdapter);
+
+                googleAdapter.geocode('1 champs élysée Paris');
+
+                mock.verify();
 
             });
 
