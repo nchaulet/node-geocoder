@@ -1,3 +1,2 @@
-test/geocoder/
-test/httpadapter/
+--recursive
 --reporter spec
