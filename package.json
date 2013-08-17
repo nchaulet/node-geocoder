@@ -2,7 +2,7 @@
   "name": "node-geocoder",
   "version": "0.0.1",
   "description": "node geocoding library",
-  "main": "index.js",
+  "main": "lib/geocoderfactory.js",
   "scripts": {
     "test": "mocha"
   },
