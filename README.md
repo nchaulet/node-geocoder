@@ -8,12 +8,13 @@ In development
 
 ## Geocoder
 
-* `google` : GoogleGeocoder
+* `google` : GoogleGeocoder support adress geocoding and reverse geocoding
 
 
 ## Http adapter
 
 * `requestify` : This adapter use Requestify library
+* `http`       : This adapter use Http nodejs library
 
 ## Usage example
 
@@ -24,11 +25,17 @@ In development
     });
 
     // output :
-    [ { lat: 48.8698679,
-    lng: 2.3072976,
-    country: 'France',
-    city: 'Paris',
-    zipcode: '75008' } ]
+    [{
+        lat: 48.8698679,
+        lng: 2.3072976,
+        country: 'France',
+        city: 'Paris',
+        zipcode: '75008',
+        streetName: 'Champs-Élysées',
+        streetNumber: '29',
+        countryCode: 'FR'
+    }]
+
 
 ## More
 

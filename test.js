@@ -4,7 +4,7 @@ var RequestifyAdapter = require ('./lib/httpadapter/requestifyadapter.js');
 
 var GeocoderFactory = require('./lib/geocoderfactory.js');
 
-var adapter = GeocoderFactory.getGeocoder('google', 'requestify');
+var adapter = GeocoderFactory.getGeocoder('google', 'http');
 
 //var adapter = new GoogleAdapter(new RequestifyAdapter());
 
