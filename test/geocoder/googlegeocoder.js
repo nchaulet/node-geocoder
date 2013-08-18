@@ -69,6 +69,21 @@
 
         });
 
+        describe('#reverse' , function() {
+            it('Should call httpAdapter get method', function() {
+
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().returns({then: function() {}});
+
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+
+                googleAdapter.reverse(10.0235,-2.3662);
+
+                mock.verify();
+
+            });
+        });
+
 
     });
 
