@@ -30,27 +30,23 @@
 
         describe('#geocode' , function() {
 
-            it('Should not accept Ipv4', function(done) {
+            it('Should not accept Ipv4', function() {
 
                 var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
 
-                googleAdapter.geocode('127.0.0.1', function(err, res) {
-                    err.should.be.instanceof(Error);
-                    err.message.should.equal('Google Geocoder no suport geocoding ip');
-                    done();
-                });
+                expect(function() {
+                        googleAdapter.geocode('127.0.0.1');
+                }).to.throw(Error, 'Google Geocoder no suport geocoding ip');
 
             });
 
-            it('Should not accept Ipv6', function(done) {
+            it('Should not accept Ipv6', function() {
 
                 var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
 
-                googleAdapter.geocode('2001:0db8:0000:85a3:0000:0000:ac1f:8001', function(err, res) {
-                    err.should.be.instanceof(Error);
-                    err.message.should.equal('Google Geocoder no suport geocoding ip');
-                    done();
-                });
+                expect(function() {
+                        googleAdapter.geocode('2001:0db8:0000:85a3:0000:0000:ac1f:8001');
+                }).to.throw(Error, 'Google Geocoder no suport geocoding ip');
 
             });
 
