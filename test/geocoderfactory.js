@@ -16,22 +16,28 @@
             it('called with "google" and "requestify" must return google geocoder with requestify adapter', function() {
                 var geocoder = GeocoderFactory.getGeocoder('google', 'requestify');
 
-                geocoder.should.be.instanceof(GoogleGeocoder);
-                geocoder.httpAdapter.should.be.instanceof(RequestifyAdapter);
+                var geocoderAdapter = geocoder.geocoder;
+
+                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+                geocoderAdapter.httpAdapter.should.be.instanceof(RequestifyAdapter);
             });
 
             it('called with "google" and "http" must return google geocoder with http adapter', function() {
                 var geocoder = GeocoderFactory.getGeocoder('google', 'http');
 
-                geocoder.should.be.instanceof(GoogleGeocoder);
-                geocoder.httpAdapter.should.be.instanceof(HttpAdapter);
+                var geocoderAdapter = geocoder.geocoder;
+
+                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
             });
 
             it('called with "google" must return google geocoder with http adapter', function() {
                 var geocoder = GeocoderFactory.getGeocoder('google');
 
-                geocoder.should.be.instanceof(GoogleGeocoder);
-                geocoder.httpAdapter.should.be.instanceof(HttpAdapter);
+                var geocoderAdapter = geocoder.geocoder;
+
+                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
             });
         });
     });

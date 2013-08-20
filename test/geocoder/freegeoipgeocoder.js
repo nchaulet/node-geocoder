@@ -5,6 +5,7 @@
         sinon = require('sinon');
 
     var FreegeoipGeocoder = require('../../lib/geocoder/freegeoipgeocoder.js');
+    var HttpAdapter = require('../../lib/httpadapter/httpadapter.js');
 
     var mockedHttpAdapter = {
         get: function() {}
@@ -50,9 +51,29 @@
                 freegeoipgeocoder.geocode('127.0.0.1');
 
                 mock.verify();
-
             });
 
+            it('Should return a geocoded adress', function(done) {
+
+                var freegeoipgeocoder = new FreegeoipGeocoder(new HttpAdapter());
+
+                freegeoipgeocoder.geocode('66.249.64.0', function(err, results) {
+                    err.should.to.equal(false);
+                    results[0].should.to.deep.equal({
+                        "latitude": 37.386,
+                        "longitude": -122.0838,
+                        "country": "United States",
+                        "city": "Mountain View",
+                        "zipcode": null,
+                        "streetName": null,
+                        "streetNumber": null,
+                        "countryCode": "US"
+                    });
+
+                    done();
+                });
+
+            });
         });
 
         describe('#reverse' , function() {
