@@ -11,7 +11,7 @@ In development
     npm instal node-geocoder
 
 
-## Geocoder Adapter
+## Geocoder Provider
 
 * `google` : GoogleGeocoder support adress geocoding and reverse geocoding
 * `freegeoip` : FreegeoipGeocoder support ip geocoding
@@ -24,10 +24,10 @@ In development
 
 ## Usage example
 
-    var geocoderAdapter = 'google';
+    var geocoderProvider = 'google';
     var httpAdapter = 'http';
 
-    var geocoder = require('node-geocoder')(geocoderAdapter, httpAdapter);
+    var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter);
 
     geocoder.geocode('29 champs elysée paris', function(err, res) {
         console.log(res);
@@ -53,3 +53,8 @@ You can improve this project by adding new geocoder or http adapter
 For run tests just `npm test`
 
 
+## Roadmap
+
+add results formating
+more documentation
+more provider
