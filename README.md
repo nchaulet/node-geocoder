@@ -6,7 +6,12 @@ Node library for geocoding and reverse geocoding
 
 In development
 
-## Geocoder
+## instalation
+
+    npm instal node-geocoder
+
+
+## Geocoder Adapter
 
 * `google` : GoogleGeocoder support adress geocoding and reverse geocoding
 * `freegeoip` : FreegeoipGeocoder support ip geocoding
@@ -14,12 +19,15 @@ In development
 
 ## Http adapter
 
+* `http`       : This adapter use Http nodejs library (by default)
 * `requestify` : This adapter use Requestify library
-* `http`       : This adapter use Http nodejs library
 
 ## Usage example
 
-    var geocoder = require('node-geocoder')('google', 'requestify');
+    var geocoderAdapter = 'google';
+    var httpAdapter = 'http';
+
+    var geocoder = require('node-geocoder')(geocoderAdapter, httpAdapter);
 
     geocoder.geocode('29 champs elysée paris', function(err, res) {
         console.log(res);
