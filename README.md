@@ -20,7 +20,7 @@ Currently in development
 ## Http adapter
 
 * `http`       : This adapter use Http nodejs library (by default)
-* `requestify` : This adapter use Requestify library
+* `requestify` : This adapter use Requestify library (you need to install `requestify`)
 
 ## Usage example
 
@@ -56,7 +56,7 @@ For run tests just `npm test`
 
 ## Extending node geocoder
 
-you can add new geocoder by implementing the two method geocode & reverse : 
+you can add new geocoder by implementing the two method geocode & reverse :
 
 
     var geocoder = {
