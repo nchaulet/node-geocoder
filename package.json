@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "requestify": "~0.1.14",
-    "iz": "~0.2.0",
     "sinon": "~1.7.3"
   },
   "devDependencies": {
