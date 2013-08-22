@@ -4,7 +4,7 @@
 
 Node library for geocoding and reverse geocoding
 
-In development
+Currently in development
 
 ## instalation
 
@@ -46,12 +46,23 @@ In development
     }]
 
 
+
+
 ## More
 
 You can improve this project by adding new geocoder or http adapter
 
 For run tests just `npm test`
 
+## Extending node geocoder
+
+you can add new geocoder by implementing the two method geocode & reverse : 
+
+
+    var geocoder = {
+        geocode: function(value, callback) { },
+        reverse: function(lat, lng, callback) { }
+    }
 
 ## Roadmap
 
