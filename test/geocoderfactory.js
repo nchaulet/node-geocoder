@@ -6,6 +6,7 @@
 
     var GoogleGeocoder = require('../lib/geocoder/googlegeocoder.js');
     var GeocoderFactory = require('../lib/geocoderfactory.js');
+    var DataScienceToolkitGeocoder = require('../lib/geocoder/datasciencetoolkitgeocoder.js');
 
     var RequestifyAdapter = require('../lib/httpadapter/requestifyadapter.js');
     var HttpAdapter = require('../lib/httpadapter/httpadapter.js');
@@ -37,6 +38,15 @@
                 var geocoderAdapter = geocoder.geocoder;
 
                 geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+            });
+
+            it('called with "datasciencetoolkit" and "http" must return datasciencetoolkit geocoder with http adapter', function() {
+                var geocoder = GeocoderFactory.getGeocoder('datasciencetoolkit', 'http');
+
+                var geocoderAdapter = geocoder.geocoder;
+
+                geocoderAdapter.should.be.instanceof(DataScienceToolkitGeocoder);
                 geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
             });
         });

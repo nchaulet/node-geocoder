@@ -15,6 +15,7 @@ Currently in development
 
 * `google` : GoogleGeocoder support adress geocoding and reverse geocoding
 * `freegeoip` : FreegeoipGeocoder support ip geocoding
+* `datasciencetoolkit` : DataScienceToolkitGeocoder support ip v4 geocoding
 
 
 ## Http adapter
