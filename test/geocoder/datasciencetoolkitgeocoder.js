@@ -36,7 +36,7 @@
                 var geocoder = new DataScienceToolkitGeocoder(mockedHttpAdapter);
                 expect(function() {geocoder.geocode('1 rue test');})
                     .to
-                    .throw(Error, 'DataScienceToolkitGeocoder suport only ip geocoding');
+                    .throw(Error, 'DataScienceToolkitGeocoder suport only IPv4 geocoding');
 
 
             });

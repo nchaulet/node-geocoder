@@ -54,6 +54,7 @@
             });
 
             it('Should return a geocoded adress', function(done) {
+                this.timeout(100000);
 
                 var freegeoipgeocoder = new FreegeoipGeocoder(new HttpAdapter());
 
