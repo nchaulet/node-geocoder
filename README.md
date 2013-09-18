@@ -9,19 +9,20 @@ Currently in development
 ## instalation
 
     npm instal node-geocoder
-
+    P
 
 ## Geocoder Provider
 
 * `google` : GoogleGeocoder support adress geocoding and reverse geocoding
 * `freegeoip` : FreegeoipGeocoder support ip geocoding
 * `datasciencetoolkit` : DataScienceToolkitGeocoder support ip v4 geocoding
-
+* `openstreetmap` : OpenStreetMapGeocoder support adress geocoding and reverse geocoding
 
 ## Http adapter
 
 * `http`       : This adapter use Http nodejs library (by default)
 * `requestify` : This adapter use Requestify library (you need to install `requestify`)
+
 
 ## Usage example
 
