@@ -52,7 +52,6 @@
             });
 
             it('Should call httpAdapter get method', function() {
-
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().returns({then: function() {}});
 
@@ -65,12 +64,9 @@
             });
 
             it('Should return geocoded adress', function(done) {
-
-
-
                 var googleAdapter = new GoogleGeocoder(new HttpAdapter());
 
-                googleAdapter.geocode('1 champs élysée Paris', function(err, results) {
+                googleAdapter.geocode('1 champs élysées Paris', function(err, results) {
                     err.should.to.equal(false);
                     results[0].should.to.deep.equal({
                         "latitude": 48.869261,
