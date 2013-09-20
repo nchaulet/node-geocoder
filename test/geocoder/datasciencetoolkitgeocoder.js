@@ -5,7 +5,6 @@
         sinon = require('sinon');
 
     var DataScienceToolkitGeocoder = require('../../lib/geocoder/datasciencetoolkitgeocoder.js');
-    var HttpAdapter = require('../../lib/httpadapter/httpadapter.js');
 
     var mockedHttpAdapter = {
         get: function() {}
@@ -55,13 +54,24 @@
 
             it('Should return a geocoded adress', function(done) {
 
-                var geocoder = new DataScienceToolkitGeocoder(new HttpAdapter());
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().callsArgWith(2, false, {
+                        '66.249.64.0' : {
+                            latitude: 37.386,
+                            longitude: -122.0838,
+                            country_code: 'US',
+                            country_name: 'United States',
+                            locality: 'Mountain View',
+                        }
+                    }
+                );
+                var geocoder = new DataScienceToolkitGeocoder(mockedHttpAdapter);
 
                 geocoder.geocode('66.249.64.0', function(err, results) {
                     err.should.to.equal(false);
                     results[0].should.to.deep.equal({
-                        "latitude": 37.4192008972168,
-                        "longitude": -122.057403564453,
+                        "latitude": 37.386,
+                        "longitude": -122.0838,
                         "country": "United States",
                         "city": "Mountain View",
                         "zipcode": null,
@@ -69,7 +79,7 @@
                         "streetNumber": null,
                         "countryCode": "US"
                     });
-
+                    mock.verify();
                     done();
                 });
 
@@ -78,8 +88,7 @@
 
         describe('#reverse' , function() {
             it('Should throw an error', function() {
-
-                  var geocoder = new DataScienceToolkitGeocoder(mockedHttpAdapter);
+                var geocoder = new DataScienceToolkitGeocoder(mockedHttpAdapter);
                 expect(function() {geocoder.reverse(10.0235,-2.3662);})
                     .to
                     .throw(Error, 'DataScienceToolkitGeocoder no support reverse geocoding');
