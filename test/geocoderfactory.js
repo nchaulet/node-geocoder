@@ -12,6 +12,8 @@
     var RequestifyAdapter = require('../lib/httpadapter/requestifyadapter.js');
     var HttpAdapter = require('../lib/httpadapter/httpadapter.js');
 
+    var GpxFormatter = require('../lib/formatter/gpxformatter.js');
+
     describe('GeocoderFactory', function() {
 
         describe('getGeocoder' , function() {
@@ -24,13 +26,15 @@
                 geocoderAdapter.httpAdapter.should.be.instanceof(RequestifyAdapter);
             });
 
-            it('called with "google" and "http" must return google geocoder with http adapter', function() {
-                var geocoder = GeocoderFactory.getGeocoder('google', 'http');
+            it('called with "google" and "http" and "gpx" must return google geocoder with http adapter and gpx formatter', function() {
+                var geocoder = GeocoderFactory.getGeocoder('google', 'http', 'gpx');
 
                 var geocoderAdapter = geocoder._geocoder;
+                var formatter = geocoder._formatter;
 
                 geocoderAdapter.should.be.instanceof(GoogleGeocoder);
                 geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+                formatter.should.be.instanceof(GpxFormatter);
             });
 
             it('called with "google" must return google geocoder with http adapter', function() {
