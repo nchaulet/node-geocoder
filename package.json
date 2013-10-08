@@ -1,6 +1,6 @@
 {
   "name": "node-geocoder",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "node geocoding library",
   "main": "lib/geocoderfactory.js",
   "scripts": {

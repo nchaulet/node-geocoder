@@ -23,13 +23,17 @@ Currently in development
 * `http`       : This adapter use Http nodejs library (by default)
 * `requestify` : This adapter use Requestify library (you need to install `requestify`)
 
+## Formatter
+
+* `gpx` : format result using GPX format 
 
 ## Usage example
 
     var geocoderProvider = 'google';
     var httpAdapter = 'http';
+    var formatter = null;
 
-    var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter);
+    var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, formatter);
 
     geocoder.geocode('29 champs elysée paris', function(err, res) {
         console.log(res);
