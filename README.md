@@ -8,7 +8,7 @@ Currently in development
 
 ## instalation
 
-    npm instal node-geocoder
+    npm install node-geocoder
     
 
 ## Geocoder Provider
@@ -33,7 +33,7 @@ Currently in development
     var httpAdapter = 'http';
     var formatter = null;
 
-    var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, formatter);
+    var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, formatter);
 
     geocoder.geocode('29 champs elysée paris', function(err, res) {
         console.log(res);
