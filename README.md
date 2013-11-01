@@ -17,6 +17,7 @@ Currently in development
 * `freegeoip` : FreegeoipGeocoder support ip geocoding
 * `datasciencetoolkit` : DataScienceToolkitGeocoder support ip v4 geocoding
 * `openstreetmap` : OpenStreetMapGeocoder support adress geocoding and reverse geocoding
+* `mapquest` : MapQuestGeocoder support adress geocoding and reverse geocoding need an apiKey
 
 ## Http adapter
 
@@ -31,9 +32,13 @@ Currently in development
 
     var geocoderProvider = 'google';
     var httpAdapter = 'http';
-    var formatter = null;
+    // optionnal
+    var extra = {
+        apiKey: 'YOUR_API_KEY',
+        formatter: null
+    };
 
-    var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, formatter);
+    var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, extra);
 
     geocoder.geocode('29 champs elysée paris', function(err, res) {
         console.log(res);
@@ -50,8 +55,6 @@ Currently in development
         streetName: 'Champs-Élysées',
         streetNumber: '29'
     }]
-
-
 
 
 ## More

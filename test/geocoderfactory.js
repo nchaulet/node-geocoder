@@ -27,7 +27,7 @@
             });
 
             it('called with "google" and "http" and "gpx" must return google geocoder with http adapter and gpx formatter', function() {
-                var geocoder = GeocoderFactory.getGeocoder('google', 'http', 'gpx');
+                var geocoder = GeocoderFactory.getGeocoder('google', 'http', { formatter : 'gpx'});
 
                 var geocoderAdapter = geocoder._geocoder;
                 var formatter = geocoder._formatter;
