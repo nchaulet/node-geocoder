@@ -13,6 +13,7 @@
     var HttpAdapter = require('../lib/httpadapter/httpadapter.js');
 
     var GpxFormatter = require('../lib/formatter/gpxformatter.js');
+    var StringFormatter = require('../lib/formatter/stringformatter.js');
 
     describe('GeocoderFactory', function() {
 
@@ -35,6 +36,17 @@
                 geocoderAdapter.should.be.instanceof(GoogleGeocoder);
                 geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
                 formatter.should.be.instanceof(GpxFormatter);
+            });
+
+            it('called with "google" and "http" and "string" must return google geocoder with http adapter and string formatter', function() {
+                var geocoder = GeocoderFactory.getGeocoder('google', 'http', { formatter : 'string', formatterPattern: 'PATTERN'});
+
+                var geocoderAdapter = geocoder._geocoder;
+                var formatter = geocoder._formatter;
+
+                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+                formatter.should.be.instanceof(StringFormatter);
             });
 
             it('called with "google" must return google geocoder with http adapter', function() {
