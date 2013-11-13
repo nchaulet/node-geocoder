@@ -26,7 +26,13 @@ Currently in development
 
 ## Formatter
 
-* `gpx` : format result using GPX format 
+* `gpx`    : format result using GPX format 
+* `string` : format result to an String array (you need to specify `extra.formatterPattern` key) 
+    * `%P` country
+    * `%p` country code
+    * `%n` street number
+    * `*S` street name
+    * `%z` zip code
 
 ## Usage example
 
@@ -75,6 +81,5 @@ you can add new geocoder by implementing the two method geocode & reverse :
 
 ## Roadmap
 
-add results formating
 more documentation
 more provider
