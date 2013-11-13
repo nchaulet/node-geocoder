@@ -1,7 +1,7 @@
 {
   "name": "node-geocoder",
-  "version": "0.3.0",
-  "description": "node geocoding library",
+  "version": "0.4.0",
+  "description": "node geocoding library, supports google maps, mapquest, open street map, ...",
   "main": "lib/geocoderfactory.js",
   "scripts": {
     "test": "mocha"
@@ -12,7 +12,10 @@
   },
   "keywords": [
     "geocoder",
-    "geo"
+    "geo",
+    "google",
+    "maps",
+    "mapquest"
   ],
   "author": "nchaulet",
   "license": "MIT",
