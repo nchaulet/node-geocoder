@@ -9,30 +9,6 @@ Currently in development
 ## instalation
 
     npm install node-geocoder
-    
-
-## Geocoder Provider
-
-* `google` : GoogleGeocoder support adress geocoding and reverse geocoding
-* `freegeoip` : FreegeoipGeocoder support ip geocoding
-* `datasciencetoolkit` : DataScienceToolkitGeocoder support ip v4 geocoding
-* `openstreetmap` : OpenStreetMapGeocoder support adress geocoding and reverse geocoding
-* `mapquest` : MapQuestGeocoder support adress geocoding and reverse geocoding need an apiKey
-
-## Http adapter
-
-* `http`       : This adapter use Http nodejs library (by default)
-* `requestify` : This adapter use Requestify library (you need to install `requestify`)
-
-## Formatter
-
-* `gpx`    : format result using GPX format 
-* `string` : format result to an String array (you need to specify `extra.formatterPattern` key) 
-    * `%P` country
-    * `%p` country code
-    * `%n` street number
-    * `*S` street name
-    * `%z` zip code
 
 ## Usage example
 
@@ -61,6 +37,30 @@ Currently in development
         streetName: 'Champs-Élysées',
         streetNumber: '29'
     }]
+
+
+## Geocoder Provider
+
+* `google` : GoogleGeocoder support adress geocoding and reverse geocoding
+* `freegeoip` : FreegeoipGeocoder support ip geocoding
+* `datasciencetoolkit` : DataScienceToolkitGeocoder support ip v4 geocoding
+* `openstreetmap` : OpenStreetMapGeocoder support adress geocoding and reverse geocoding
+* `mapquest` : MapQuestGeocoder support adress geocoding and reverse geocoding need an apiKey
+
+## Http adapter
+
+* `http`       : This adapter use Http nodejs library (by default)
+* `requestify` : This adapter use Requestify library (you need to install `requestify`)
+
+## Formatter
+
+* `gpx`    : format result using GPX format 
+* `string` : format result to an String array (you need to specify `extra.formatterPattern` key) 
+    * `%P` country
+    * `%p` country code
+    * `%n` street number
+    * `%S` street name
+    * `%z` zip code
 
 
 ## More
