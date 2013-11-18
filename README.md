@@ -6,7 +6,7 @@ Node library for geocoding and reverse geocoding
 
 Currently in development
 
-## instalation
+## Installation
 
     npm install node-geocoder
 
