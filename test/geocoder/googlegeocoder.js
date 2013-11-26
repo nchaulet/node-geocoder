@@ -75,8 +75,8 @@
                             {types: ['locality'], long_name: 'Paris' },
                             {types: ['postal_code'], long_name: '75008' },
                             {types: ['route'], long_name: 'Champs-Élysées' },
-                            {types: ['street_number'], long_name: '1' }
-
+                            {types: ['street_number'], long_name: '1' },
+                            {types: ['administrative_area_level_1'], long_name: 'Île-de-France', short_name: 'IDF'}
                         ],                            
                         country_code: 'US',
                         country_name: 'United States',
@@ -88,14 +88,16 @@
                 googleAdapter.geocode('1 champs élysées Paris', function(err, results) {
                     err.should.to.equal(false);
                     results[0].should.to.deep.equal({
-                        "latitude": 37.386,
-                        "longitude":  -122.0838,
-                        "country": "France",
-                        "city": "Paris",
-                        "zipcode": "75008",
-                        "streetName": "Champs-Élysées",
+                        "latitude"    : 37.386,
+                        "longitude"   : -122.0838,
+                        "country"     : "France",
+                        "city"        : "Paris",
+                        "zipcode"     : "75008",
+                        "streetName"  : "Champs-Élysées",
                         "streetNumber": "1",
-                        "countryCode": "Fr"
+                        "countryCode" : "Fr",
+                        "state"       : "Île-de-France",
+                        "stateCode"   : "IDF"
                     });
                     mock.verify();
                     done();
@@ -133,7 +135,9 @@
                             {types: ['locality'], long_name: 'Brooklyn' },
                             {types: ['postal_code'], long_name: '11211' },
                             {types: ['route'], long_name: 'Bedford Avenue' },
-                            {types: ['street_number'], long_name: '277' }
+                            {types: ['street_number'], long_name: '277' },
+                            {types: ['administrative_area_level_1'], long_name: 'État de New York', short_name: 'NY'}
+
 
                         ],                            
                         country_code: 'US',
@@ -145,14 +149,16 @@
                 googleAdapter.reverse(40.714232,-73.9612889, function(err, results) {
                         err.should.to.equal(false);
                         results[0].should.to.deep.equal({
-                            "latitude": 40.714232,
-                            "longitude": -73.9612889,
-                            "country": "United States",
-                            "city": "Brooklyn",
-                            "zipcode": "11211",
-                            "streetName": "Bedford Avenue",
+                            "latitude"    : 40.714232,
+                            "longitude"   : -73.9612889,
+                            "country"     : "United States",
+                            "city"        : "Brooklyn",
+                            "zipcode"     : "11211",
+                            "streetName"  : "Bedford Avenue",
                             "streetNumber": "277",
-                            "countryCode": "US"
+                            "countryCode" : "US",
+                            "state"       : "État de New York",
+                            "stateCode"   : "NY"
                         });
                         mock.verify();
                         done();

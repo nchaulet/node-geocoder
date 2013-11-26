@@ -35,7 +35,9 @@ Currently in development
         city: 'Paris',
         zipcode: '75008',
         streetName: 'Champs-Élysées',
-        streetNumber: '29'
+        streetNumber: '29',
+        state: 'Île de France',
+        stateCode: 'IDF'
     }]
 
 
@@ -61,6 +63,8 @@ Currently in development
     * `%n` street number
     * `%S` street name
     * `%z` zip code
+    * `%T` State
+    * `%t` state code
 
 
 ## More
