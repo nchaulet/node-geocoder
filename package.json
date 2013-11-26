@@ -25,9 +25,9 @@
   "dependencies": {
   },
   "devDependencies": {
-    "chai": "~1.7.2",
-    "mocha": "~1.12.0",
-    "sinon": "~1.7.3",
-    "requestify": "~0.1.14"
+    "chai": "~1.8",
+    "mocha": "~1.14",
+    "sinon": "~1.7",
+    "requestify": "~0.1"
   }
 }
