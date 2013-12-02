@@ -119,6 +119,23 @@
                 });
 
             });
+
+            it('Should error for no result', function(done) {
+
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().callsArgWith(2, false, {
+                        "2543 Graystone Place, #123, Simi Valley, CA 93065": null
+                    }
+                );
+                var geocoder = new DataScienceToolkitGeocoder(mockedHttpAdapter);
+
+                geocoder.geocode('2543 Graystone Place, #123, Simi Valley, CA 93065', function(err, results) {
+                    err.message.should.to.equal('Could not geocode "2543 Graystone Place, #123, Simi Valley, CA 93065".');
+                    mock.verify();
+                    done();
+                });
+
+            });
         });
 
         describe('#reverse' , function() {
