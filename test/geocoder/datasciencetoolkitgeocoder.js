@@ -30,16 +30,6 @@
 
         describe('#geocode' , function() {
 
-            it('Should not accept adress', function() {
-
-                var geocoder = new DataScienceToolkitGeocoder(mockedHttpAdapter);
-                expect(function() {geocoder.geocode('1 rue test');})
-                    .to
-                    .throw(Error, 'DataScienceToolkitGeocoder suport only IPv4 geocoding');
-
-
-            });
-
             it('Should call httpAdapter get method', function() {
 
                 var mock = sinon.mock(mockedHttpAdapter);
@@ -56,27 +46,72 @@
 
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, {
-                        '66.249.64.0' : {
-                            latitude: 37.386,
-                            longitude: -122.0838,
-                            country_code: 'US',
-                            country_name: 'United States',
-                            locality: 'Mountain View',
+                        "67.169.73.113":{
+                            "country_name":"United States",
+                            "area_code":415,
+                            "region":"CA",
+                            "postal_code":"94114",
+                            "city":"San Francisco",
+                            "latitude":37.7587013244629,
+                            "country_code":"US",
+                            "longitude":-122.438102722168,
+                            "country_code3":"USA",
+                            "dma_code":807
                         }
                     }
                 );
                 var geocoder = new DataScienceToolkitGeocoder(mockedHttpAdapter);
 
-                geocoder.geocode('66.249.64.0', function(err, results) {
+                geocoder.geocode('67.169.73.113', function(err, results) {
                     err.should.to.equal(false);
                     results[0].should.to.deep.equal({
-                        "latitude": 37.386,
-                        "longitude": -122.0838,
+                        "latitude": 37.7587013244629,
+                        "longitude": -122.438102722168,
                         "country": "United States",
-                        "city": "Mountain View",
-                        "zipcode": null,
-                        "streetName": null,
-                        "streetNumber": null,
+                        "city": "San Francisco",
+                        "zipcode": "94114",
+                        "streetName": undefined,
+                        "streetNumber": undefined,
+                        "countryCode": "US"
+                    });
+                    mock.verify();
+                    done();
+                });
+
+            });
+
+            it('Should return a geocoded adress', function(done) {
+
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().callsArgWith(2, false, {
+                        "2543 Graystone Place, Simi Valley, CA 93065": {
+                            "country_code3": "USA",
+                            "latitude": 34.280874,
+                            "country_name": "United States",
+                            "longitude": -118.766282,
+                            "street_address": "2543 Graystone Pl",
+                            "region": "CA",
+                            "confidence": 1.0,
+                            "street_number": "2543",
+                            "locality": "Simi Valley",
+                            "street_name": "Graystone Pl",
+                            "fips_county": "06111",
+                            "country_code": "US"
+                        }
+                    }
+                );
+                var geocoder = new DataScienceToolkitGeocoder(mockedHttpAdapter);
+
+                geocoder.geocode('2543 Graystone Place, Simi Valley, CA 93065', function(err, results) {
+                    err.should.to.equal(false);
+                    results[0].should.to.deep.equal({
+                        "latitude": 34.280874,
+                        "longitude": -118.766282,
+                        "country": "United States",
+                        "city": "Simi Valley",
+                        "zipcode": undefined,
+                        "streetName": "Graystone Pl",
+                        "streetNumber": "2543",
                         "countryCode": "US"
                     });
                     mock.verify();
