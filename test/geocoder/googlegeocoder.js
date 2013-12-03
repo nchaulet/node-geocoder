@@ -9,7 +9,7 @@
 
     var mockedHttpAdapter = {
         get: function() {
-          return {}
+          return {};
         }
     };
 
