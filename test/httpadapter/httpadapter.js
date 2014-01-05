@@ -7,13 +7,11 @@
 
     var HttpAdapter = require('../../lib/httpadapter/httpadapter.js');
 
-
     describe('HttpAdapter', function() {
 
         describe('#constructor' , function() {
 
             it('if no http specified must instanciate one', function() {
-
                 var http = require('http');
 
                 var httpAdapter = new HttpAdapter();
@@ -35,7 +33,6 @@
         describe('#get' , function() {
 
             it('get must call http  request', function() {
-
                 var http = { request: function () {} };
                 var mock = sinon.mock(http);
                 mock.expects('request').once().returns({end: function() {}});

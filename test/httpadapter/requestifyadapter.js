@@ -2,7 +2,6 @@
 (function() {
     var chai = require('chai'),
         should = chai.should(),
-        expect = chai.expect,
         sinon = require('sinon');
 
     var RequestifyAdapter = require('../../lib/httpadapter/requestifyadapter.js');
