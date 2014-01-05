@@ -12,34 +12,35 @@ Currently in development
 
 ## Usage example
 
-    var geocoderProvider = 'google';
-    var httpAdapter = 'http';
-    // optionnal
-    var extra = {
-        apiKey: 'YOUR_API_KEY',
-        formatter: null
-    };
+```javascript
+var geocoderProvider = 'google';
+var httpAdapter = 'http';
+// optionnal
+var extra = {
+    apiKey: 'YOUR_API_KEY', // for map quest
+    formatter: null         // 'gpx', 'string', ...
+};
 
-    var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, extra);
+var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, extra);
 
-    geocoder.geocode('29 champs elysée paris', function(err, res) {
-        console.log(res);
-    });
+geocoder.geocode('29 champs elysée paris', function(err, res) {
+    console.log(res);
+});
 
-    // output :
-    [{
-        latitude: 48.8698679,
-        longitude: 2.3072976,
-        country: 'France',
-        countryCode: 'FR',
-        city: 'Paris',
-        zipcode: '75008',
-        streetName: 'Champs-Élysées',
-        streetNumber: '29',
-        state: 'Île de France',
-        stateCode: 'IDF'
-    }]
-
+// output :
+[{
+    latitude: 48.8698679,
+    longitude: 2.3072976,
+    country: 'France',
+    countryCode: 'FR',
+    city: 'Paris',
+    zipcode: '75008',
+    streetName: 'Champs-Élysées',
+    streetNumber: '29',
+    state: 'Île de France',
+    stateCode: 'IDF'
+}]
+```
 
 ## Geocoder Provider
 
@@ -77,11 +78,12 @@ To run tests just `npm test`
 
 You can add new geocoders by implementing the two method geocode & reverse:
 
-
-    var geocoder = {
-        geocode: function(value, callback) { },
-        reverse: function(lat, lng, callback) { }
-    }
+```javascript
+var geocoder = {
+    geocode: function(value, callback) { },
+    reverse: function(lat, lng, callback) { }
+}
+```
 
 ## Roadmap
 
