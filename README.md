@@ -44,7 +44,7 @@ geocoder.geocode('29 champs elysée paris', function(err, res) {
 
 ## Geocoder Provider
 
-* `google` : GoogleGeocoder support address geocoding and reverse geocoding
+* `google` : GoogleGeocoder support address geocoding and reverse geocoding, use `extra.clientId`and `extra.apiKey`(privateKey) for business licence
 * `freegeoip` : FreegeoipGeocoder support ip geocoding
 * `datasciencetoolkit` : DataScienceToolkitGeocoder supports ip v4 geocoding and address geocoding
 * `openstreetmap` : OpenStreetMapGeocoder support address geocoding and reverse geocoding
