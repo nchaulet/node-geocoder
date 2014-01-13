@@ -16,23 +16,28 @@
     describe('GoogleGeocoder', function() {
 
         describe('#constructor' , function() {
-
             it('an http adapter must be set', function() {
-
                 expect(function() {new GoogleGeocoder();}).to.throw(Error, 'Google Geocoder need an httpAdapter');
             });
 
-            it('Should be an instance of GoogleGeocoder', function() {
+            it('if a clientId is specified an apiKey must be set', function() {
+                expect(function() {new GoogleGeocoder(mockedHttpAdapter, 'CLIENT_ID');}).to.throw(Error, 'You must specify a apiKey (privateKey)');
+            });
 
+            it('Should be an instance of GoogleGeocoder if an http adapter is provided', function() {
                 var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
 
                 googleAdapter.should.be.instanceof(GoogleGeocoder);
             });
 
+            it('Should be an instance of GoogleGeocoder if an http adapter, clientId, and apiKer are provided', function() {
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, 'CLIENT_ID', 'API_KEY');
+
+                googleAdapter.should.be.instanceof(GoogleGeocoder);
+            });
         });
 
         describe('#geocode' , function() {
-
             it('Should not accept Ipv4', function() {
 
                 var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
@@ -55,14 +60,16 @@
 
             it('Should call httpAdapter get method', function() {
                 var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').once().returns({then: function() {}});
+                mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {
+                    address: "1 champs élysée Paris",
+                    sensor: false
+                }).once().returns({then: function() {}});
 
                 var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
 
                 googleAdapter.geocode('1 champs élysée Paris');
 
                 mock.verify();
-
             });
 
             it('Should return geocoded adress', function(done) {
@@ -104,9 +111,6 @@
                     mock.verify();
                     done();
                 });
-
-
-
             });
 
             it('Should handle a not "OK" status', function(done) {
@@ -217,6 +221,22 @@
                     mock.verify();
                     done();
                 });
+            });
+
+            it('Should call httpAdapter get method with signed url if clientId and apiKey specified', function() {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {
+                    address: "1 champs élysée Paris",
+                    client: "raoul",
+                    sensor: false,
+                    signature: "wiN9RmtojePLkLpnDeamUtKVfjQ="
+                }).once().returns({then: function() {}});
+
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, 'raoul', 'foo');
+
+                googleAdapter.geocode('1 champs élysée Paris');
+
+                mock.verify();
             });
         });
 
