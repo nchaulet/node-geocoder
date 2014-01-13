@@ -21,7 +21,7 @@
             });
 
             it('if a clientId is specified an apiKey must be set', function() {
-                expect(function() {new GoogleGeocoder(mockedHttpAdapter, 'CLIENT_ID');}).to.throw(Error, 'You must specify a apiKey (privateKey)');
+                expect(function() {new GoogleGeocoder(mockedHttpAdapter, {clientId: 'CLIENT_ID'});}).to.throw(Error, 'You must specify a apiKey (privateKey)');
             });
 
             it('Should be an instance of GoogleGeocoder if an http adapter is provided', function() {
@@ -31,7 +31,7 @@
             });
 
             it('Should be an instance of GoogleGeocoder if an http adapter, clientId, and apiKer are provided', function() {
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, 'CLIENT_ID', 'API_KEY');
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, {clientId: 'CLIENT_ID', apiKey: 'API_KEY'});
 
                 googleAdapter.should.be.instanceof(GoogleGeocoder);
             });
@@ -232,7 +232,7 @@
                     signature: "wiN9RmtojePLkLpnDeamUtKVfjQ="
                 }).once().returns({then: function() {}});
 
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, 'raoul', 'foo');
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, {clientId: 'raoul', apiKey: 'foo'});
 
                 googleAdapter.geocode('1 champs élysée Paris');
 

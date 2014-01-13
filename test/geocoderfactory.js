@@ -27,6 +27,27 @@
                 geocoderAdapter.httpAdapter.should.be.instanceof(RequestifyAdapter);
             });
 
+            it('called with "google", "http" and extra business key must return google geocoder with http adapter and business key', function() {
+                var geocoder = GeocoderFactory.getGeocoder('google', 'http', {clientId: 'CLIENT_ID', apiKey: 'API_KEY'});
+
+                var geocoderAdapter = geocoder._geocoder;
+
+                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+                geocoderAdapter.options.clientId.should.be.equal('CLIENT_ID');
+                geocoderAdapter.options.apiKey.should.be.equal('API_KEY');
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+            });
+
+            it('called with "google", "http" and extra language key must return google geocoder with http adapter and options language', function() {
+                var geocoder = GeocoderFactory.getGeocoder('google', 'http', {language: 'fr'});
+
+                var geocoderAdapter = geocoder._geocoder;
+
+                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+                geocoderAdapter.options.language.should.be.equal('fr');
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+            });
+
             it('called with "google" and "http" and "gpx" must return google geocoder with http adapter and gpx formatter', function() {
                 var geocoder = GeocoderFactory.getGeocoder('google', 'http', { formatter : 'gpx'});
 
