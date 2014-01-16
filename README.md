@@ -85,7 +85,8 @@ var geocoder = {
 }
 ```
 
-## Roadmap
+## Changelog
 
-more documentation
-more provider
+### 1.1.0
+
+* add google geocoder language option
