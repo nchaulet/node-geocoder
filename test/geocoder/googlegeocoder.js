@@ -72,6 +72,22 @@
                 mock.verify();
             });
 
+            it('Should call httpAdapter get method with language if specified', function() {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {
+                    address: "1 champs élysée Paris",
+                    sensor: false,
+                    language: "fr"
+                }).once().returns({then: function() {}});
+
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, { language: 'fr' });
+
+                googleAdapter.geocode('1 champs élysée Paris');
+
+                mock.verify();
+            });
+
+
             it('Should return geocoded adress', function(done) {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, { status: "OK", results: [{
@@ -86,7 +102,7 @@
                             {types: ['route'], long_name: 'Champs-Élysées' },
                             {types: ['street_number'], long_name: '1' },
                             {types: ['administrative_area_level_1'], long_name: 'Île-de-France', short_name: 'IDF'}
-                        ],                            
+                        ],
                         country_code: 'US',
                         country_name: 'United States',
                         locality: 'Mountain View',
@@ -171,7 +187,7 @@
                             {types: ['administrative_area_level_1'], long_name: 'État de New York', short_name: 'NY'}
 
 
-                        ],                            
+                        ],
                         country_code: 'US',
                         country_name: 'United States',
                         locality: 'Mountain View',
