@@ -74,7 +74,7 @@ You can improve this project by adding new geocoders or http adapters.
 
 To run tests just `npm test`
 
-## Extending node geocoder
+### Extending node geocoder
 
 You can add new geocoders by implementing the two method geocode & reverse:
 
