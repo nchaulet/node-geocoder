@@ -90,3 +90,8 @@ var geocoder = {
 ### 1.1.0
 
 * add google geocoder language option
+
+### 1.2.0
+
+* add openStreetmap geocoder language option
+* httpAdapter, improve error handling
