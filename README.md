@@ -94,4 +94,4 @@ var geocoder = {
 ### 1.2.0
 
 * add openStreetmap geocoder language option
-* httpAdapter, improve error handling
+* improve http error handling
