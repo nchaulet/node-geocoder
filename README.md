@@ -95,3 +95,4 @@ var geocoder = {
 
 * add openStreetmap geocoder language option
 * improve http error handling
+
