@@ -46,7 +46,7 @@ geocoder.geocode('29 champs elysée paris', function(err, res) {
 
 * `google` : GoogleGeocoder support address geocoding and reverse geocoding, use `extra.clientId`and `extra.apiKey`(privateKey)for business licence, you can also use `extra.language` for specify language
 * `freegeoip` : FreegeoipGeocoder support ip geocoding
-* `datasciencetoolkit` : DataScienceToolkitGeocoder supports ip v4 geocoding and address geocoding
+* `datasciencetoolkit` : DataScienceToolkitGeocoder supports ip v4 geocoding and address geocoding, use `extra.host` for specify a local instance
 * `openstreetmap` : OpenStreetMapGeocoder support address geocoding and reverse geocoding
 * `mapquest` : MapQuestGeocoder support address geocoding and reverse geocoding need an apiKey
 
@@ -95,4 +95,9 @@ var geocoder = {
 
 * add openStreetmap geocoder language option
 * improve http error handling
+
+### 1.3.0
+
+* add host options for datasciencetoolkit
+* improve tests
 
