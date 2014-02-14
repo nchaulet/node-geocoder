@@ -42,6 +42,18 @@
                 mock.verify();
             });
 
+            it('Should call httpAdapter get method with specified host', function() {
+
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').withArgs('http://raoul.io/ip2coordinates/127.0.0.1', {}).once().returns({then: function() {}});
+
+                var geocoder = new DataScienceToolkitGeocoder(mockedHttpAdapter, {host: 'raoul.io'});
+
+                geocoder.geocode('127.0.0.1');
+
+                mock.verify();
+            });
+
             it('Should return a geocoded adress', function(done) {
 
                 var mock = sinon.mock(mockedHttpAdapter);
