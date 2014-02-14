@@ -88,6 +88,16 @@
                 geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
             });
 
+            it('called with "datasciencetoolkit" "http" and "host" option must return datasciencetoolkit geocoder with host extra', function() {
+                var geocoder = GeocoderFactory.getGeocoder('datasciencetoolkit', 'http', {'host' : 'raoul.io'});
+
+                var geocoderAdapter = geocoder._geocoder;
+
+                geocoderAdapter.should.be.instanceof(DataScienceToolkitGeocoder);
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+                geocoderAdapter.options.host.should.be.equal('raoul.io');
+            });
+
             it('called with "openstreetmap" and "http" must return openstreetmap geocoder with http adapter', function() {
                 var geocoder = GeocoderFactory.getGeocoder('openstreetmap', 'http');
 
