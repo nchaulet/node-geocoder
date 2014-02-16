@@ -9,7 +9,6 @@
     var DataScienceToolkitGeocoder = require('../lib/geocoder/datasciencetoolkitgeocoder.js');
     var OpenStreetMapGeocoder = require('../lib/geocoder/openstreetmapgeocoder.js');
 
-    var RequestifyAdapter = require('../lib/httpadapter/requestifyadapter.js');
     var HttpAdapter = require('../lib/httpadapter/httpadapter.js');
 
     var GpxFormatter = require('../lib/formatter/gpxformatter.js');
@@ -18,14 +17,6 @@
     describe('GeocoderFactory', function() {
 
         describe('getGeocoder' , function() {
-            it('called with "google" and "requestify" must return google geocoder with requestify adapter', function() {
-                var geocoder = GeocoderFactory.getGeocoder('google', 'requestify');
-
-                var geocoderAdapter = geocoder._geocoder;
-
-                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
-                geocoderAdapter.httpAdapter.should.be.instanceof(RequestifyAdapter);
-            });
 
             it('called with "google", "http" and extra business key must return google geocoder with http adapter and business key', function() {
                 var geocoder = GeocoderFactory.getGeocoder('google', 'http', {clientId: 'CLIENT_ID', apiKey: 'API_KEY'});
