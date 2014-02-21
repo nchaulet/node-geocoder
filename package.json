@@ -15,7 +15,9 @@
     "geo",
     "google",
     "maps",
-    "mapquest"
+    "mapquest",
+    "agol",
+    "arcgis"
   ],
   "author": "nchaulet",
   "license": "MIT",
