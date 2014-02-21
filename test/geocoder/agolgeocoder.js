@@ -13,6 +13,11 @@
         }
     };
 
+    var mockedOptions = {
+        'client_id': "CLIENT_ID",
+        'client_secret': "CLIENT_SECRET"
+    };
+
     describe('AGOLGeocoder', function() {
 
         describe('#constructor' , function() {
