@@ -25,12 +25,13 @@
                 expect(function() {new AGOLGeocoder();}).to.throw(Error, 'ArcGis Online Geocoder requires a httpAdapter to be defined');
             });
 
-            it('if a clientId is specified an apiKey must be set', function() {
-                expect(function() {new AGOLGeocoder(mockedHttpAdapter, {clientId: 'CLIENT_ID'});}).to.throw(Error, 'You must specify a apiKey (privateKey)');
+            it('client_id should be set', function() {
+                expect(function() {new AGOLGeocoder(mockedHttpAdapter, {client_secret: 'CLIENT_SECRET'});}).to.throw(Error, 'You must specify the client_id and the client_secret');
             });
 
-            it('Should be an instance of AGOLGeocoder if an http adapter is provided', function() {
-                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
+            it('client_secret should be set', function() {
+                expect(function() {new AGOLGeocoder(mockedHttpAdapter, {client_id: 'CLIENT_ID'});}).to.throw(Error, 'You must specify the client_id and the client_secret');
+            });
 
                 googleAdapter.should.be.instanceof(AGOLGeocoder);
             });
