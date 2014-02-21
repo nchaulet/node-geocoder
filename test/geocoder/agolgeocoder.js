@@ -13,34 +13,34 @@
         }
     };
 
-    describe('GoogleGeocoder', function() {
+    describe('AGOLGeocoder', function() {
 
         describe('#constructor' , function() {
             it('an http adapter must be set', function() {
-                expect(function() {new GoogleGeocoder();}).to.throw(Error, 'Google Geocoder need an httpAdapter');
+                expect(function() {new AGOLGeocoder();}).to.throw(Error, 'Google Geocoder need an httpAdapter');
             });
 
             it('if a clientId is specified an apiKey must be set', function() {
-                expect(function() {new GoogleGeocoder(mockedHttpAdapter, {clientId: 'CLIENT_ID'});}).to.throw(Error, 'You must specify a apiKey (privateKey)');
+                expect(function() {new AGOLGeocoder(mockedHttpAdapter, {clientId: 'CLIENT_ID'});}).to.throw(Error, 'You must specify a apiKey (privateKey)');
             });
 
-            it('Should be an instance of GoogleGeocoder if an http adapter is provided', function() {
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+            it('Should be an instance of AGOLGeocoder if an http adapter is provided', function() {
+                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
 
-                googleAdapter.should.be.instanceof(GoogleGeocoder);
+                googleAdapter.should.be.instanceof(AGOLGeocoder);
             });
 
-            it('Should be an instance of GoogleGeocoder if an http adapter, clientId, and apiKer are provided', function() {
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, {clientId: 'CLIENT_ID', apiKey: 'API_KEY'});
+            it('Should be an instance of AGOLGeocoder if an http adapter, clientId, and apiKer are provided', function() {
+                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter, {clientId: 'CLIENT_ID', apiKey: 'API_KEY'});
 
-                googleAdapter.should.be.instanceof(GoogleGeocoder);
+                googleAdapter.should.be.instanceof(AGOLGeocoder);
             });
         });
 
         describe('#geocode' , function() {
             it('Should not accept Ipv4', function() {
 
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
 
                 expect(function() {
                         googleAdapter.geocode('127.0.0.1');
@@ -50,7 +50,7 @@
 
             it('Should not accept Ipv6', function() {
 
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
 
                 expect(function() {
                         googleAdapter.geocode('2001:0db8:0000:85a3:0000:0000:ac1f:8001');
@@ -65,7 +65,7 @@
                     sensor: false
                 }).once().returns({then: function() {}});
 
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
 
                 googleAdapter.geocode('1 champs élysée Paris');
 
@@ -80,7 +80,7 @@
                     language: "fr"
                 }).once().returns({then: function() {}});
 
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, { language: 'fr' });
+                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter, { language: 'fr' });
 
                 googleAdapter.geocode('1 champs élysée Paris');
 
@@ -108,7 +108,7 @@
                         locality: 'Mountain View',
                     }]}
                 );
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
 
                 googleAdapter.geocode('1 champs élysées Paris', function(err, results) {
                     err.should.to.equal(false);
@@ -133,7 +133,7 @@
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, { status: "OVER_QUERY_LIMIT", error_message: "You have exceeded your rate-limit for this API.", results: [] });
 
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
 
                 googleAdapter.geocode('1 champs élysées Paris', function(err, results) {
                     err.message.should.to.equal("Status is OVER_QUERY_LIMIT. You have exceeded your rate-limit for this API.");
@@ -146,7 +146,7 @@
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, { status: "INVALID_REQUEST", results: [] });
 
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
 
                 googleAdapter.geocode('1 champs élysées Paris', function(err, results) {
                     err.message.should.to.equal("Status is INVALID_REQUEST.");
@@ -163,7 +163,7 @@
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().returns({then: function() {}});
 
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
 
                 googleAdapter.reverse(10.0235,-2.3662);
 
@@ -193,7 +193,7 @@
                         locality: 'Mountain View',
                     }]}
                 );
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
                 googleAdapter.reverse(40.714232,-73.9612889, function(err, results) {
                         err.should.to.equal(false);
                         results[0].should.to.deep.equal({
@@ -217,7 +217,7 @@
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, { status: "OVER_QUERY_LIMIT", error_message: "You have exceeded your rate-limit for this API.", results: [] });
 
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
 
                 googleAdapter.reverse(40.714232,-73.9612889, function(err, results) {
                     err.message.should.to.equal("Status is OVER_QUERY_LIMIT. You have exceeded your rate-limit for this API.");
@@ -230,7 +230,7 @@
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, { status: "INVALID_REQUEST", results: [] });
 
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
 
                 googleAdapter.reverse(40.714232,-73.9612889, function(err, results) {
                     err.message.should.to.equal("Status is INVALID_REQUEST.");
@@ -248,7 +248,7 @@
                     signature: "wiN9RmtojePLkLpnDeamUtKVfjQ="
                 }).once().returns({then: function() {}});
 
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, {clientId: 'raoul', apiKey: 'foo'});
+                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter, {clientId: 'raoul', apiKey: 'foo'});
 
                 googleAdapter.geocode('1 champs élysée Paris');
 
