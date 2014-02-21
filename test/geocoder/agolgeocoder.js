@@ -33,7 +33,12 @@
                 expect(function() {new AGOLGeocoder(mockedHttpAdapter, {client_id: 'CLIENT_ID'});}).to.throw(Error, 'You must specify the client_id and the client_secret');
             });
 
-                googleAdapter.should.be.instanceof(AGOLGeocoder);
+            it('expect an error if HTTPAdapter is provided while options are not', function() {
+                expect(
+                    function() {
+                        new AGOLGeocoder(mockedHttpAdapter);
+                    }).to.throw(
+                        Error,'You must specify the client_id and the client_secret');
             });
 
             it('Should be an instance of AGOLGeocoder if an http adapter and proper options are supplied', function() {
