@@ -4,7 +4,7 @@
         expect = chai.expect,
         sinon = require('sinon');
 
-    var GoogleGeocoder = require('../../lib/geocoder/googlegeocoder.js');
+    var AGOLGeocoder = require('../../lib/geocoder/agolgeocoder.js');
     var HttpAdapter = require('../../lib/httpadapter/httpadapter.js');
 
     var mockedHttpAdapter = {
