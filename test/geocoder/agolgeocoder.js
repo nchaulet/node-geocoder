@@ -36,10 +36,10 @@
                 googleAdapter.should.be.instanceof(AGOLGeocoder);
             });
 
-            it('Should be an instance of AGOLGeocoder if an http adapter, clientId, and apiKer are provided', function() {
-                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter, {clientId: 'CLIENT_ID', apiKey: 'API_KEY'});
+            it('Should be an instance of AGOLGeocoder if an http adapter and proper options are supplied', function() {
+                var geocoder = new AGOLGeocoder(mockedHttpAdapter, mockedOptions);
 
-                googleAdapter.should.be.instanceof(AGOLGeocoder);
+                geocoder.should.be.instanceof(AGOLGeocoder);
             });
         });
 
