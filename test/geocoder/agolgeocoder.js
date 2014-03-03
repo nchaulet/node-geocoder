@@ -13,6 +13,30 @@
         }
     };
 
+    var mockedRequestifyAdapter = {
+        requestify: function() {
+            return {};
+        },
+        get: function() {
+            return {};
+        }
+    };
+
+    var mockedAuthHttpAdapter = {
+        requestify: function() {
+            return {};
+        },
+        get: function() {
+            return {
+                'err': false,
+                'result': {
+                    'access_token':"ABCD",
+                    'expires_in': 10000
+                }
+            };
+        }
+    };
+
     var mockedOptions = {
         'client_id': "CLIENT_ID",
         'client_secret': "CLIENT_SECRET"
@@ -25,24 +49,28 @@
                 expect(function() {new AGOLGeocoder();}).to.throw(Error, 'ArcGis Online Geocoder requires a httpAdapter to be defined');
             });
 
+            it('requires requestify (for HTTPS support)', function() {
+                expect(function() {new AGOLGeocoder(mockedHttpAdapter, {client_secret: 'CLIENT_SECRET'});}).to.throw(Error, 'The AGOL geocoder requires HTTPS support that is available in requestify');
+            });
+
             it('client_id should be set', function() {
-                expect(function() {new AGOLGeocoder(mockedHttpAdapter, {client_secret: 'CLIENT_SECRET'});}).to.throw(Error, 'You must specify the client_id and the client_secret');
+                expect(function() {new AGOLGeocoder(mockedRequestifyAdapter, {client_secret: 'CLIENT_SECRET'});}).to.throw(Error, 'You must specify the client_id and the client_secret');
             });
 
             it('client_secret should be set', function() {
-                expect(function() {new AGOLGeocoder(mockedHttpAdapter, {client_id: 'CLIENT_ID'});}).to.throw(Error, 'You must specify the client_id and the client_secret');
+                expect(function() {new AGOLGeocoder(mockedRequestifyAdapter, {client_id: 'CLIENT_ID'});}).to.throw(Error, 'You must specify the client_id and the client_secret');
             });
 
             it('expect an error if HTTPAdapter is provided while options are not', function() {
                 expect(
                     function() {
-                        new AGOLGeocoder(mockedHttpAdapter);
+                        new AGOLGeocoder(mockedRequestifyAdapter);
                     }).to.throw(
                         Error,'You must specify the client_id and the client_secret');
             });
 
             it('Should be an instance of AGOLGeocoder if an http adapter and proper options are supplied', function() {
-                var geocoder = new AGOLGeocoder(mockedHttpAdapter, mockedOptions);
+                var geocoder = new AGOLGeocoder(mockedRequestifyAdapter, mockedOptions);
 
                 geocoder.should.be.instanceof(AGOLGeocoder);
             });
@@ -51,89 +79,91 @@
         describe('#geocode' , function() {
             it('Should not accept Ipv4', function() {
 
-                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
+                var geocoder = new AGOLGeocoder(mockedRequestifyAdapter,mockedOptions);
 
                 expect(function() {
-                        googleAdapter.geocode('127.0.0.1');
-                }).to.throw(Error, 'Google Geocoder no suport geocoding ip');
+                    geocoder.geocode('127.0.0.1');
+                }).to.throw(Error, 'The AGOL geocoder does not support IP addresses');
 
             });
 
             it('Should not accept Ipv6', function() {
 
-                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
+                var geocoder = new AGOLGeocoder(mockedRequestifyAdapter,mockedOptions);
 
                 expect(function() {
-                        googleAdapter.geocode('2001:0db8:0000:85a3:0000:0000:ac1f:8001');
-                }).to.throw(Error, 'Google Geocoder no suport geocoding ip');
+                    geocoder.geocode('2001:0db8:0000:85a3:0000:0000:ac1f:8001');
+                }).to.throw(Error, 'The AGOL geocoder does not support IP addresses');
 
             });
 
-            it('Should call httpAdapter get method', function() {
-                var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {
-                    address: "1 champs élysée Paris",
-                    sensor: false
-                }).once().returns({then: function() {}});
+            it('Should call out for authentication', function() {
+                var mock = sinon.mock(mockedAuthHttpAdapter);
+                mock.expects('get').withArgs("https://www.arcgis.com/sharing/oauth2/token", {
+                    'client_id': mockedOptions.client_id,
+                    'grant_type': 'client_credentials',
+                    'client_secret': mockedOptions.client_secret
+                }).once().returns({then: function (err,result) {}});
 
-                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
+                var geocoder = new AGOLGeocoder(mockedAuthHttpAdapter,mockedOptions);
 
-                googleAdapter.geocode('1 champs élysée Paris');
+                geocoder.geocode('1 champs élysée Paris');
 
                 mock.verify();
             });
 
-            it('Should call httpAdapter get method with language if specified', function() {
-                var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {
-                    address: "1 champs élysée Paris",
-                    sensor: false,
-                    language: "fr"
-                }).once().returns({then: function() {}});
+            it('Should return cached token', function() {
+                var geocoder = new AGOLGeocoder(mockedAuthHttpAdapter,mockedOptions);
 
-                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter, { language: 'fr' });
-
-                googleAdapter.geocode('1 champs élysée Paris');
-
-                mock.verify();
+                geocoder._getToken(function(err,token) {
+                    token.should.equal("ABCD");
+                });
+                geocoder._getToken(function(err,token) {
+                    token.should.equal("ABCD");
+                });
             });
 
+            it('Should assume cached token is invalid', function() {
+                var geocoder = new AGOLGeocoder(mockedAuthHttpAdapter,mockedOptions);
+
+                geocoder.cache.token = "AAA";
+                geocoder.cache.tokenExp = ((new Date).getTime() - 2000);
+
+                //Verify token is old
+                geocoder.cache.token.should.equal("AAA");
+
+                //Verify that expired token is replaced
+                geocoder._getToken(function(err,token) {
+                    token.should.equal("ABCD");
+                });
+
+            });
 
             it('Should return geocoded adress', function(done) {
-                var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').once().callsArgWith(2, false, { status: "OK", results: [{
-                        geometry: {location : {
-                            lat: 37.386,
-                            lng: -122.0838
-                        }},
-                        address_components: [
-                            {types: ['country'], long_name: 'France', short_name: 'Fr' },
-                            {types: ['locality'], long_name: 'Paris' },
-                            {types: ['postal_code'], long_name: '75008' },
-                            {types: ['route'], long_name: 'Champs-Élysées' },
-                            {types: ['street_number'], long_name: '1' },
-                            {types: ['administrative_area_level_1'], long_name: 'Île-de-France', short_name: 'IDF'}
-                        ],
-                        country_code: 'US',
-                        country_name: 'United States',
-                        locality: 'Mountain View',
-                    }]}
-                );
-                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
+                var mock = sinon.mock(mockedRequestifyAdapter);
 
-                googleAdapter.geocode('1 champs élysées Paris', function(err, results) {
+                mock.expects('get').once().callsArgWith(2, false,
+                    '{"spatialReference":{"wkid":4326,"latestWkid":4326},"locations":[{"name":"380 New York St, Redlands, California, 92373","extent":{"xmin":-117.196701,"ymin":34.055489999999999,"xmax":-117.19470099999999,"ymax":34.057490000000001},"feature":{"geometry":{"x":-117.19566584280369,"y":34.056490727765947},"attributes":{"AddrNum":"","StPreDir":"","StName":"New York","StType":"St","City":"Redlands","Postal":"92373","Region":"California","Country":"USA"}}}]}'
+                );
+                var geocoder = new AGOLGeocoder(mockedRequestifyAdapter,mockedOptions);
+
+                //Force valid tokens (this was tested separately)
+                geocoder._getToken = function(callback) {
+                    callback(false,"ABCD");
+                };
+                geocoder.geocode('380 New York St, Redlands, CA 92373', function(err, results) {
                     err.should.to.equal(false);
                     results[0].should.to.deep.equal({
-                        "latitude"    : 37.386,
-                        "longitude"   : -122.0838,
-                        "country"     : "France",
-                        "city"        : "Paris",
-                        "zipcode"     : "75008",
-                        "streetName"  : "Champs-Élysées",
-                        "streetNumber": "1",
-                        "countryCode" : "Fr",
-                        "state"       : "Île-de-France",
-                        "stateCode"   : "IDF"
+                        latitude: -117.19566584280369,
+                        longitude: 34.05649072776595,
+                        country: 'USA',
+                        city: 'Redlands',
+                        state: 'California',
+                        stateCode: null,
+                        zipcode: '92373',
+                        streetName: ' New York St',
+                        streetNumber: '',
+                        countryCode: 'USA'
                     });
                     mock.verify();
                     done();
@@ -141,31 +171,24 @@
             });
 
             it('Should handle a not "OK" status', function(done) {
-                var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').once().callsArgWith(2, false, { status: "OVER_QUERY_LIMIT", error_message: "You have exceeded your rate-limit for this API.", results: [] });
+                var mock = sinon.mock(mockedRequestifyAdapter);
 
-                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
+                mock.expects('get').once().callsArgWith(2, false,
+                    '{"error":{"code":498,"message":"Invalid Token","details":[]}}'
+                );
+                var geocoder = new AGOLGeocoder(mockedRequestifyAdapter,mockedOptions);
 
-                googleAdapter.geocode('1 champs élysées Paris', function(err, results) {
-                    err.message.should.to.equal("Status is OVER_QUERY_LIMIT. You have exceeded your rate-limit for this API.");
+                //Force valid tokens (this was tested separately)
+                geocoder._getToken = function(callback) {
+                    callback(false,"ABCD");
+                };
+                geocoder.geocode('380 New York St, Redlands, CA 92373', function(err, results) {
+                    //err.should.to.equal(false);
+                    err.should.to.deep.equal({"code":498,"message":"Invalid Token","details":[]});
                     mock.verify();
                     done();
                 });
             });
-
-            it('Should handle a not "OK" status and no error_message', function(done) {
-                var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').once().callsArgWith(2, false, { status: "INVALID_REQUEST", results: [] });
-
-                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
-
-                googleAdapter.geocode('1 champs élysées Paris', function(err, results) {
-                    err.message.should.to.equal("Status is INVALID_REQUEST.");
-                    mock.verify();
-                    done();
-                });
-            });
-
         });
 
         describe('#reverse' , function() {
