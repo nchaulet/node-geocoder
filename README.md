@@ -49,6 +49,7 @@ geocoder.geocode('29 champs elysée paris', function(err, res) {
 * `datasciencetoolkit` : DataScienceToolkitGeocoder supports ip v4 geocoding and address geocoding, use `extra.host` for specify a local instance
 * `openstreetmap` : OpenStreetMapGeocoder support address geocoding and reverse geocoding
 * `mapquest` : MapQuestGeocoder support address geocoding and reverse geocoding need an apiKey
+* `agol` : ArcGis Online Geocoding service, supports geocoding and reverse.  Requires a client_id & client_secret (Only works with requestify)
 
 ## Http adapter
 
@@ -101,3 +102,7 @@ var geocoder = {
 * add host options for datasciencetoolkit
 * improve tests
 
+### 1.4.0
+
+* Added suport for the ESRI AGOL geocoding service
+* Included test coverage for the new geocoder
