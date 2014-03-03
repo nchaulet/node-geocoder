@@ -193,103 +193,61 @@
         describe('#reverse' , function() {
             it('Should call httpAdapter get method', function() {
 
-                var mock = sinon.mock(mockedHttpAdapter);
+                var mock = sinon.mock(mockedRequestifyAdapter);
                 mock.expects('get').once().returns({then: function() {}});
 
-                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
+                var geocoder = new AGOLGeocoder(mockedRequestifyAdapter,mockedOptions);
 
-                googleAdapter.reverse(10.0235,-2.3662);
+                geocoder.reverse(10.0235,-2.3662);
 
                 mock.verify();
 
             });
 
             it('Should return geocoded adress', function(done) {
-                var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').once().callsArgWith(2, false, { status: "OK", results: [{
-                        geometry: {location : {
-                            lat: 40.714232,
-                            lng: -73.9612889
-                        }},
-                        address_components: [
-                            {types: ['country'], long_name: 'United States', short_name: 'US' },
-                            {types: ['locality'], long_name: 'Brooklyn' },
-                            {types: ['postal_code'], long_name: '11211' },
-                            {types: ['route'], long_name: 'Bedford Avenue' },
-                            {types: ['street_number'], long_name: '277' },
-                            {types: ['administrative_area_level_1'], long_name: 'État de New York', short_name: 'NY'}
-
-
-                        ],
-                        country_code: 'US',
-                        country_name: 'United States',
-                        locality: 'Mountain View',
-                    }]}
+                var mock = sinon.mock(mockedRequestifyAdapter);
+                mock.expects('get').once().callsArgWith(2, false,
+                    '{"address":{"Address":"1190 E Kenyon Ave","Neighborhood":null,"City":"Englewood","Subregion":null,"Region":"Colorado","Postal":"80113","PostalExt":null,"CountryCode":"USA","Loc_name":"USA.PointAddress"},"location":{"x":-104.97389993455704,"y":39.649423090952013,"spatialReference":{"wkid":4326,"latestWkid":4326}}}'
                 );
-                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
-                googleAdapter.reverse(40.714232,-73.9612889, function(err, results) {
+                var geocoder = new AGOLGeocoder(mockedRequestifyAdapter,mockedOptions);
+                //Force valid tokens (this was tested separately)
+                geocoder._getToken = function(callback) {
+                    callback(false,"ABCD");
+                };
+                geocoder.reverse(-104.98469734299971,39.739146640000456, function(err, results) {
                         err.should.to.equal(false);
-                        results[0].should.to.deep.equal({
-                            "latitude"    : 40.714232,
-                            "longitude"   : -73.9612889,
-                            "country"     : "United States",
-                            "city"        : "Brooklyn",
-                            "zipcode"     : "11211",
-                            "streetName"  : "Bedford Avenue",
-                            "streetNumber": "277",
-                            "countryCode" : "US",
-                            "state"       : "État de New York",
-                            "stateCode"   : "NY"
-                        });
+                        results[0].should.to.deep.equal({ latitude: -104.97389993455704,
+                            longitude: 39.64942309095201,
+                            country: 'USA',
+                            city: 'Englewood',
+                            state: 'Colorado',
+                            zipcode: '80113',
+                            countryCode: 'USA',
+                            address: '1190 E Kenyon Ave',
+                            neighborhood: null,
+                            loc_name: 'USA.PointAddress' });
                         mock.verify();
                         done();
                 });
             });
 
             it('Should handle a not "OK" status', function(done) {
-                var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').once().callsArgWith(2, false, { status: "OVER_QUERY_LIMIT", error_message: "You have exceeded your rate-limit for this API.", results: [] });
+                var mock = sinon.mock(mockedRequestifyAdapter);
+                mock.expects('get').once().callsArgWith(2, false,
+                    '{"error":{"code":42,"message":"Random Error","details":[]}}'
+                );
 
-                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
-
-                googleAdapter.reverse(40.714232,-73.9612889, function(err, results) {
-                    err.message.should.to.equal("Status is OVER_QUERY_LIMIT. You have exceeded your rate-limit for this API.");
+                var geocoder = new AGOLGeocoder(mockedRequestifyAdapter,mockedOptions);
+                //Force valid tokens (this was tested separately)
+                geocoder._getToken = function(callback) {
+                    callback(false,"ABCD");
+                };
+                geocoder.reverse(40.714232,-73.9612889, function(err, results) {
+                    err.should.to.deep.equal({"code":42,"message":"Random Error","details":[]});
                     mock.verify();
                     done();
                 });
-            });
-
-            it('Should handle a not "OK" status and no error_message', function(done) {
-                var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').once().callsArgWith(2, false, { status: "INVALID_REQUEST", results: [] });
-
-                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter);
-
-                googleAdapter.reverse(40.714232,-73.9612889, function(err, results) {
-                    err.message.should.to.equal("Status is INVALID_REQUEST.");
-                    mock.verify();
-                    done();
-                });
-            });
-
-            it('Should call httpAdapter get method with signed url if clientId and apiKey specified', function() {
-                var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {
-                    address: "1 champs élysée Paris",
-                    client: "raoul",
-                    sensor: false,
-                    signature: "wiN9RmtojePLkLpnDeamUtKVfjQ="
-                }).once().returns({then: function() {}});
-
-                var googleAdapter = new AGOLGeocoder(mockedHttpAdapter, {clientId: 'raoul', apiKey: 'foo'});
-
-                googleAdapter.geocode('1 champs élysée Paris');
-
-                mock.verify();
             });
         });
-
-
     });
-
 })();
