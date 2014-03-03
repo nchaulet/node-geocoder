@@ -5,7 +5,6 @@
         sinon = require('sinon');
 
     var AGOLGeocoder = require('../../lib/geocoder/agolgeocoder.js');
-    var HttpAdapter = require('../../lib/httpadapter/httpadapter.js');
 
     var mockedHttpAdapter = {
         get: function() {
