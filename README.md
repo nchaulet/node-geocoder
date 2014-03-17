@@ -21,12 +21,12 @@ var extra = {
 
 var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, extra);
 
+// Using callback
 geocoder.geocode('29 champs elysée paris', function(err, res) {
     console.log(res);
 });
 
 // Or using Promise
-
 geocoder.geocode('29 champs elysée paris')
     .then(function(res) {
         console.log(res);
@@ -51,9 +51,19 @@ geocoder.geocode('29 champs elysée paris')
 
 // Reverse example
 
+// Using callback
 geocoder.reverse(45.767, 4.833, function(err, res) {
     console.log(res);
 });
+
+// Or using Promise
+geocoder.reverse(45.767, 4.833)
+    .then(function(res) {
+        console.log(res);
+    })
+    .err(function(err) {
+        console.log(err);
+    });
 
 ```
 
@@ -82,12 +92,13 @@ geocoder.reverse(45.767, 4.833, function(err, res) {
     * `%T` State
     * `%t` state code
 
-
 ## More
 
 You can improve this project by adding new geocoders or http adapters.
 
 To run tests just `npm test`
+
+To check code style install `jshint` and just run `jshint lib test
 
 ### Extending node geocoder
 
@@ -97,6 +108,14 @@ You can add new geocoders by implementing the two method geocode & reverse:
 var geocoder = {
     geocode: function(value, callback) { },
     reverse: function(lat, lng, callback) { }
+}
+```
+
+You can also add formatter implementing this interface
+
+```javascript
+var formatter = {
+    format: function(data) { return formattedData; },
 }
 ```
 
