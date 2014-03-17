@@ -1,41 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Node-geocoder by nchaulet</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Node-geocoder : nodejs geocoding library " />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Node-geocoder</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Node-geocoder</h1>
-        <p>nodejs geocoding library </p>
 
-        <p class="view"><a href="https://github.com/nchaulet/node-geocoder">View the Project on GitHub <small>nchaulet/node-geocoder</small></a></p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/nchaulet/node-geocoder">View on GitHub</a>
 
+          <h1 id="project_title">Node-geocoder</h1>
+          <h2 id="project_tagline">nodejs geocoding library </h2>
 
-        <ul>
-          <li><a href="https://github.com/nchaulet/node-geocoder/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/nchaulet/node-geocoder/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/nchaulet/node-geocoder">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/nchaulet/node-geocoder/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/nchaulet/node-geocoder/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h1>
 <a name="node-geocoder" class="anchor" href="#node-geocoder"><span class="octicon octicon-link"></span></a>node-geocoder</h1>
+
+<p>(current version 2.0.0)</p>
 
 <p><a href="https://travis-ci.org/nchaulet/node-geocoder"><img src="https://travis-ci.org/nchaulet/node-geocoder.png?branch=master" alt="Build Status"></a></p>
 
 <p>Node library for geocoding and reverse geocoding</p>
-
-<p>Currently in development</p>
 
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
@@ -56,9 +59,19 @@
 
 <span class="kd">var</span> <span class="nx">geocoder</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-geocoder'</span><span class="p">).</span><span class="nx">getGeocoder</span><span class="p">(</span><span class="nx">geocoderProvider</span><span class="p">,</span> <span class="nx">httpAdapter</span><span class="p">,</span> <span class="nx">extra</span><span class="p">);</span>
 
+<span class="c1">// Using callback</span>
 <span class="nx">geocoder</span><span class="p">.</span><span class="nx">geocode</span><span class="p">(</span><span class="s1">'29 champs elysée paris'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
 <span class="p">});</span>
+
+<span class="c1">// Or using Promise</span>
+<span class="nx">geocoder</span><span class="p">.</span><span class="nx">geocode</span><span class="p">(</span><span class="s1">'29 champs elysée paris'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
 
 <span class="c1">// output :</span>
 <span class="p">[{</span>
@@ -73,6 +86,23 @@
     <span class="nx">state</span><span class="o">:</span> <span class="s1">'Île de France'</span><span class="p">,</span>
     <span class="nx">stateCode</span><span class="o">:</span> <span class="s1">'IDF'</span>
 <span class="p">}]</span>
+
+<span class="c1">// Reverse example</span>
+
+<span class="c1">// Using callback</span>
+<span class="nx">geocoder</span><span class="p">.</span><span class="nx">reverse</span><span class="p">(</span><span class="mf">45.767</span><span class="p">,</span> <span class="mf">4.833</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Or using Promise</span>
+<span class="nx">geocoder</span><span class="p">.</span><span class="nx">reverse</span><span class="p">(</span><span class="mf">45.767</span><span class="p">,</span> <span class="mf">4.833</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
+
 </pre></div>
 
 <h2>
@@ -84,19 +114,19 @@
 <li>
 <code>freegeoip</code> : FreegeoipGeocoder support ip geocoding</li>
 <li>
-<code>datasciencetoolkit</code> : DataScienceToolkitGeocoder supports ip v4 geocoding and address geocoding</li>
+<code>datasciencetoolkit</code> : DataScienceToolkitGeocoder supports ip v4 geocoding and address geocoding, use <code>extra.host</code> for specify a local instance</li>
 <li>
 <code>openstreetmap</code> : OpenStreetMapGeocoder support address geocoding and reverse geocoding</li>
 <li>
 <code>mapquest</code> : MapQuestGeocoder support address geocoding and reverse geocoding need an apiKey</li>
+<li>
+<code>agol</code> : ArcGis Online Geocoding service, supports geocoding and reverse.  Requires a client_id &amp; client_secret (Only works with requestify)</li>
 </ul><h2>
 <a name="http-adapter" class="anchor" href="#http-adapter"><span class="octicon octicon-link"></span></a>Http adapter</h2>
 
 <ul>
 <li>
-<code>http</code>       : This adapter uses Http nodejs library (by default)</li>
-<li>
-<code>requestify</code> : This adapter uses Requestify library (you need to install <code>requestify</code>)</li>
+<code>http</code>: This adapter uses Http nodejs library (by default)</li>
 </ul><h2>
 <a name="formatter" class="anchor" href="#formatter"><span class="octicon octicon-link"></span></a>Formatter</h2>
 
@@ -130,6 +160,8 @@
 
 <p>To run tests just <code>npm test</code></p>
 
+<p>To check code style install <code>jshint</code> and just run `jshint lib test</p>
+
 <h3>
 <a name="extending-node-geocoder" class="anchor" href="#extending-node-geocoder"><span class="octicon octicon-link"></span></a>Extending node geocoder</h3>
 
@@ -138,6 +170,13 @@
 <div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">geocoder</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">geocode</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span> <span class="p">},</span>
     <span class="nx">reverse</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lat</span><span class="p">,</span> <span class="nx">lng</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>You can also add formatter implementing this interface</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">formatter</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">format</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">formattedData</span><span class="p">;</span> <span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -155,14 +194,37 @@
 <ul>
 <li>add openStreetmap geocoder language option</li>
 <li>improve http error handling</li>
+</ul><h3>
+<a name="130" class="anchor" href="#130"><span class="octicon octicon-link"></span></a>1.3.0</h3>
+
+<ul>
+<li>add host options for datasciencetoolkit</li>
+<li>improve tests</li>
+</ul><h3>
+<a name="140" class="anchor" href="#140"><span class="octicon octicon-link"></span></a>1.4.0</h3>
+
+<ul>
+<li>Added suport for the ESRI AGOL geocoding service</li>
+<li>Included test coverage for the new geocoder</li>
+</ul><h3>
+<a name="200" class="anchor" href="#200"><span class="octicon octicon-link"></span></a>2.0.0</h3>
+
+<ul>
+<li>remove requestify http adapter</li>
+<li>Now support Promise API (using Q)</li>
 </ul>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/nchaulet">nchaulet</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Node-geocoder maintained by <a href="https://github.com/nchaulet">nchaulet</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+
     
+
   </body>
 </html>
