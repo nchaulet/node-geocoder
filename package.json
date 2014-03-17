@@ -1,6 +1,6 @@
 {
   "name": "node-geocoder",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "node geocoding library, supports google maps, mapquest, open street map, ...",
   "main": "lib/geocoderfactory.js",
   "scripts": {
@@ -25,11 +25,11 @@
     "url": "https://github.com/nchaulet/node-geocoder/issues"
   },
   "dependencies": {
+    "q": "~1.0.1"
   },
   "devDependencies": {
     "chai": "~1.8",
     "mocha": "~1.14",
-    "sinon": "~1.7",
-    "requestify": "~0.1"
+    "sinon": "~1.7"
   }
 }
