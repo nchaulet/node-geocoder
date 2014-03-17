@@ -1,10 +1,11 @@
 (function() {
-    var chai = require('chai'),
+    var chai   = require('chai'),
         should = chai.should(),
         expect = chai.expect,
-        sinon = require('sinon');
+        sinon  = require('sinon');
 
-    var Geocoder = require('../lib/geocoder.js');
+    var Geocoder = require('../lib/geocoder.js'),
+        Q        = require('q');
 
     var mockedGeocoder = {
         geocode: function() {},
@@ -34,6 +35,13 @@
 
                 mock.verify();
             });
+
+            it('Should return a promise', function() {
+                var geocoder = new Geocoder(mockedGeocoder);
+
+                var promise = geocoder.geocode('127.0.0.1');
+                promise.then.should.be.a('function');
+            });
         });
 
         describe('#reverse' , function() {
@@ -46,6 +54,14 @@
                 geocoder.reverse(1, 2);
 
                 mock.verify();
+            });
+
+            it('Should return a promise', function() {
+                var geocoder = new Geocoder(mockedGeocoder);
+
+                var promise = geocoder.reverse('127.0.0.1');
+
+                promise.then.should.be.a('function');
             });
         });
 

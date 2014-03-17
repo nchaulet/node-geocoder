@@ -30,7 +30,6 @@
   "devDependencies": {
     "chai": "~1.8",
     "mocha": "~1.14",
-    "sinon": "~1.7",
-    "requestify": "~0.1"
+    "sinon": "~1.7"
   }
 }
