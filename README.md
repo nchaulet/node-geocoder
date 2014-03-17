@@ -4,8 +4,6 @@
 
 Node library for geocoding and reverse geocoding
 
-Currently in development
-
 ## Installation
 
     npm install node-geocoder
@@ -27,6 +25,16 @@ geocoder.geocode('29 champs elysée paris', function(err, res) {
     console.log(res);
 });
 
+// Or using Promise
+
+geocoder.geocode('29 champs elysée paris')
+    .then(function(res) {
+        console.log(res);
+    })
+    .err(function(err) {
+        console.log(err);
+    });
+
 // output :
 [{
     latitude: 48.8698679,
@@ -40,6 +48,13 @@ geocoder.geocode('29 champs elysée paris', function(err, res) {
     state: 'Île de France',
     stateCode: 'IDF'
 }]
+
+// Reverse example
+
+geocoder.reverse(45.767, 4.833, function(err, res) {
+    console.log(res);
+});
+
 ```
 
 ## Geocoder Provider
@@ -53,8 +68,7 @@ geocoder.geocode('29 champs elysée paris', function(err, res) {
 
 ## Http adapter
 
-* `http`       : This adapter uses Http nodejs library (by default)
-* `requestify` : This adapter uses Requestify library (you need to install `requestify`)
+* `http`: This adapter uses Http nodejs library (by default)
 
 ## Formatter
 
@@ -106,3 +120,8 @@ var geocoder = {
 
 * Added suport for the ESRI AGOL geocoding service
 * Included test coverage for the new geocoder
+
+### 2.0.0
+
+* remove requestify http adapter
+* Now support Promise API (using Q)
