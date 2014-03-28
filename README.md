@@ -145,3 +145,9 @@ var formatter = {
 
 * remove requestify http adapter
 * Now support Promise API (using Q)
+
+### 2.0.1
+
+* fix bugs
+* add https adapter
+ 
