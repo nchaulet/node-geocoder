@@ -87,6 +87,20 @@
                 mock.verify();
             });
 
+            it('Should call httpAdapter get method with key if specified', function() {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {
+                    address: "1 champs élysée Paris",
+                    sensor: false,
+                    key: "hey-you-guys"
+                }).once().returns({then: function() {}});
+
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, { apiKey: 'hey-you-guys' });
+
+                googleAdapter.geocode('1 champs élysée Paris');
+
+                mock.verify();
+            });
 
             it('Should return geocoded adress', function(done) {
                 var mock = sinon.mock(mockedHttpAdapter);
