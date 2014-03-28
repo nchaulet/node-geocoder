@@ -79,6 +79,7 @@ geocoder.reverse(45.767, 4.833)
 ## Http adapter
 
 * `http`: This adapter uses Http nodejs library (by default)
+* `https`: This adapter uses Https nodejs library
 
 ## Formatter
 
