@@ -74,6 +74,7 @@ geocoder.reverse(45.767, 4.833)
 * `datasciencetoolkit` : DataScienceToolkitGeocoder supports ip v4 geocoding and address geocoding, use `extra.host` for specify a local instance
 * `openstreetmap` : OpenStreetMapGeocoder support address geocoding and reverse geocoding
 * `mapquest` : MapQuestGeocoder support address geocoding and reverse geocoding need an apiKey
+* `openmapquest` : Open MapQuestGeocoder (based on OpenStreetMapGeocoder) support address geocoding and reverse geocoding need an apiKey
 * `agol` : ArcGis Online Geocoding service, supports geocoding and reverse.  Requires a client_id & client_secret (Only works with requestify)
 
 ## Http adapter
