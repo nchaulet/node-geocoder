@@ -151,4 +151,8 @@ var formatter = {
 
 * fix bugs
 * add https adapter
- 
+
+### 2.1.0
+
+* add openmapquest geocoder
+
