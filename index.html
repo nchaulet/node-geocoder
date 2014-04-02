@@ -34,8 +34,6 @@
         <h1>
 <a name="node-geocoder" class="anchor" href="#node-geocoder"><span class="octicon octicon-link"></span></a>node-geocoder</h1>
 
-<p>(current version 2.0.0)</p>
-
 <p><a href="https://travis-ci.org/nchaulet/node-geocoder"><img src="https://travis-ci.org/nchaulet/node-geocoder.png?branch=master" alt="Build Status"></a></p>
 
 <p>Node library for geocoding and reverse geocoding</p>
@@ -120,6 +118,8 @@
 <li>
 <code>mapquest</code> : MapQuestGeocoder support address geocoding and reverse geocoding need an apiKey</li>
 <li>
+<code>openmapquest</code> : Open MapQuestGeocoder (based on OpenStreetMapGeocoder) support address geocoding and reverse geocoding need an apiKey</li>
+<li>
 <code>agol</code> : ArcGis Online Geocoding service, supports geocoding and reverse.  Requires a client_id &amp; client_secret (Only works with requestify)</li>
 </ul><h2>
 <a name="http-adapter" class="anchor" href="#http-adapter"><span class="octicon octicon-link"></span></a>Http adapter</h2>
@@ -127,6 +127,8 @@
 <ul>
 <li>
 <code>http</code>: This adapter uses Http nodejs library (by default)</li>
+<li>
+<code>https</code>: This adapter uses Https nodejs library</li>
 </ul><h2>
 <a name="formatter" class="anchor" href="#formatter"><span class="octicon octicon-link"></span></a>Formatter</h2>
 
@@ -212,6 +214,17 @@
 <ul>
 <li>remove requestify http adapter</li>
 <li>Now support Promise API (using Q)</li>
+</ul><h3>
+<a name="201" class="anchor" href="#201"><span class="octicon octicon-link"></span></a>2.0.1</h3>
+
+<ul>
+<li>fix bugs</li>
+<li>add https adapter</li>
+</ul><h3>
+<a name="210" class="anchor" href="#210"><span class="octicon octicon-link"></span></a>2.1.0</h3>
+
+<ul>
+<li>add openmapquest geocoder</li>
 </ul>
       </section>
     </div>
