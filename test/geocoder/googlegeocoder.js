@@ -259,7 +259,7 @@
                     address: "1 champs élysée Paris",
                     client: "raoul",
                     sensor: false,
-                    signature: "wiN9RmtojePLkLpnDeamUtKVfjQ="
+                    signature: "PW1yyLFH9lN16B-Iw7EXiAeMKX8="
                 }).once().returns({then: function() {}});
 
                 var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, {clientId: 'raoul', apiKey: 'foo'});
