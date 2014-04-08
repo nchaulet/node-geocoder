@@ -156,3 +156,7 @@ var formatter = {
 
 * add openmapquest geocoder
 
+### 2.1.1 
+
+* Fix bugs
+
