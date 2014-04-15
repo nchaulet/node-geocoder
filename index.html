@@ -120,7 +120,10 @@
 <li>
 <code>openmapquest</code> : Open MapQuestGeocoder (based on OpenStreetMapGeocoder) support address geocoding and reverse geocoding need an apiKey</li>
 <li>
-<code>agol</code> : ArcGis Online Geocoding service, supports geocoding and reverse.  Requires a client_id &amp; client_secret (Only works with requestify)</li>
+<code>agol</code> : ArcGis Online Geocoding service, supports geocoding and reverse.  Requires a client_id &amp; client_secret</li>
+<li>
+<code>tomtom</code>: TomTomGeocoder support address geocoding , you need to specify <code>extra.apiKey</code>
+</li>
 </ul><h2>
 <a name="http-adapter" class="anchor" href="#http-adapter"><span class="octicon octicon-link"></span></a>Http adapter</h2>
 
@@ -181,51 +184,6 @@
     <span class="nx">format</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">formattedData</span><span class="p">;</span> <span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
-
-<h2>
-<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>Changelog</h2>
-
-<h3>
-<a name="110" class="anchor" href="#110"><span class="octicon octicon-link"></span></a>1.1.0</h3>
-
-<ul>
-<li>add google geocoder language option</li>
-</ul><h3>
-<a name="120" class="anchor" href="#120"><span class="octicon octicon-link"></span></a>1.2.0</h3>
-
-<ul>
-<li>add openStreetmap geocoder language option</li>
-<li>improve http error handling</li>
-</ul><h3>
-<a name="130" class="anchor" href="#130"><span class="octicon octicon-link"></span></a>1.3.0</h3>
-
-<ul>
-<li>add host options for datasciencetoolkit</li>
-<li>improve tests</li>
-</ul><h3>
-<a name="140" class="anchor" href="#140"><span class="octicon octicon-link"></span></a>1.4.0</h3>
-
-<ul>
-<li>Added suport for the ESRI AGOL geocoding service</li>
-<li>Included test coverage for the new geocoder</li>
-</ul><h3>
-<a name="200" class="anchor" href="#200"><span class="octicon octicon-link"></span></a>2.0.0</h3>
-
-<ul>
-<li>remove requestify http adapter</li>
-<li>Now support Promise API (using Q)</li>
-</ul><h3>
-<a name="201" class="anchor" href="#201"><span class="octicon octicon-link"></span></a>2.0.1</h3>
-
-<ul>
-<li>fix bugs</li>
-<li>add https adapter</li>
-</ul><h3>
-<a name="210" class="anchor" href="#210"><span class="octicon octicon-link"></span></a>2.1.0</h3>
-
-<ul>
-<li>add openmapquest geocoder</li>
-</ul>
       </section>
     </div>
 
