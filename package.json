@@ -1,7 +1,7 @@
 {
   "name": "node-geocoder",
-  "version": "2.1.1",
-  "description": "node geocoding library, supports google maps, mapquest, open street map, ...",
+  "version": "2.2.0",
+  "description": "node geocoding library, supports google maps, mapquest, open street map, tom tom, promise",
   "main": "lib/geocoderfactory.js",
   "scripts": {
     "test": "mocha"
@@ -17,7 +17,8 @@
     "maps",
     "mapquest",
     "agol",
-    "arcgis"
+    "arcgis",
+    "tomtom"
   ],
   "author": "nchaulet",
   "license": "MIT",

@@ -75,7 +75,8 @@ geocoder.reverse(45.767, 4.833)
 * `openstreetmap` : OpenStreetMapGeocoder support address geocoding and reverse geocoding
 * `mapquest` : MapQuestGeocoder support address geocoding and reverse geocoding need an apiKey
 * `openmapquest` : Open MapQuestGeocoder (based on OpenStreetMapGeocoder) support address geocoding and reverse geocoding need an apiKey
-* `agol` : ArcGis Online Geocoding service, supports geocoding and reverse.  Requires a client_id & client_secret (Only works with requestify)
+* `agol` : ArcGis Online Geocoding service, supports geocoding and reverse.  Requires a client_id & client_secret
+* `tomtom`: TomTomGeocoder support address geocoding , you need to specify `extra.apiKey`
 
 ## Http adapter
 

@@ -36,3 +36,7 @@
 ## 2.1.1 
 
 * Fix bugs
+
+## 2.2.0
+
+* add tomtom geocoder
