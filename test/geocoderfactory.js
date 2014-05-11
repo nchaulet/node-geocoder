@@ -97,6 +97,13 @@
                 geocoderAdapter.should.be.instanceof(OpenStreetMapGeocoder);
                 geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
             });
+
+            it('called with "zaertyazeaze" and "http" must throw an error', function() {
+
+                expect(function() {GeocoderFactory.getGeocoder('zaertyazeaze', 'http');})
+                    .to
+                    .throw(Error, 'No geocoder provider find for : zaertyazeaze');
+            });
         });
     });
 
