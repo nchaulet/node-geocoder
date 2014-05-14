@@ -1,28 +1,31 @@
 #!/usr/bin/env node
 
-var GeocoderFactory = require('../lib/geocoderfactory.js');
+var program         = require('commander'),
+	GeocoderFactory = require('../lib/geocoderfactory.js');
 
-var args = process.argv.slice(2);
+program
+	.usage('[options] [value]')
+	.description('geocode given value')
+	.option('-p, --provider [value]]', 'Geocoder provider (default to google)', 'google');
 
-var geocoderOptionIndex = args.indexOf('--provider') + 1;
+program
+	.version('2.4.0')
+	.command('*')
+	.action(function(value){
+		try {
+			var geocoder = GeocoderFactory.getGeocoder(program.provider);	
+		} catch(e) {
+			console.error(e.message);
+			process.exit(1);
+		}
 
-var geocoderProvider = 'google';
-
-if (geocoderOptionIndex > 0) {
-	geocoderProvider = args[geocoderOptionIndex];
-}
-
-try {
-	var geocoder = GeocoderFactory.getGeocoder(geocoderProvider);	
-} catch(e) {
-	console.error(e.message);
-	process.exit(1);
-}
-
-geocoder.geocode(args[args.length - 1])
-	.then(function(results) {
-		console.log(results);
-	}, function(err) {
-		console.error(err.message);
-		process.exit(1);
+		geocoder.geocode(value)
+			.then(function(results) {
+				console.log(results);
+			}, function(err) {
+				console.error(err.message);
+				process.exit(1);
+			});
 	});
+
+program.parse(process.argv);
