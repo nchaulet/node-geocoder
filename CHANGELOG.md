@@ -40,3 +40,11 @@
 ## 2.2.0
 
 * add tomtom geocoder
+
+## 2.3.0 
+
+* init command line 
+
+## 2.4.0 
+
+* use commander for command line
