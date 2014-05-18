@@ -38,7 +38,7 @@ geocoder.geocode('29 champs elysée paris')
     .then(function(res) {
         console.log(res);
     })
-    .err(function(err) {
+    .catch(function(err) {
         console.log(err);
     });
 
@@ -68,7 +68,7 @@ geocoder.reverse(45.767, 4.833)
     .then(function(res) {
         console.log(res);
     })
-    .err(function(err) {
+    .catch(function(err) {
         console.log(err);
     });
 
