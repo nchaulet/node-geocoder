@@ -68,7 +68,7 @@ geocoder.reverse(45.767, 4.833)
     .then(function(res) {
         console.log(res);
     })
-    .err(function(err) {
+    .catch(function(err) {
         console.log(err);
     });
 
