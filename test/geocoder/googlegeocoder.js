@@ -17,7 +17,7 @@
 
         describe('#constructor' , function() {
             it('an http adapter must be set', function() {
-                expect(function() {new GoogleGeocoder();}).to.throw(Error, 'Google Geocoder need an httpAdapter');
+                expect(function() {new GoogleGeocoder();}).to.throw(Error, 'GoogleGeocoder need an httpAdapter');
             });
 
             it('if a clientId is specified an apiKey must be set', function() {
