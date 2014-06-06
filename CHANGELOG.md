@@ -48,3 +48,8 @@
 ## 2.4.0 
 
 * use commander for command line
+
+## 2.5.0
+
+* add abstract geocoder for better code factorization
+* Init google geocoder filtering (to document)
