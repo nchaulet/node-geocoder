@@ -35,7 +35,7 @@
                 var freegeoipgeocoder = new FreegeoipGeocoder(mockedHttpAdapter);
                 expect(function() {freegeoipgeocoder.geocode('1 rue test');})
                     .to
-                    .throw(Error, 'FreegeoipGeocoder suport only ip geocoding');
+                    .throw(Error, 'FreegeoipGeocoder no suport geocoding adress');
 
 
             });
