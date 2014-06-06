@@ -36,7 +36,7 @@
 
                 expect(function() {
                         osmAdapter.geocode('127.0.0.1');
-                }).to.throw(Error, 'OpenStreetMapGeocoder no suport geocoding ip');
+                }).to.throw(Error, 'OpenStreetMapGeocoder no suport geocoding IPv4');
 
             });
 
@@ -46,7 +46,7 @@
 
                 expect(function() {
                         osmAdapter.geocode('2001:0db8:0000:85a3:0000:0000:ac1f:8001');
-                }).to.throw(Error, 'OpenStreetMapGeocoder no suport geocoding ip');
+                }).to.throw(Error, 'OpenStreetMapGeocoder no suport geocoding IPv6');
 
             });
 

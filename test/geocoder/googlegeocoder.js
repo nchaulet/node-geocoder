@@ -17,7 +17,7 @@
 
         describe('#constructor' , function() {
             it('an http adapter must be set', function() {
-                expect(function() {new GoogleGeocoder();}).to.throw(Error, 'Google Geocoder need an httpAdapter');
+                expect(function() {new GoogleGeocoder();}).to.throw(Error, 'GoogleGeocoder need an httpAdapter');
             });
 
             it('if a clientId is specified an apiKey must be set', function() {
@@ -44,7 +44,7 @@
 
                 expect(function() {
                         googleAdapter.geocode('127.0.0.1');
-                }).to.throw(Error, 'Google Geocoder no suport geocoding ip');
+                }).to.throw(Error, 'GoogleGeocoder no suport geocoding IPv4');
 
             });
 
@@ -54,7 +54,7 @@
 
                 expect(function() {
                         googleAdapter.geocode('2001:0db8:0000:85a3:0000:0000:ac1f:8001');
-                }).to.throw(Error, 'Google Geocoder no suport geocoding ip');
+                }).to.throw(Error, 'GoogleGeocoder no suport geocoding IPv6');
 
             });
 
@@ -83,6 +83,25 @@
                 var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, { language: 'fr' });
 
                 googleAdapter.geocode('1 champs élysée Paris');
+
+                mock.verify();
+            });
+
+            it('Should call httpAdapter get method with components if called with object', function() {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {
+                    address: "1 champs élysée Paris",
+                    sensor: false,
+                    components: "country:FR|postal_code:75008"
+                }).once().returns({then: function() {}});
+
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+
+                googleAdapter.geocode({
+                    address: '1 champs élysée Paris',
+                    zipcode: '75008',
+                    country: 'FR'
+                });
 
                 mock.verify();
             });
