@@ -56,6 +56,11 @@ geocoder.geocode('29 champs elysée paris')
     stateCode: 'IDF'
 }]
 
+## Advenced usage (only google provider)
+geocoder.geocode({address: '29 champs elysée', country: 'France', zipcode: '75008', function(err, res) {
+    console.log(res);
+});
+
 // Reverse example
 
 // Using callback
