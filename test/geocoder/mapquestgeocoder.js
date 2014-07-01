@@ -56,6 +56,22 @@
 
             });
 
+            it('Should call httpAdapter get method', function() {
+
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').withArgs(
+                    'http://www.mapquestapi.com/geocoding/v1/address', 
+                    { key: "API_KEY", location: "test" }
+                ).once().returns({then: function() {}});
+
+                var mapquestAdapter = new MapQuestGeocoder(mockedHttpAdapter, 'API_KEY');
+
+                mapquestAdapter.geocode('test');
+
+                mock.verify();
+
+            });
+
         });
 
         describe('#reverse' , function() {
