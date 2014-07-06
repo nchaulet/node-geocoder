@@ -53,3 +53,7 @@
 
 * add abstract geocoder for better code factorization
 * Init google geocoder filtering (to document)
+
+## 2.6.0
+
+* add openstreetmap nominatim
