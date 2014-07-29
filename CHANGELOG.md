@@ -57,3 +57,7 @@
 ## 2.6.0
 
 * add openstreetmap nominatim
+
+## 2.7.0
+
+* improve http error handling
