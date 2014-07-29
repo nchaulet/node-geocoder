@@ -35,7 +35,10 @@
             it('get must call http  request', function() {
                 var http = { request: function () {} };
                 var mock = sinon.mock(http);
-                mock.expects('request').once().returns({end: function() {}});
+                mock.expects('request').once().returns({
+                    end: function() {},
+                    on: function() { return this; }
+                });
 
                 var httpAdapter = new HttpAdapter(http);
 
