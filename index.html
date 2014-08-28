@@ -55,7 +55,7 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
 <span class="kd">var</span> <span class="nx">httpAdapter</span> <span class="o">=</span> <span class="s1">'http'</span><span class="p">;</span>
 <span class="c1">// optionnal</span>
 <span class="kd">var</span> <span class="nx">extra</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">'YOUR_API_KEY'</span><span class="p">,</span> <span class="c1">// for map quest</span>
+    <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">'YOUR_API_KEY'</span><span class="p">,</span> <span class="c1">// for mapquest, opencagedata, Google premier</span>
     <span class="nx">formatter</span><span class="o">:</span> <span class="kc">null</span>         <span class="c1">// 'gpx', 'string', ...</span>
 <span class="p">};</span>
 
@@ -71,7 +71,7 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
     <span class="p">})</span>
-    <span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
     <span class="p">});</span>
 
@@ -89,6 +89,11 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
     <span class="nx">stateCode</span><span class="o">:</span> <span class="s1">'IDF'</span>
 <span class="p">}]</span>
 
+<span class="err">##</span> <span class="nx">Advenced</span> <span class="nx">usage</span> <span class="p">(</span><span class="nx">only</span> <span class="nx">google</span> <span class="nx">provider</span><span class="p">)</span>
+<span class="nx">geocoder</span><span class="p">.</span><span class="nx">geocode</span><span class="p">({</span><span class="nx">address</span><span class="o">:</span> <span class="s1">'29 champs elysée'</span><span class="p">,</span> <span class="nx">country</span><span class="o">:</span> <span class="s1">'France'</span><span class="p">,</span> <span class="nx">zipcode</span><span class="o">:</span> <span class="s1">'75008'</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+<span class="p">});</span>
+
 <span class="c1">// Reverse example</span>
 
 <span class="c1">// Using callback</span>
@@ -101,7 +106,7 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
     <span class="p">})</span>
-    <span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
     <span class="p">});</span>
 
@@ -112,7 +117,7 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
 
 <ul>
 <li>
-<code>google</code> : GoogleGeocoder support address geocoding and reverse geocoding, use <code>extra.clientId</code>and <code>extra.apiKey</code>(privateKey)for business licence, you can also use <code>extra.language</code> for specify language</li>
+<code>google</code> : GoogleGeocoder support address geocoding and reverse geocoding, use <code>extra.clientId</code>and <code>extra.apiKey</code>(privateKey) for business licence, you can also use <code>extra.language</code> for specify language. Note that 'https' is required when using an apiKey</li>
 <li>
 <code>freegeoip</code> : FreegeoipGeocoder support ip geocoding</li>
 <li>
@@ -127,6 +132,11 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
 <code>agol</code> : ArcGis Online Geocoding service, supports geocoding and reverse.  Requires a client_id &amp; client_secret</li>
 <li>
 <code>tomtom</code>: TomTomGeocoder support address geocoding , you need to specify <code>extra.apiKey</code>
+</li>
+<li>
+<code>nominatimmapquest</code>: OpenStreetMap nominatim geocoder, support address, and reverse geocoding</li>
+<li>
+<code>opencage</code>: uses multiple open sources, support address, reverse geocoding, you need to specify <code>extra.apiKey</code>
 </li>
 </ul><h2>
 <a name="http-adapter" class="anchor" href="#http-adapter"><span class="octicon octicon-link"></span></a>Http adapter</h2>
@@ -169,7 +179,7 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
 
 <p>To run tests just <code>npm test</code></p>
 
-<p>To check code style install <code>jshint</code> and just run `jshint lib test</p>
+<p>To check code style install <code>jshint</code> and just run <code>jshint lib test</code></p>
 
 <h3>
 <a name="extending-node-geocoder" class="anchor" href="#extending-node-geocoder"><span class="octicon octicon-link"></span></a>Extending node geocoder</h3>
