@@ -65,3 +65,4 @@
 ## 2.8.0
 
 * add opencage geocoder (http://geocoder.opencagedata.com/)
+
