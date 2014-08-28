@@ -61,3 +61,7 @@
 ## 2.7.0
 
 * improve http error handling
+
+## 2.8.0
+
+* add opencage geocoder (http://geocoder.opencagedata.com/)

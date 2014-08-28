@@ -22,7 +22,7 @@ var geocoderProvider = 'google';
 var httpAdapter = 'http';
 // optionnal
 var extra = {
-    apiKey: 'YOUR_API_KEY', // for map quest
+    apiKey: 'YOUR_API_KEY', // for mapquest, opencagedata, Google premier
     formatter: null         // 'gpx', 'string', ...
 };
 
@@ -81,7 +81,7 @@ geocoder.reverse(45.767, 4.833)
 
 ## Geocoder Provider
 
-* `google` : GoogleGeocoder support address geocoding and reverse geocoding, use `extra.clientId`and `extra.apiKey`(privateKey)for business licence, you can also use `extra.language` for specify language. Note that 'https' is required when using an apiKey
+* `google` : GoogleGeocoder support address geocoding and reverse geocoding, use `extra.clientId`and `extra.apiKey`(privateKey) for business licence, you can also use `extra.language` for specify language. Note that 'https' is required when using an apiKey
 * `freegeoip` : FreegeoipGeocoder support ip geocoding
 * `datasciencetoolkit` : DataScienceToolkitGeocoder supports ip v4 geocoding and address geocoding, use `extra.host` for specify a local instance
 * `openstreetmap` : OpenStreetMapGeocoder support address geocoding and reverse geocoding
@@ -89,7 +89,8 @@ geocoder.reverse(45.767, 4.833)
 * `openmapquest` : Open MapQuestGeocoder (based on OpenStreetMapGeocoder) support address geocoding and reverse geocoding need an apiKey
 * `agol` : ArcGis Online Geocoding service, supports geocoding and reverse.  Requires a client_id & client_secret
 * `tomtom`: TomTomGeocoder support address geocoding , you need to specify `extra.apiKey`
-* `nominatimmapquest`OpenStreetMap nominatim geocoder, support address, and reverse geocoding
+* `nominatimmapquest`: OpenStreetMap nominatim geocoder, support address, and reverse geocoding
+* `opencage`: uses multiple open sources, support address, reverse geocoding, you need to specify `extra.apiKey`
 
 ## Http adapter
 
@@ -114,7 +115,7 @@ You can improve this project by adding new geocoders or http adapters.
 
 To run tests just `npm test`
 
-To check code style install `jshint` and just run `jshint lib test
+To check code style install `jshint` and just run `jshint lib test`
 
 ### Extending node geocoder
 
