@@ -85,7 +85,7 @@ describe('AGOLGeocoder', function() {
 
         });
 
-        it('Should not accept IPdoes not support geov6', function() {
+        it('Should not accept IPv6', function() {
 
             var geocoder = new AGOLGeocoder(mockedRequestifyAdapter,mockedOptions);
 
