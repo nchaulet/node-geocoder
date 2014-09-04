@@ -33,7 +33,7 @@
 
 <p><a href="https://travis-ci.org/nchaulet/node-geocoder"><img src="https://travis-ci.org/nchaulet/node-geocoder.png?branch=master" alt="Build Status"></a></p>
 
-<p>Node library for geocoding and reverse geocoding. Can be use as a nodejs library or as a command line</p>
+<p>Node library for geocoding and reverse geocoding. Can be used as a nodejs library or on command line</p>
 
 <h2>
 <a name="installation-and-usage-geocoder-command-line" class="anchor" href="#installation-and-usage-geocoder-command-line"><span class="octicon octicon-link"></span></a>Installation and usage (geocoder command line)</h2>
@@ -55,7 +55,7 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
 <span class="kd">var</span> <span class="nx">httpAdapter</span> <span class="o">=</span> <span class="s1">'http'</span><span class="p">;</span>
 <span class="c1">// optionnal</span>
 <span class="kd">var</span> <span class="nx">extra</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">'YOUR_API_KEY'</span><span class="p">,</span> <span class="c1">// for mapquest, opencagedata, Google premier</span>
+    <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">'YOUR_API_KEY'</span><span class="p">,</span> <span class="c1">// for Mapquest, OpenCage, Google Premier</span>
     <span class="nx">formatter</span><span class="o">:</span> <span class="kc">null</span>         <span class="c1">// 'gpx', 'string', ...</span>
 <span class="p">};</span>
 
@@ -89,7 +89,7 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
     <span class="nx">stateCode</span><span class="o">:</span> <span class="s1">'IDF'</span>
 <span class="p">}]</span>
 
-<span class="err">##</span> <span class="nx">Advenced</span> <span class="nx">usage</span> <span class="p">(</span><span class="nx">only</span> <span class="nx">google</span> <span class="nx">provider</span><span class="p">)</span>
+<span class="err">##</span> <span class="nx">Advanced</span> <span class="nx">usage</span> <span class="p">(</span><span class="nx">only</span> <span class="nx">google</span> <span class="nx">provider</span><span class="p">)</span>
 <span class="nx">geocoder</span><span class="p">.</span><span class="nx">geocode</span><span class="p">({</span><span class="nx">address</span><span class="o">:</span> <span class="s1">'29 champs elysée'</span><span class="p">,</span> <span class="nx">country</span><span class="o">:</span> <span class="s1">'France'</span><span class="p">,</span> <span class="nx">zipcode</span><span class="o">:</span> <span class="s1">'75008'</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
 <span class="p">});</span>
@@ -117,35 +117,35 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
 
 <ul>
 <li>
-<code>google</code> : GoogleGeocoder support address geocoding and reverse geocoding, use <code>extra.clientId</code>and <code>extra.apiKey</code>(privateKey) for business licence, you can also use <code>extra.language</code> for specify language. Note that 'https' is required when using an apiKey</li>
+<code>google</code> : GoogleGeocoder. Supports address geocoding and reverse geocoding. Use <code>extra.clientId</code>and <code>extra.apiKey</code>(privateKey) for business licence. You can also use <code>extra.language</code> to specify language. Note that 'https' is required when using an apiKey</li>
 <li>
-<code>freegeoip</code> : FreegeoipGeocoder support ip geocoding</li>
+<code>freegeoip</code> : FreegeoipGeocoder. Supports IP geocoding</li>
 <li>
-<code>datasciencetoolkit</code> : DataScienceToolkitGeocoder supports ip v4 geocoding and address geocoding, use <code>extra.host</code> for specify a local instance</li>
+<code>datasciencetoolkit</code> : DataScienceToolkitGeocoder. Supports IPv4 geocoding and address geocoding. Use <code>extra.host</code> to specify a local instance</li>
 <li>
-<code>openstreetmap</code> : OpenStreetMapGeocoder support address geocoding and reverse geocoding</li>
+<code>openstreetmap</code> : OpenStreetMapGeocoder. Supports address geocoding and reverse geocoding</li>
 <li>
-<code>mapquest</code> : MapQuestGeocoder support address geocoding and reverse geocoding need an apiKey</li>
+<code>mapquest</code> : MapQuestGeocoder. Supports address geocoding and reverse geocoding. Needs an apiKey</li>
 <li>
-<code>openmapquest</code> : Open MapQuestGeocoder (based on OpenStreetMapGeocoder) support address geocoding and reverse geocoding need an apiKey</li>
+<code>openmapquest</code> : Open MapQuestGeocoder (based on OpenStreetMapGeocoder). Supports address geocoding and reverse geocoding. Needs an apiKey</li>
 <li>
-<code>agol</code> : ArcGis Online Geocoding service, supports geocoding and reverse.  Requires a client_id &amp; client_secret</li>
+<code>agol</code> : ArcGis Online Geocoding service. Supports geocoding and reverse. Requires a client_id &amp; client_secret</li>
 <li>
-<code>tomtom</code>: TomTomGeocoder support address geocoding , you need to specify <code>extra.apiKey</code>
+<code>tomtom</code>: TomTomGeocoder. Supports address geocoding. You need to specify <code>extra.apiKey</code>
 </li>
 <li>
-<code>nominatimmapquest</code>: OpenStreetMap nominatim geocoder, support address, and reverse geocoding</li>
+<code>nominatimmapquest</code>: OpenStreetMap Nominatim geocoder. Support address and reverse geocoding</li>
 <li>
-<code>opencage</code>: uses multiple open sources, support address, reverse geocoding, you need to specify <code>extra.apiKey</code>
+<code>opencage</code>: OpenCage Geocoder. Uses multiple open sources. Supports address and reverse geocoding. You need to specify <code>extra.apiKey</code>
 </li>
 </ul><h2>
 <a name="http-adapter" class="anchor" href="#http-adapter"><span class="octicon octicon-link"></span></a>Http adapter</h2>
 
 <ul>
 <li>
-<code>http</code>: This adapter uses Http nodejs library (by default)</li>
+<code>http</code>: This adapter uses the Http nodejs library (default)</li>
 <li>
-<code>https</code>: This adapter uses Https nodejs library</li>
+<code>https</code>: This adapter uses the Https nodejs library</li>
 </ul><h2>
 <a name="formatter" class="anchor" href="#formatter"><span class="octicon octicon-link"></span></a>Formatter</h2>
 
@@ -177,14 +177,14 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
 
 <p>You can improve this project by adding new geocoders or http adapters.</p>
 
-<p>To run tests just <code>npm test</code></p>
+<p>To run tests just <code>npm test</code>.</p>
 
-<p>To check code style install <code>jshint</code> and just run <code>jshint lib test</code></p>
+<p>To check code style install <code>jshint</code> and just run <code>jshint lib test</code>.</p>
 
 <h3>
 <a name="extending-node-geocoder" class="anchor" href="#extending-node-geocoder"><span class="octicon octicon-link"></span></a>Extending node geocoder</h3>
 
-<p>You can add new geocoders by implementing the two method geocode &amp; reverse:</p>
+<p>You can add new geocoders by implementing the two methods <code>geocode</code> and <code>reverse</code>:</p>
 
 <div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">geocoder</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">geocode</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span> <span class="p">},</span>
@@ -192,7 +192,7 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
 <span class="p">}</span>
 </pre></div>
 
-<p>You can also add formatter implementing this interface</p>
+<p>You can also add formatter implementing the following interface</p>
 
 <div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">formatter</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">format</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">formattedData</span><span class="p">;</span> <span class="p">},</span>
