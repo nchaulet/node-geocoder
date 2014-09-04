@@ -16,7 +16,7 @@
 
 ## 1.4.0
 
-* Added suport for the ESRI AGOL geocoding service
+* Added support for the ESRI AGOL geocoding service
 * Included test coverage for the new geocoder
 
 ## 2.0.0

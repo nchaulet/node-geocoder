@@ -54,7 +54,7 @@
                 mock.verify();
             });
 
-            it('Should return a geocoded adress', function(done) {
+            it('Should return a geocoded address', function(done) {
 
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, {
@@ -92,7 +92,7 @@
 
             });
 
-            it('Should return a geocoded adress', function(done) {
+            it('Should return a geocoded address', function(done) {
 
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, {

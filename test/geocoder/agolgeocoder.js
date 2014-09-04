@@ -75,7 +75,7 @@ describe('AGOLGeocoder', function() {
     });
 
     describe('#geocode' , function() {
-        it('Should not accept Ipv4', function() {
+        it('Should not accept IPv4', function() {
 
             var geocoder = new AGOLGeocoder(mockedRequestifyAdapter,mockedOptions);
 
@@ -85,7 +85,7 @@ describe('AGOLGeocoder', function() {
 
         });
 
-        it('Should not accept Ipv6', function() {
+        it('Should not accept IPv6', function() {
 
             var geocoder = new AGOLGeocoder(mockedRequestifyAdapter,mockedOptions);
 
@@ -137,7 +137,7 @@ describe('AGOLGeocoder', function() {
 
         });
 
-        it('Should return geocoded adress', function(done) {
+        it('Should return geocoded address', function(done) {
             var mock = sinon.mock(mockedRequestifyAdapter);
 
             mock.expects('get').once().callsArgWith(2, false,
@@ -203,7 +203,7 @@ describe('AGOLGeocoder', function() {
 
         });
 
-        it('Should return geocoded adress', function(done) {
+        it('Should return geocoded address', function(done) {
             var mock = sinon.mock(mockedRequestifyAdapter);
             mock.expects('get').once().callsArgWith(2, false,
                 '{"address":{"Address":"1190 E Kenyon Ave","Neighborhood":null,"City":"Englewood","Subregion":null,"Region":"Colorado","Postal":"80113","PostalExt":null,"CountryCode":"USA","Loc_name":"USA.PointAddress"},"location":{"x":-104.97389993455704,"y":39.649423090952013,"spatialReference":{"wkid":4326,"latestWkid":4326}}}'

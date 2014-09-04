@@ -30,12 +30,12 @@
 
         describe('#geocode' , function() {
 
-            it('Should not accept adress', function() {
+            it('Should not accept address', function() {
 
                 var freegeoipgeocoder = new FreegeoipGeocoder(mockedHttpAdapter);
                 expect(function() {freegeoipgeocoder.geocode('1 rue test');})
                     .to
-                    .throw(Error, 'FreegeoipGeocoder no suport geocoding adress');
+                    .throw(Error, 'FreegeoipGeocoder does not support geocoding address');
 
 
             });
@@ -52,7 +52,7 @@
                 mock.verify();
             });
 
-            it('Should return a geocoded adress', function(done) {
+            it('Should return a geocoded address', function(done) {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, {
                         latitude: 37.386,

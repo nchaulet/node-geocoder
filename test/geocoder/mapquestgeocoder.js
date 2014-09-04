@@ -22,7 +22,7 @@
 
             it('an apiKey must be set', function() {
 
-                expect(function() {new MapQuestGeocoder(mockedHttpAdapter);}).to.throw(Error, 'MapQuestGeocoder need an apiKey');
+                expect(function() {new MapQuestGeocoder(mockedHttpAdapter);}).to.throw(Error, 'MapQuestGeocoder needs an apiKey');
             });
 
             it('Should be an instance of MapQuestGeocoder', function() {
@@ -36,23 +36,23 @@
 
         describe('#geocode' , function() {
 
-            it('Should not accept Ipv4', function() {
+            it('Should not accept IPv4', function() {
 
                 var mapquestAdapter = new MapQuestGeocoder(mockedHttpAdapter, 'API_KEY');
 
                 expect(function() {
                         mapquestAdapter.geocode('127.0.0.1');
-                }).to.throw(Error, 'MapQuestGeocoder no suport geocoding IPv4');
+                }).to.throw(Error, 'MapQuestGeocoder does not support geocoding IPv4');
 
             });
 
-            it('Should not accept Ipv6', function() {
+            it('Should not accept IPv6', function() {
 
                 var mapquestAdapter = new MapQuestGeocoder(mockedHttpAdapter, 'API_KEY');
 
                 expect(function() {
                         mapquestAdapter.geocode('2001:0db8:0000:85a3:0000:0000:ac1f:8001');
-                }).to.throw(Error, 'MapQuestGeocoder no suport geocoding IPv6');
+                }).to.throw(Error, 'MapQuestGeocoder does not support geocoding IPv6');
 
             });
 
