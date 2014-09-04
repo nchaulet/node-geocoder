@@ -85,8 +85,8 @@ geocoder.reverse(45.767, 4.833)
 * `freegeoip` : FreegeoipGeocoder. Supports IP geocoding
 * `datasciencetoolkit` : DataScienceToolkitGeocoder. Supports IPv4 geocoding and address geocoding. Use `extra.host` to specify a local instance
 * `openstreetmap` : OpenStreetMapGeocoder. Supports address geocoding and reverse geocoding
-* `mapquest` : MapQuestGeocoder. Supports address geocoding and reverse geocoding. Needs an apiiKey
-* `openmapquest` : Open MapQuestGeocoder (based on OpenStreetMapGeocoder). Supports address geocoding and reverse geocoding. Needs an apiiKey
+* `mapquest` : MapQuestGeocoder. Supports address geocoding and reverse geocoding. Needs an apiKey
+* `openmapquest` : Open MapQuestGeocoder (based on OpenStreetMapGeocoder). Supports address geocoding and reverse geocoding. Needs an apiKey
 * `agol` : ArcGis Online Geocoding service. Supports geocoding and reverse. Requires a client_id & client_secret
 * `tomtom`: TomTomGeocoder. Supports address geocoding. You need to specify `extra.apiKey`
 * `nominatimmapquest`: OpenStreetMap Nominatim geocoder. Support address and reverse geocoding

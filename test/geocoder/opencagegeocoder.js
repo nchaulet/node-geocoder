@@ -21,7 +21,7 @@
 
             it('an apiKey must be set', function() {
 
-                expect(function() {new OpenCageGeocoder(mockedHttpAdapter);}).to.throw(Error, 'OpenCageGeocoder needs an apiiKey');
+                expect(function() {new OpenCageGeocoder(mockedHttpAdapter);}).to.throw(Error, 'OpenCageGeocoder needs an apiKey');
             });
 
             it('Should be an instance of OpenCageGeocoder', function() {

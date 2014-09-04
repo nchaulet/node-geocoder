@@ -22,7 +22,7 @@
 
             it('an apiKey must be set', function() {
 
-                expect(function() {new MapQuestGeocoder(mockedHttpAdapter);}).to.throw(Error, 'MapQuestGeocoder needs an apiiKey');
+                expect(function() {new MapQuestGeocoder(mockedHttpAdapter);}).to.throw(Error, 'MapQuestGeocoder needs an apiKey');
             });
 
             it('Should be an instance of MapQuestGeocoder', function() {
