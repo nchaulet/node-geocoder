@@ -30,23 +30,23 @@
 
         describe('#geocode' , function() {
 
-            it('Should not accept Ipv4', function() {
+            it('Should not accept IPv4', function() {
 
                 var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter);
 
                 expect(function() {
                         nmAdapter.geocode('127.0.0.1');
-                }).to.throw(Error, 'NominatimMapquestGeocoder no suport geocoding IPv4');
+                }).to.throw(Error, 'NominatimMapquestGeocoder does not support geocoding IPv4');
 
             });
 
-            it('Should not accept Ipv6', function() {
+            it('Should not accept IPv6', function() {
 
                 var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter);
 
                 expect(function() {
                         nmAdapter.geocode('2001:0db8:0000:85a3:0000:0000:ac1f:8001');
-                }).to.throw(Error, 'NominatimMapquestGeocoder no suport geocoding IPv6');
+                }).to.throw(Error, 'NominatimMapquestGeocoder does not support geocoding IPv6');
 
             });
 
@@ -63,7 +63,7 @@
 
             });
 
-            it('Should return geocoded adress', function(done) {
+            it('Should return geocoded address', function(done) {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, {
                         lat: 48.86841815,
@@ -105,7 +105,7 @@
         });
 
         describe('#reverse' , function() {
-            it('Should return geocoded adress', function(done) {
+            it('Should return geocoded address', function(done) {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, {
                         lat: 40.714232,

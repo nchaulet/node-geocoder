@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/nchaulet/node-geocoder.png?branch=master)](https://travis-ci.org/nchaulet/node-geocoder)
 
-Node library for geocoding and reverse geocoding. Can be use as a nodejs library or as a command line
+Node library for geocoding and reverse geocoding. Can be used as a nodejs library or on command line
 
 ## Installation and usage (geocoder command line)
 
@@ -22,7 +22,7 @@ var geocoderProvider = 'google';
 var httpAdapter = 'http';
 // optionnal
 var extra = {
-    apiKey: 'YOUR_API_KEY', // for mapquest, opencagedata, Google premier
+    apiKey: 'YOUR_API_KEY', // for Mapquest, OpenCage, Google Premier
     formatter: null         // 'gpx', 'string', ...
 };
 
@@ -56,7 +56,7 @@ geocoder.geocode('29 champs elysée paris')
     stateCode: 'IDF'
 }]
 
-## Advenced usage (only google provider)
+## Advanced usage (only google provider)
 geocoder.geocode({address: '29 champs elysée', country: 'France', zipcode: '75008'}, function(err, res) {
     console.log(res);
 });
@@ -81,21 +81,21 @@ geocoder.reverse(45.767, 4.833)
 
 ## Geocoder Provider
 
-* `google` : GoogleGeocoder support address geocoding and reverse geocoding, use `extra.clientId`and `extra.apiKey`(privateKey) for business licence, you can also use `extra.language` for specify language. Note that 'https' is required when using an apiKey
-* `freegeoip` : FreegeoipGeocoder support ip geocoding
-* `datasciencetoolkit` : DataScienceToolkitGeocoder supports ip v4 geocoding and address geocoding, use `extra.host` for specify a local instance
-* `openstreetmap` : OpenStreetMapGeocoder support address geocoding and reverse geocoding
-* `mapquest` : MapQuestGeocoder support address geocoding and reverse geocoding need an apiKey
-* `openmapquest` : Open MapQuestGeocoder (based on OpenStreetMapGeocoder) support address geocoding and reverse geocoding need an apiKey
-* `agol` : ArcGis Online Geocoding service, supports geocoding and reverse.  Requires a client_id & client_secret
-* `tomtom`: TomTomGeocoder support address geocoding , you need to specify `extra.apiKey`
-* `nominatimmapquest`: OpenStreetMap nominatim geocoder, support address, and reverse geocoding
-* `opencage`: uses multiple open sources, support address, reverse geocoding, you need to specify `extra.apiKey`
+* `google` : GoogleGeocoder. Supports address geocoding and reverse geocoding. Use `extra.clientId`and `extra.apiKey`(privateKey) for business licence. You can also use `extra.language` to specify language. Note that 'https' is required when using an apiKey
+* `freegeoip` : FreegeoipGeocoder. Supports IP geocoding
+* `datasciencetoolkit` : DataScienceToolkitGeocoder. Supports IPv4 geocoding and address geocoding. Use `extra.host` to specify a local instance
+* `openstreetmap` : OpenStreetMapGeocoder. Supports address geocoding and reverse geocoding
+* `mapquest` : MapQuestGeocoder. Supports address geocoding and reverse geocoding. Needs an apiiKey
+* `openmapquest` : Open MapQuestGeocoder (based on OpenStreetMapGeocoder). Supports address geocoding and reverse geocoding. Needs an apiiKey
+* `agol` : ArcGis Online Geocoding service. Supports geocoding and reverse. Requires a client_id & client_secret
+* `tomtom`: TomTomGeocoder. Supports address geocoding. You need to specify `extra.apiKey`
+* `nominatimmapquest`: OpenStreetMap Nominatim geocoder. Support address and reverse geocoding
+* `opencage`: OpenCage Geocoder. Uses multiple open sources. Supports address and reverse geocoding. You need to specify `extra.apiKey`
 
 ## Http adapter
 
-* `http`: This adapter uses Http nodejs library (by default)
-* `https`: This adapter uses Https nodejs library
+* `http`: This adapter uses the Http nodejs library (default)
+* `https`: This adapter uses the Https nodejs library
 
 ## Formatter
 
@@ -113,13 +113,13 @@ geocoder.reverse(45.767, 4.833)
 
 You can improve this project by adding new geocoders or http adapters.
 
-To run tests just `npm test`
+To run tests just `npm test`.
 
-To check code style install `jshint` and just run `jshint lib test`
+To check code style install `jshint` and just run `jshint lib test`.
 
 ### Extending node geocoder
 
-You can add new geocoders by implementing the two method geocode & reverse:
+You can add new geocoders by implementing the two methods `geocode` and `reverse`:
 
 ```javascript
 var geocoder = {
@@ -128,7 +128,7 @@ var geocoder = {
 }
 ```
 
-You can also add formatter implementing this interface
+You can also add formatter implementing the following interface
 
 ```javascript
 var formatter = {
