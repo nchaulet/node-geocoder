@@ -70,3 +70,10 @@
 
 * fix openstreetmap reverse method
 
+## 2.8.2
+
+* fix openstreetmap typo
+
+
+
+
