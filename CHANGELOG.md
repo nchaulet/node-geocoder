@@ -66,3 +66,7 @@
 
 * add opencage geocoder (http://geocoder.opencagedata.com/)
 
+## 2.8.1
+
+* fix openstreetmap reverse method
+
