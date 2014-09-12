@@ -105,7 +105,7 @@
         describe('#reverse' , function() {
             it('Should return geocoded address', function(done) {
                 var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').once().callsArgWith(2, false, [{
+                mock.expects('get').once().callsArgWith(2, false, {
                         lat: 40.714232,
                         lon: -73.9612889,
                         address: {
@@ -116,7 +116,7 @@
                             road: 'Bedford Avenue',
                             house_number: "277"
                         }
-                    }]
+                    }
                 );
                 var osmAdapter = new OpenStreetMapGeocoder(mockedHttpAdapter);
                 osmAdapter.reverse(40.714232,-73.9612889, function(err, results) {
