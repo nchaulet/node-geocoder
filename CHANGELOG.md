@@ -74,6 +74,7 @@
 
 * fix openstreetmap typo
 
+## 2.9.0
 
-
+* add smarty streets geocoder
 
