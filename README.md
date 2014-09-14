@@ -91,6 +91,7 @@ geocoder.reverse(45.767, 4.833)
 * `tomtom`: TomTomGeocoder. Supports address geocoding. You need to specify `extra.apiKey`
 * `nominatimmapquest`: OpenStreetMap Nominatim geocoder. Support address and reverse geocoding
 * `opencage`: OpenCage Geocoder. Uses multiple open sources. Supports address and reverse geocoding. You need to specify `extra.apiKey`
+* `smartyStreet`: Smarty street geocoder, need to specify `extra.auth_id`and extra.auth_token`
 
 ## Http adapter
 
