@@ -78,3 +78,6 @@
 
 * add smarty streets geocoder
 
+## 2.9.1
+
+* add ValueError
