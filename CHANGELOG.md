@@ -81,3 +81,8 @@
 ## 2.9.1
 
 * add ValueError
+
+## 2.9.2
+
+* add state field to openstreet map geocoder
+
