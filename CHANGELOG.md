@@ -86,3 +86,8 @@
 
 * add state field to openstreet map geocoder
 
+## 2.10.0
+
+* add extra.region to google geocoder
+* better error handling
+
