@@ -87,6 +87,21 @@
                 mock.verify();
             });
 
+            it('Should call httpAdapter get method with region if specified', function() {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {
+                    address: "1 champs élysée Paris",
+                    sensor: false,
+                    region: "fr"
+                }).once().returns({then: function() {}});
+
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, { region: 'fr' });
+
+                googleAdapter.geocode('1 champs élysée Paris');
+
+                mock.verify();
+            });
+
             it('Should call httpAdapter get method with components if called with object', function() {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {

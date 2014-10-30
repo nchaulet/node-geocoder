@@ -29,13 +29,14 @@
                 geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
             });
 
-            it('called with "google", "http" and extra language key must return google geocoder with http adapter and options language', function() {
-                var geocoder = GeocoderFactory.getGeocoder('google', 'http', {language: 'fr'});
+            it('called with "google", "http", extra language key and extra region must return google geocoder with http adapter and options language', function() {
+                var geocoder = GeocoderFactory.getGeocoder('google', 'http', {language: 'fr',region:'de'});
 
                 var geocoderAdapter = geocoder._geocoder;
 
                 geocoderAdapter.should.be.instanceof(GoogleGeocoder);
                 geocoderAdapter.options.language.should.be.equal('fr');
+                geocoderAdapter.options.region.should.be.equal('de');
                 geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
             });
 

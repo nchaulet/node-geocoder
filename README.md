@@ -81,7 +81,7 @@ geocoder.reverse(45.767, 4.833)
 
 ## Geocoder Provider
 
-* `google` : GoogleGeocoder. Supports address geocoding and reverse geocoding. Use `extra.clientId`and `extra.apiKey`(privateKey) for business licence. You can also use `extra.language` to specify language. Note that 'https' is required when using an apiKey
+* `google` : GoogleGeocoder. Supports address geocoding and reverse geocoding. Use `extra.clientId`and `extra.apiKey`(privateKey) for business licence. You can also use `extra.language` and `extra.region` to specify language and region, respectively. Note that 'https' is required when using an apiKey
 * `freegeoip` : FreegeoipGeocoder. Supports IP geocoding
 * `datasciencetoolkit` : DataScienceToolkitGeocoder. Supports IPv4 geocoding and address geocoding. Use `extra.host` to specify a local instance
 * `openstreetmap` : OpenStreetMapGeocoder. Supports address geocoding and reverse geocoding
