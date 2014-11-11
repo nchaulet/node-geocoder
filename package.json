@@ -29,12 +29,12 @@
     "url": "https://github.com/nchaulet/node-geocoder/issues"
   },
   "dependencies": {
-    "q": "~1.0.1",
-    "commander": "~2.2.0"
+    "commander": "^2.5.0",
+    "q": "^1.1.1"
   },
   "devDependencies": {
-    "chai": "~1.8",
-    "mocha": "~1.14",
-    "sinon": "~1.7"
+    "chai": "^1.8.1",
+    "mocha": "^1.14.0",
+    "sinon": "^1.7.3"
   }
 }
