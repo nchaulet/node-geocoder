@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/nchaulet/node-geocoder.png?branch=master)](https://travis-ci.org/nchaulet/node-geocoder)
 
+![Dependencycy status](https://david-dm.org/nchaulet/node-geocoder.png)
+
 Node library for geocoding and reverse geocoding. Can be used as a nodejs library or on command line
 
 ## Installation and usage (geocoder command line)
