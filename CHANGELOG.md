@@ -96,3 +96,7 @@
 * remove node 0.8 supports
 * fix open street map street name
 
+# 2.11.1
+
+* Fix open street map state
+
