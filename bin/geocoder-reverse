@@ -5,13 +5,13 @@ var program         = require('commander'),
 
 program
   .version('2.12.0')
-  .usage('[options] [value]')
+  .usage('[options] [lat] [long]')
   .description('geocode given value')
   .option('-p, --provider [value]]', 'Geocoder provider (default to google)', 'google');
 
 program
   .command('*')
-  .action(function(value){
+  .action(function(lat, long){
     try {
       var geocoder = GeocoderFactory.getGeocoder(program.provider);
     } catch(e) {
@@ -19,7 +19,7 @@ program
       process.exit(1);
     }
 
-    geocoder.geocode(value)
+    geocoder.reverse(lat, long)
       .then(function(results) {
         console.log(results);
       }, function(err) {
