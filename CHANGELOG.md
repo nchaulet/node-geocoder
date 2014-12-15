@@ -33,7 +33,7 @@
 
 * add openmapquest geocoder
 
-## 2.1.1 
+## 2.1.1
 
 * Fix bugs
 
@@ -41,11 +41,11 @@
 
 * add tomtom geocoder
 
-## 2.3.0 
+## 2.3.0
 
-* init command line 
+* init command line
 
-## 2.4.0 
+## 2.4.0
 
 * use commander for command line
 
@@ -99,4 +99,12 @@
 # 2.11.1
 
 * Fix open street map state
+
+# 2.12.0
+
+* reverse geocoder command
+
+# 2.12.1
+
+* fix factory type
 
