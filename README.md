@@ -80,7 +80,14 @@ geocoder.reverse(45.767, 4.833)
         console.log(err);
     });
 
+// Batch geocode
+
+geocoder.batchGeocode(['13 rue sainte catherine', 'another adress'], function (values) {
+    console.log(values) ;
+});
+
 ```
+
 
 ## Geocoder Provider
 
