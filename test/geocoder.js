@@ -44,6 +44,31 @@
             });
         });
 
+        describe('#batchGeocode' , function() {
+            it('Should call mockedGeocoder geocoder method x times', function() {
+                var mock = sinon.mock(mockedGeocoder);
+                mock.expects('geocode').exactly(4).returns({then: function() {}});
+
+                var geocoder = new Geocoder(mockedGeocoder);
+
+                geocoder.batchGeocode([
+                    '127.0.0.1',
+                    '127.0.0.1',
+                    '127.0.0.1',
+                    '127.0.0.1'
+                ]);
+
+                mock.verify();
+            });
+
+            it('Should return a promise', function() {
+                var geocoder = new Geocoder(mockedGeocoder);
+
+                var promise = geocoder.batchGeocode(['127.0.0.1']);
+                promise.then.should.be.a('function');
+            });
+        });
+
         describe('#reverse' , function() {
             it('Should call mockedGeocoder reverse method', function() {
                 var mock = sinon.mock(mockedGeocoder);
