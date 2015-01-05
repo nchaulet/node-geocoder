@@ -108,3 +108,7 @@
 
 * fix factory type
 
+# 2.13.0
+
+* add batchGeocode
+
