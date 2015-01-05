@@ -29,95 +29,102 @@
       </header>
       <section>
         <h1>
-<a name="node-geocoder" class="anchor" href="#node-geocoder"><span class="octicon octicon-link"></span></a>node-geocoder</h1>
+<a id="node-geocoder" class="anchor" href="#node-geocoder" aria-hidden="true"><span class="octicon octicon-link"></span></a>node-geocoder</h1>
 
 <p><a href="https://travis-ci.org/nchaulet/node-geocoder"><img src="https://travis-ci.org/nchaulet/node-geocoder.png?branch=master" alt="Build Status"></a></p>
+
+<p><img src="https://david-dm.org/nchaulet/node-geocoder.png" alt="Dependencycy status"></p>
 
 <p>Node library for geocoding and reverse geocoding. Can be used as a nodejs library or on command line</p>
 
 <h2>
-<a name="installation-and-usage-geocoder-command-line" class="anchor" href="#installation-and-usage-geocoder-command-line"><span class="octicon octicon-link"></span></a>Installation and usage (geocoder command line)</h2>
+<a id="installation-and-usage-geocoder-command-line" class="anchor" href="#installation-and-usage-geocoder-command-line" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation and usage (geocoder command line)</h2>
 
-<pre lang="shell"><code>npm install -g node-geocoder
-geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
-</code></pre>
+<div class="highlight highlight-shell"><pre>npm install -g node-geocoder
+geocoder --provider google <span class="pl-s1"><span class="pl-pds">'</span>Fornino, 187 Bedford Ave, Brooklyn, NY 11211<span class="pl-pds">'</span></span>
+geocoder-reverse 48.858887 2.294486</pre></div>
 
 <h2>
-<a name="installation-nodejs-library" class="anchor" href="#installation-nodejs-library"><span class="octicon octicon-link"></span></a>Installation (nodejs library)</h2>
+<a id="installation-nodejs-library" class="anchor" href="#installation-nodejs-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation (nodejs library)</h2>
 
 <pre><code>npm install node-geocoder
 </code></pre>
 
 <h2>
-<a name="usage-example" class="anchor" href="#usage-example"><span class="octicon octicon-link"></span></a>Usage example</h2>
+<a id="usage-example" class="anchor" href="#usage-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage example</h2>
 
-<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">geocoderProvider</span> <span class="o">=</span> <span class="s1">'google'</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">httpAdapter</span> <span class="o">=</span> <span class="s1">'http'</span><span class="p">;</span>
-<span class="c1">// optionnal</span>
-<span class="kd">var</span> <span class="nx">extra</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">'YOUR_API_KEY'</span><span class="p">,</span> <span class="c1">// for Mapquest, OpenCage, Google Premier</span>
-    <span class="nx">formatter</span><span class="o">:</span> <span class="kc">null</span>         <span class="c1">// 'gpx', 'string', ...</span>
-<span class="p">};</span>
+<div class="highlight highlight-javascript"><pre><span class="pl-s">var</span> geocoderProvider <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span>google<span class="pl-pds">'</span></span>;
+<span class="pl-s">var</span> httpAdapter <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span>http<span class="pl-pds">'</span></span>;
+<span class="pl-c">// optionnal</span>
+<span class="pl-s">var</span> extra <span class="pl-k">=</span> {
+    apiKey<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>YOUR_API_KEY<span class="pl-pds">'</span></span>, <span class="pl-c">// for Mapquest, OpenCage, Google Premier</span>
+    formatter<span class="pl-k">:</span> <span class="pl-c1">null</span>         <span class="pl-c">// 'gpx', 'string', ...</span>
+};
 
-<span class="kd">var</span> <span class="nx">geocoder</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-geocoder'</span><span class="p">).</span><span class="nx">getGeocoder</span><span class="p">(</span><span class="nx">geocoderProvider</span><span class="p">,</span> <span class="nx">httpAdapter</span><span class="p">,</span> <span class="nx">extra</span><span class="p">);</span>
+<span class="pl-s">var</span> geocoder <span class="pl-k">=</span> <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">'</span>node-geocoder<span class="pl-pds">'</span></span>).getGeocoder(geocoderProvider, httpAdapter, extra);
 
-<span class="c1">// Using callback</span>
-<span class="nx">geocoder</span><span class="p">.</span><span class="nx">geocode</span><span class="p">(</span><span class="s1">'29 champs elysée paris'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
-<span class="p">});</span>
+<span class="pl-c">// Using callback</span>
+geocoder.geocode(<span class="pl-s1"><span class="pl-pds">'</span>29 champs elysée paris<span class="pl-pds">'</span></span>, <span class="pl-st">function</span>(<span class="pl-vpf">err</span>, <span class="pl-vpf">res</span>) {
+    <span class="pl-en">console</span><span class="pl-s3">.log</span>(res);
+});
 
-<span class="c1">// Or using Promise</span>
-<span class="nx">geocoder</span><span class="p">.</span><span class="nx">geocode</span><span class="p">(</span><span class="s1">'29 champs elysée paris'</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-    <span class="p">});</span>
+<span class="pl-c">// Or using Promise</span>
+geocoder.geocode(<span class="pl-s1"><span class="pl-pds">'</span>29 champs elysée paris<span class="pl-pds">'</span></span>)
+    .then(<span class="pl-st">function</span>(<span class="pl-vpf">res</span>) {
+        <span class="pl-en">console</span><span class="pl-s3">.log</span>(res);
+    })
+    .catch(<span class="pl-st">function</span>(<span class="pl-vpf">err</span>) {
+        <span class="pl-en">console</span><span class="pl-s3">.log</span>(err);
+    });
 
-<span class="c1">// output :</span>
-<span class="p">[{</span>
-    <span class="nx">latitude</span><span class="o">:</span> <span class="mf">48.8698679</span><span class="p">,</span>
-    <span class="nx">longitude</span><span class="o">:</span> <span class="mf">2.3072976</span><span class="p">,</span>
-    <span class="nx">country</span><span class="o">:</span> <span class="s1">'France'</span><span class="p">,</span>
-    <span class="nx">countryCode</span><span class="o">:</span> <span class="s1">'FR'</span><span class="p">,</span>
-    <span class="nx">city</span><span class="o">:</span> <span class="s1">'Paris'</span><span class="p">,</span>
-    <span class="nx">zipcode</span><span class="o">:</span> <span class="s1">'75008'</span><span class="p">,</span>
-    <span class="nx">streetName</span><span class="o">:</span> <span class="s1">'Champs-Élysées'</span><span class="p">,</span>
-    <span class="nx">streetNumber</span><span class="o">:</span> <span class="s1">'29'</span><span class="p">,</span>
-    <span class="nx">state</span><span class="o">:</span> <span class="s1">'Île de France'</span><span class="p">,</span>
-    <span class="nx">stateCode</span><span class="o">:</span> <span class="s1">'IDF'</span>
-<span class="p">}]</span>
+<span class="pl-c">// output :</span>
+[{
+    latitude<span class="pl-k">:</span> <span class="pl-c1">48.8698679</span>,
+    longitude<span class="pl-k">:</span> <span class="pl-c1">2.3072976</span>,
+    country<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>France<span class="pl-pds">'</span></span>,
+    countryCode<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>FR<span class="pl-pds">'</span></span>,
+    city<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>Paris<span class="pl-pds">'</span></span>,
+    zipcode<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>75008<span class="pl-pds">'</span></span>,
+    streetName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>Champs-Élysées<span class="pl-pds">'</span></span>,
+    streetNumber<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>29<span class="pl-pds">'</span></span>,
+    state<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>Île de France<span class="pl-pds">'</span></span>,
+    stateCode<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>IDF<span class="pl-pds">'</span></span>
+}]
 
-<span class="err">##</span> <span class="nx">Advanced</span> <span class="nx">usage</span> <span class="p">(</span><span class="nx">only</span> <span class="nx">google</span> <span class="nx">provider</span><span class="p">)</span>
-<span class="nx">geocoder</span><span class="p">.</span><span class="nx">geocode</span><span class="p">({</span><span class="nx">address</span><span class="o">:</span> <span class="s1">'29 champs elysée'</span><span class="p">,</span> <span class="nx">country</span><span class="o">:</span> <span class="s1">'France'</span><span class="p">,</span> <span class="nx">zipcode</span><span class="o">:</span> <span class="s1">'75008'</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
-<span class="p">});</span>
+## Advanced usage (only google provider)
+geocoder.geocode({address<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>29 champs elysée<span class="pl-pds">'</span></span>, country<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>France<span class="pl-pds">'</span></span>, zipcode<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>75008<span class="pl-pds">'</span></span>}, <span class="pl-st">function</span>(<span class="pl-vpf">err</span>, <span class="pl-vpf">res</span>) {
+    <span class="pl-en">console</span><span class="pl-s3">.log</span>(res);
+});
 
-<span class="c1">// Reverse example</span>
+<span class="pl-c">// Reverse example</span>
 
-<span class="c1">// Using callback</span>
-<span class="nx">geocoder</span><span class="p">.</span><span class="nx">reverse</span><span class="p">(</span><span class="mf">45.767</span><span class="p">,</span> <span class="mf">4.833</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
-<span class="p">});</span>
+<span class="pl-c">// Using callback</span>
+geocoder.<span class="pl-s3">reverse</span>(<span class="pl-c1">45.767</span>, <span class="pl-c1">4.833</span>, <span class="pl-st">function</span>(<span class="pl-vpf">err</span>, <span class="pl-vpf">res</span>) {
+    <span class="pl-en">console</span><span class="pl-s3">.log</span>(res);
+});
 
-<span class="c1">// Or using Promise</span>
-<span class="nx">geocoder</span><span class="p">.</span><span class="nx">reverse</span><span class="p">(</span><span class="mf">45.767</span><span class="p">,</span> <span class="mf">4.833</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-    <span class="p">});</span>
+<span class="pl-c">// Or using Promise</span>
+geocoder.<span class="pl-s3">reverse</span>(<span class="pl-c1">45.767</span>, <span class="pl-c1">4.833</span>)
+    .then(<span class="pl-st">function</span>(<span class="pl-vpf">res</span>) {
+        <span class="pl-en">console</span><span class="pl-s3">.log</span>(res);
+    })
+    .catch(<span class="pl-st">function</span>(<span class="pl-vpf">err</span>) {
+        <span class="pl-en">console</span><span class="pl-s3">.log</span>(err);
+    });
 
+<span class="pl-c">// Batch geocode</span>
+
+geocoder.batchGeocode([<span class="pl-s1"><span class="pl-pds">'</span>13 rue sainte catherine<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>another adress<span class="pl-pds">'</span></span>], <span class="pl-st">function</span> (<span class="pl-vpf">values</span>) {
+    <span class="pl-en">console</span><span class="pl-s3">.log</span>(values) ;
+});
 </pre></div>
 
 <h2>
-<a name="geocoder-provider" class="anchor" href="#geocoder-provider"><span class="octicon octicon-link"></span></a>Geocoder Provider</h2>
+<a id="geocoder-provider" class="anchor" href="#geocoder-provider" aria-hidden="true"><span class="octicon octicon-link"></span></a>Geocoder Provider</h2>
 
 <ul>
 <li>
-<code>google</code> : GoogleGeocoder. Supports address geocoding and reverse geocoding. Use <code>extra.clientId</code>and <code>extra.apiKey</code>(privateKey) for business licence. You can also use <code>extra.language</code> to specify language. Note that 'https' is required when using an apiKey</li>
+<code>google</code> : GoogleGeocoder. Supports address geocoding and reverse geocoding. Use <code>extra.clientId</code>and <code>extra.apiKey</code>(privateKey) for business licence. You can also use <code>extra.language</code> and <code>extra.region</code> to specify language and region, respectively. Note that 'https' is required when using an apiKey</li>
 <li>
 <code>freegeoip</code> : FreegeoipGeocoder. Supports IP geocoding</li>
 <li>
@@ -141,16 +148,20 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
 <li>
 <code>smartyStreet</code>: Smarty street geocoder (US only), you need to specify <code>extra.auth_id</code> and <code>extra.auth_token</code>
 </li>
-</ul><h2>
-<a name="http-adapter" class="anchor" href="#http-adapter"><span class="octicon octicon-link"></span></a>Http adapter</h2>
+</ul>
+
+<h2>
+<a id="http-adapter" class="anchor" href="#http-adapter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Http adapter</h2>
 
 <ul>
 <li>
 <code>http</code>: This adapter uses the Http nodejs library (default)</li>
 <li>
 <code>https</code>: This adapter uses the Https nodejs library</li>
-</ul><h2>
-<a name="formatter" class="anchor" href="#formatter"><span class="octicon octicon-link"></span></a>Formatter</h2>
+</ul>
+
+<h2>
+<a id="formatter" class="anchor" href="#formatter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Formatter</h2>
 
 <ul>
 <li>
@@ -175,8 +186,10 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
 <code>%t</code> state code</li>
 </ul>
 </li>
-</ul><h2>
-<a name="more" class="anchor" href="#more"><span class="octicon octicon-link"></span></a>More</h2>
+</ul>
+
+<h2>
+<a id="more" class="anchor" href="#more" aria-hidden="true"><span class="octicon octicon-link"></span></a>More</h2>
 
 <p>You can improve this project by adding new geocoders or http adapters.</p>
 
@@ -185,22 +198,20 @@ geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
 <p>To check code style install <code>jshint</code> and just run <code>jshint lib test</code>.</p>
 
 <h3>
-<a name="extending-node-geocoder" class="anchor" href="#extending-node-geocoder"><span class="octicon octicon-link"></span></a>Extending node geocoder</h3>
+<a id="extending-node-geocoder" class="anchor" href="#extending-node-geocoder" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extending node geocoder</h3>
 
 <p>You can add new geocoders by implementing the two methods <code>geocode</code> and <code>reverse</code>:</p>
 
-<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">geocoder</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">geocode</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span> <span class="p">},</span>
-    <span class="nx">reverse</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lat</span><span class="p">,</span> <span class="nx">lng</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
+<div class="highlight highlight-javascript"><pre><span class="pl-s">var</span> geocoder <span class="pl-k">=</span> {
+    <span class="pl-en">geocode</span>: <span class="pl-st">function</span>(<span class="pl-vpf">value</span>, <span class="pl-vpf">callback</span>) { },
+    <span class="pl-en">reverse</span>: <span class="pl-st">function</span>(<span class="pl-vpf">lat</span>, <span class="pl-vpf">lng</span>, <span class="pl-vpf">callback</span>) { }
+}</pre></div>
 
 <p>You can also add formatter implementing the following interface</p>
 
-<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">formatter</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">format</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">formattedData</span><span class="p">;</span> <span class="p">},</span>
-<span class="p">}</span>
-</pre></div>
+<div class="highlight highlight-javascript"><pre><span class="pl-s">var</span> formatter <span class="pl-k">=</span> {
+    <span class="pl-en">format</span>: <span class="pl-st">function</span>(<span class="pl-vpf">data</span>) { <span class="pl-k">return</span> formattedData; },
+}</pre></div>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/nchaulet">nchaulet</a></p>
