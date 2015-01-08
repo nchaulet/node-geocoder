@@ -112,3 +112,7 @@
 
 * add batchGeocode
 
+# 2.13.1
+
+* fix agol geocoder
+
