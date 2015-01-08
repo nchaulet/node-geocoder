@@ -47,10 +47,6 @@ describe('AGOLGeocoder', function() {
             expect(function() {new AGOLGeocoder();}).to.throw(Error, 'ArcGis Online Geocoder requires a httpAdapter to be defined');
         });
 
-        it('requires requestify (for HTTPS support)', function() {
-            expect(function() {new AGOLGeocoder(mockedHttpAdapter, {client_secret: 'CLIENT_SECRET'});}).to.throw(Error, 'The AGOL geocoder requires HTTPS support that is available in requestify');
-        });
-
         it('client_id should be set', function() {
             expect(function() {new AGOLGeocoder(mockedRequestifyAdapter, {client_secret: 'CLIENT_SECRET'});}).to.throw(Error, 'You must specify the client_id and the client_secret');
         });
