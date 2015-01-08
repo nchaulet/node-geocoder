@@ -97,7 +97,7 @@ geocoder.batchGeocode(['13 rue sainte catherine', 'another adress'], function (v
 * `openstreetmap` : OpenStreetMapGeocoder. Supports address geocoding and reverse geocoding
 * `mapquest` : MapQuestGeocoder. Supports address geocoding and reverse geocoding. Needs an apiKey
 * `openmapquest` : Open MapQuestGeocoder (based on OpenStreetMapGeocoder). Supports address geocoding and reverse geocoding. Needs an apiKey
-* `agol` : ArcGis Online Geocoding service. Supports geocoding and reverse. Requires a client_id & client_secret
+* `agol` : ArcGis Online Geocoding service. Supports geocoding and reverse. Requires a client_id & client_secret and 'https' http adapter
 * `tomtom`: TomTomGeocoder. Supports address geocoding. You need to specify `extra.apiKey`
 * `nominatimmapquest`: OpenStreetMap Nominatim geocoder. Support address and reverse geocoding
 * `opencage`: OpenCage Geocoder. Uses multiple open sources. Supports address and reverse geocoding. You need to specify `extra.apiKey`
