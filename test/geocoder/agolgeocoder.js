@@ -137,7 +137,7 @@ describe('AGOLGeocoder', function() {
             var mock = sinon.mock(mockedRequestifyAdapter);
 
             mock.expects('get').once().callsArgWith(2, false,
-                '{"spatialReference":{"wkid":4326,"latestWkid":4326},"locations":[{"name":"380 New York St, Redlands, California, 92373","extent":{"xmin":-117.196701,"ymin":34.055489999999999,"xmax":-117.19470099999999,"ymax":34.057490000000001},"feature":{"geometry":{"x":-117.19566584280369,"y":34.056490727765947},"attributes":{"AddrNum":"","StPreDir":"","StName":"New York","StType":"St","City":"Redlands","Postal":"92373","Region":"California","Country":"USA"}}}]}'
+                '{"spatialReference":{"wkid":4326,"latestWkid":4326},"locations":[{"name":"380 New York St, Redlands, California, 92373","extent":{"xmin":-117.196701,"ymin":34.055489999999999,"xmax":-117.19470099999999,"ymax":34.057490000000001},"feature":{"geometry":{"x":-117.19566584280369,"y":34.056490727765947},"attributes":{"AddNum":"380","StPreDir":"","StName":"New York","StType":"St","City":"Redlands","Postal":"92373","Region":"California","Country":"USA"}}}]}'
             );
             var geocoder = new AGOLGeocoder(mockedRequestifyAdapter,mockedOptions);
 
@@ -156,7 +156,7 @@ describe('AGOLGeocoder', function() {
                     stateCode: null,
                     zipcode: '92373',
                     streetName: ' New York St',
-                    streetNumber: '',
+                    streetNumber: '380',
                     countryCode: 'USA'
                 });
                 mock.verify();
