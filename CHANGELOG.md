@@ -96,7 +96,7 @@
 * remove node 0.8 supports
 * fix open street map street name
 
-# 2.11.1
+## 2.11.1
 
 * Fix open street map state
 
@@ -104,15 +104,20 @@
 
 * reverse geocoder command
 
-# 2.12.1
+## 2.12.1
 
 * fix factory type
 
-# 2.13.0
+## 2.13.0
 
 * add batchGeocode
 
-# 2.13.1
+## 2.13.1
 
 * fix agol geocoder
+
+## 2.13.2
+
+* fix agol geocoder
+
 
