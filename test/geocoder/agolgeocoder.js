@@ -148,8 +148,8 @@ describe('AGOLGeocoder', function() {
             geocoder.geocode('380 New York St, Redlands, CA 92373', function(err, results) {
                 err.should.to.equal(false);
                 results[0].should.to.deep.equal({
-                    latitude: -117.19566584280369,
-                    longitude: 34.05649072776595,
+                    latitude: 34.05649072776595,
+                    longitude: -117.19566584280369,
                     country: 'USA',
                     city: 'Redlands',
                     state: 'California',
@@ -211,16 +211,17 @@ describe('AGOLGeocoder', function() {
             };
             geocoder.reverse(-104.98469734299971,39.739146640000456, function(err, results) {
                     err.should.to.equal(false);
-                    results[0].should.to.deep.equal({ latitude: -104.97389993455704,
-                        longitude: 39.64942309095201,
-                        country: 'USA',
-                        city: 'Englewood',
-                        state: 'Colorado',
-                        zipcode: '80113',
-                        countryCode: 'USA',
-                        address: '1190 E Kenyon Ave',
-                        neighborhood: null,
-                        loc_name: 'USA.PointAddress' });
+                    results[0].should.to.deep.equal({
+                      latitude: 39.64942309095201,
+                      longitude: -104.97389993455704,
+                      country: 'USA',
+                      city: 'Englewood',
+                      state: 'Colorado',
+                      zipcode: '80113',
+                      countryCode: 'USA',
+                      address: '1190 E Kenyon Ave',
+                      neighborhood: null,
+                      loc_name: 'USA.PointAddress' });
                     mock.verify();
                     done();
             });
