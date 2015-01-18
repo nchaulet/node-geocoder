@@ -120,4 +120,7 @@
 
 * fix agol geocoder
 
+## 2.14.0
+
+* improve batch geocode
 
