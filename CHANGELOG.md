@@ -124,3 +124,6 @@
 
 * improve batch geocode
 
+## 2.15.0
+
+* better https requirements system
