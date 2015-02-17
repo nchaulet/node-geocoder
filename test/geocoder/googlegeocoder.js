@@ -10,6 +10,9 @@
     var mockedHttpAdapter = {
         get: function() {
           return {};
+        },
+        supportsHttps: function() {
+            return true;
         }
     };
 

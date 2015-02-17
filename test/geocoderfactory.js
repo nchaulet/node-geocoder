@@ -9,7 +9,8 @@
     var DataScienceToolkitGeocoder = require('../lib/geocoder/datasciencetoolkitgeocoder.js');
     var OpenStreetMapGeocoder = require('../lib/geocoder/openstreetmapgeocoder.js');
 
-    var HttpAdapter = require('../lib/httpadapter/httpadapter.js');
+    var HttpAdapter  = require('../lib/httpadapter/httpadapter.js'),
+        HttpsAdapter = require('../lib/httpadapter/httpsadapter.js');
 
     var GpxFormatter = require('../lib/formatter/gpxformatter.js');
     var StringFormatter = require('../lib/formatter/stringformatter.js');
@@ -18,15 +19,15 @@
 
         describe('getGeocoder' , function() {
 
-            it('called with "google", "http" and extra business key must return google geocoder with http adapter and business key', function() {
-                var geocoder = GeocoderFactory.getGeocoder('google', 'http', {clientId: 'CLIENT_ID', apiKey: 'API_KEY'});
+            it('called with "google", "https" and extra business key must return google geocoder with http adapter and business key', function() {
+                var geocoder = GeocoderFactory.getGeocoder('google', 'https', {clientId: 'CLIENT_ID', apiKey: 'API_KEY'});
 
                 var geocoderAdapter = geocoder._geocoder;
 
                 geocoderAdapter.should.be.instanceof(GoogleGeocoder);
                 geocoderAdapter.options.clientId.should.be.equal('CLIENT_ID');
                 geocoderAdapter.options.apiKey.should.be.equal('API_KEY');
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
             });
 
             it('called with "google", "http", extra language key and extra region must return google geocoder with http adapter and options language', function() {
