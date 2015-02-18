@@ -127,3 +127,7 @@
 ## 2.15.0
 
 * better https requirements system
+
+## 2.15.1
+
+* fix camel case error
