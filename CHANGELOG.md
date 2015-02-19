@@ -131,3 +131,7 @@
 ## 2.15.1
 
 * fix camel case error
+
+## 2.16.0
+
+* add county (only on opencage)

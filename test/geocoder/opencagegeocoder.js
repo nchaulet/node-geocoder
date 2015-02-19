@@ -131,6 +131,7 @@
                         "countryCode": "BR",
                         "zipcode": undefined,
                         "streetNumber": undefined,
+                        "county" : "RMSP"
                     });
 
                     mock.verify();
@@ -200,7 +201,8 @@
                             "zipcode": 10117,
                             "streetName": "Reichstagufer",
                             "streetNumber": 10,
-                            "countryCode": "de"
+                            "countryCode": "de",
+                            "county" : undefined
                         });
                         mock.verify();
                         done();
