@@ -139,3 +139,7 @@
 ## 2.16.1
 
 * fix some bugs on google geocoder (no result, now return an empty arrray)
+
+## 2.17.0
+
+* new index syntax (getGeocoder is deprecated)
