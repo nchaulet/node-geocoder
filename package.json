@@ -1,6 +1,6 @@
 {
   "name": "node-geocoder",
-  "version": "2.17.0",
+  "version": "2.17.1",
   "description": "Node Geocoder, node geocoding library, supports google maps, mapquest, open street map, tom tom, promise",
   "main": "lib/geocoderfactory.js",
   "scripts": {
