@@ -29,7 +29,7 @@ var extra = {
     formatter: null         // 'gpx', 'string', ...
 };
 
-var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, extra);
+var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
 // Using callback
 geocoder.geocode('29 champs elysée paris', function(err, res) {
