@@ -143,3 +143,7 @@
 ## 2.17.0
 
 * new index syntax (getGeocoder is deprecated)
+
+## 2.18.0
+
+* Refacto on nominatim geocoder, refacto on abstract geocoder, add raw response to results
