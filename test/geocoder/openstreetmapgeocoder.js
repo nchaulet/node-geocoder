@@ -82,7 +82,7 @@
 
                 var osmAdapter = new OpenStreetMapGeocoder(mockedHttpAdapter);
 
-                osmAdapter.geocode('1 champ-élysées Paris', function(err, results) {
+                osmAdapter.geocode('1 champ-élysées Paris', function(err, results, rawResults) {
                     err.should.to.equal(false);
 
                     results[0].should.to.deep.equal({
@@ -96,6 +96,20 @@
                         "streetNumber": "1",
                         "countryCode": "FR"
                     });
+
+                    rawResults.should.deep.equal([{
+                            lat: 48.86841815,
+                            lon: 2.30700964746136,
+                            address: {
+                                country_code: 'FR',
+                                country: 'France',
+                                city: 'Paris',
+                                state: '',
+                                postcode: "75008",
+                                road: 'Champs-Élysées',
+                                house_number: "1"
+                            }
+                        }]);
 
                     mock.verify();
                     done();
@@ -122,7 +136,7 @@
                     }
                 );
                 var osmAdapter = new OpenStreetMapGeocoder(mockedHttpAdapter);
-                osmAdapter.reverse(40.714232,-73.9612889, function(err, results) {
+                osmAdapter.reverse(40.714232,-73.9612889, function(err, results, rawResults) {
                         err.should.to.equal(false);
                         results[0].should.to.deep.equal({
                             "latitude": 40.714232,
@@ -135,6 +149,19 @@
                             "streetNumber": "277",
                             "countryCode": "US"
                         });
+                        rawResults.should.deep.equal({
+                                lat: 40.714232,
+                                lon: -73.9612889,
+                                address: {
+                                    country_code: 'US',
+                                    country: 'United States',
+                                    city: 'Brooklyn',
+                                    state: 'New York',
+                                    postcode: "11211",
+                                    road: 'Bedford Avenue',
+                                    house_number: "277"
+                                }
+                            });
                         mock.verify();
                         done();
                 });
