@@ -4,7 +4,7 @@
   "description": "Node Geocoder, node geocoding library, supports google maps, mapquest, open street map, tom tom, promise",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha",
+    "test": "./node_modules/.bin/mocha --check-leaks",
     "lint": "./node_modules/.bin/jshint lib test"
   },
   "bin": {
