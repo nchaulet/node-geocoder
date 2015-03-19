@@ -115,6 +115,63 @@
                 });
             });
 
+            it('Should return geocoded address when quried with object', function(done) {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().callsArgWith(2, false, [{
+                        "place_id": "7677374",
+                        "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http:\/\/www.openstreetmap.org\/copyright",
+                        "osm_type": "node",
+                        "osm_id": "829071536",
+                        "boundingbox": ["48.8712111", "48.8713111", "2.3017954", "2.3018954"],
+                        "lat": "48.8712611",
+                        "lon": "2.3018454",
+                        "display_name": "93, Avenue des Champs-\u00c9lys\u00e9es, Champs-\u00c9lys\u00e9es, 8e, Paris, \u00cele-de-France, France m\u00e9tropolitaine, 75008, France",
+                        "class": "place",
+                        "type": "house",
+                        "importance": 0.621,
+                        "address": {
+                            "house_number": "93",
+                            "road": "Avenue des Champs-\u00c9lys\u00e9es",
+                            "suburb": "Champs-\u00c9lys\u00e9es",
+                            "city_district": "8e",
+                            "city": "Paris",
+                            "county": "Paris",
+                            "state": "\u00cele-de-France",
+                            "country": "France",
+                            "postcode": "75008",
+                            "country_code": "fr"
+                        }
+                    }]
+                ).withArgs('http://nominatim.openstreetmap.org/search', {
+                  addressdetails: 1,
+                  city: "Paris",
+                  format: "json",
+                  limit: 1,
+                  street: "93 Champs-Élysèes"
+                });
+
+                var osmAdapter = new OpenStreetMapGeocoder(mockedHttpAdapter);
+
+                osmAdapter.geocode({street:'93 Champs-Élysèes', city:'Paris', limit:1}, function(err, results) {
+                    mock.verify();
+
+                    err.should.to.equal(false);
+
+                    results[0].should.to.deep.equal({
+                        "latitude": 48.8712611,
+                        "longitude": 2.3018454,
+                        "country": "France",
+						            "state": "\u00cele-de-France",
+                        "city": "Paris",
+                        "zipcode": "75008",
+                        "streetName": "Avenue des Champs-\u00c9lys\u00e9es",
+                        "streetNumber": "93",
+                        "countryCode": "FR"
+                    });
+
+                    done();
+                });
+            });
         });
 
         describe('#reverse' , function() {
