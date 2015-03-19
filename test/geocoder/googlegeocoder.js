@@ -175,6 +175,25 @@
                         "state"       : "Île-de-France",
                         "stateCode"   : "IDF"
                     });
+
+                    results.raw.should.deep.equal({ status: "OK", results: [{
+                        geometry: {location : {
+                            lat: 37.386,
+                            lng: -122.0838
+                        }},
+                        address_components: [
+                            {types: ['country'], long_name: 'France', short_name: 'Fr' },
+                            {types: ['locality'], long_name: 'Paris' },
+                            {types: ['postal_code'], long_name: '75008' },
+                            {types: ['route'], long_name: 'Champs-Élysées' },
+                            {types: ['street_number'], long_name: '1' },
+                            {types: ['administrative_area_level_1'], long_name: 'Île-de-France', short_name: 'IDF'}
+                        ],
+                        country_code: 'US',
+                        country_name: 'United States',
+                        locality: 'Mountain View',
+                    }]});
+
                     mock.verify();
                     done();
                 });
@@ -188,6 +207,9 @@
 
                 googleAdapter.geocode('1 champs élysées Paris', function(err, results) {
                     err.message.should.to.equal("Status is OVER_QUERY_LIMIT. You have exceeded your rate-limit for this API.");
+
+                    results.raw.should.deep.equal({ status: "OVER_QUERY_LIMIT", error_message: "You have exceeded your rate-limit for this API.", results: [] });
+
                     mock.verify();
                     done();
                 });
@@ -259,6 +281,27 @@
                             "state"       : "État de New York",
                             "stateCode"   : "NY"
                         });
+
+                        results.raw.should.deep.equal({ status: "OK", results: [{
+                            geometry: {location : {
+                                lat: 40.714232,
+                                lng: -73.9612889
+                            }},
+                            address_components: [
+                                {types: ['country'], long_name: 'United States', short_name: 'US' },
+                                {types: ['locality'], long_name: 'Brooklyn' },
+                                {types: ['postal_code'], long_name: '11211' },
+                                {types: ['route'], long_name: 'Bedford Avenue' },
+                                {types: ['street_number'], long_name: '277' },
+                                {types: ['administrative_area_level_1'], long_name: 'État de New York', short_name: 'NY'}
+
+
+                            ],
+                            country_code: 'US',
+                            country_name: 'United States',
+                            locality: 'Mountain View',
+                        }]});
+
                         mock.verify();
                         done();
                 });

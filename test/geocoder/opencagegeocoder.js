@@ -134,6 +134,51 @@
                         "county" : "RMSP"
                     });
 
+                    results.raw.should.deep.equal({
+                        "status" : {
+                          "code" : 200,
+                          "message" : "OK"
+                       },
+                       "results": [
+                               {
+                                    "annotations" : {
+                                       "geohash" : "6gydn5nhb587vf642f07",
+                                       "timezone" : {
+                                          "name" : "America/Sao_Paulo",
+                                          "now_in_dst" : 0,
+                                          "offset_sec" : -10800,
+                                          "offset_string" : -300,
+                                          "short_name" : "BRT"
+                                       }
+                                    },
+                                    "bounds" : {
+                                       "northeast" : {
+                                          "lat" : -23.5370283,
+                                          "lng" : -46.8357228
+                                       },
+                                       "southwest" : {
+                                          "lat" : -23.5373732,
+                                          "lng" : -46.8374628
+                                       }
+                                    },
+                                    "components" : {
+                                       "city" : "Carapicuíba",
+                                       "country" : "Brazil",
+                                       "country_code" : "BR",
+                                       "county" : "RMSP",
+                                       "road" : "Rua Cafelândia",
+                                       "state" : "SP"
+                                    },
+                                    "confidence" : 10,
+                                    "formatted" : "Rua Cafelândia, Carapicuíba, RMSP, SP, Brazil",
+                                    "geometry" : {
+                                       "lat" : -23.5373732,
+                                       "lng" : -46.8374628
+                                    }
+                                }
+                        ]
+                    });
+
                     mock.verify();
                     done();
                 });
