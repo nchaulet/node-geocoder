@@ -252,6 +252,24 @@
                 });
             });
 
+            it('Should correctly set extra arguments from constructor extras', function(done) {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().callsArgWith(2, false, [])
+                .withArgs('http://nominatim.openstreetmap.org/reverse', {
+                  format: 'json',
+                  addressdetails: 1,
+                  lat:12,
+                  lon:7,
+                  zoom:9
+                });
+
+                var osmAdapter = new OpenStreetMapGeocoder(mockedHttpAdapter,{zoom:9});
+                osmAdapter.reverse({lat:12,lon:7}, function(err, results) {
+                    mock.verify();
+                    done();
+                });
+            });
+
             it('Should ignore format and addressdetails arguments', function(done) {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, [])
