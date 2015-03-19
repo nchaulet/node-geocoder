@@ -147,3 +147,4 @@
 ## 2.18.0
 
 * Made first argument of `reverse` a query object (`lat, lon` is deprecated)
+* Extended options on nominatim-based geocoders (MapQuestGeocoder, NominatimMapquestGeocoder)

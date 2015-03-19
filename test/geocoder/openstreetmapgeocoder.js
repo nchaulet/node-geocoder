@@ -143,6 +143,7 @@
                         }
                     }]
                 ).withArgs('http://nominatim.openstreetmap.org/search', {
+                  format: 'json',
                   addressdetails: 1,
                   city: "Paris",
                   format: "json",
@@ -169,6 +170,22 @@
                         "countryCode": "FR"
                     });
 
+                    done();
+                });
+            });
+
+            it('Should ignore format and addressdetails arguments', function(done) {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().callsArgWith(2, false, [])
+                .withArgs('http://nominatim.openstreetmap.org/search', {
+                  format: 'json',
+                  addressdetails: 1,
+                  q:"Athens"
+                });
+
+                var osmAdapter = new OpenStreetMapGeocoder(mockedHttpAdapter);
+                osmAdapter.geocode({q:'Athens',format:'xml',addressdetails:0}, function(err, results) {
+                    mock.verify();
                     done();
                 });
             });
@@ -213,6 +230,41 @@
                         "streetNumber": "279",
                         "countryCode": "US"
                     });
+                    done();
+                });
+            });
+
+            it('Should correctly set extra arguments', function(done) {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().callsArgWith(2, false, [])
+                .withArgs('http://nominatim.openstreetmap.org/reverse', {
+                  format: 'json',
+                  addressdetails: 1,
+                  lat:12,
+                  lon:7,
+                  zoom:15
+                });
+
+                var osmAdapter = new OpenStreetMapGeocoder(mockedHttpAdapter);
+                osmAdapter.reverse({lat:12,lon:7,zoom:15}, function(err, results) {
+                    mock.verify();
+                    done();
+                });
+            });
+
+            it('Should ignore format and addressdetails arguments', function(done) {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().callsArgWith(2, false, [])
+                .withArgs('http://nominatim.openstreetmap.org/reverse', {
+                  format: 'json',
+                  addressdetails: 1,
+                  lat:12,
+                  lon:7
+                });
+
+                var osmAdapter = new OpenStreetMapGeocoder(mockedHttpAdapter);
+                osmAdapter.reverse({lat:12,lon:7,format:'xml',addressdetails:0}, function(err, results) {
+                    mock.verify();
                     done();
                 });
             });
