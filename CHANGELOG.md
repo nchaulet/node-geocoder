@@ -147,3 +147,7 @@
 ## 2.18.0
 
 * Refacto on nominatim geocoder, refacto on abstract geocoder, add raw response to results
+
+## 2.18.2
+
+* fix leak, and duplicate code
