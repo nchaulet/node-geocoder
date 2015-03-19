@@ -60,7 +60,7 @@
 
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').withArgs(
-                    'http://www.mapquestapi.com/geocoding/v1/address', 
+                    'http://www.mapquestapi.com/geocoding/v1/address',
                     { key: "API_KEY", location: "test" }
                 ).once().returns({then: function() {}});
 
@@ -82,7 +82,7 @@
 
                 var mapquestAdapter = new MapQuestGeocoder(mockedHttpAdapter, 'API_KEY');
 
-                mapquestAdapter.reverse(10.0235,-2.3662);
+                mapquestAdapter.reverse({lat:10.0235,lon:-2.3662});
 
                 mock.verify();
 
