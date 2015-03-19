@@ -97,6 +97,20 @@
                         "countryCode": "FR"
                     });
 
+                    results.raw.should.deep.equal([{
+                        lat: 48.86841815,
+                        lon: 2.30700964746136,
+                        address: {
+                            country_code: 'FR',
+                            country: 'France',
+                            city: 'Paris',
+                            state: '',
+                            postcode: "75008",
+                            road: 'Champs-Élysées',
+                            house_number: "1"
+                        }
+                    }]);
+
                     mock.verify();
                     done();
                 });
@@ -135,6 +149,20 @@
                             "streetNumber": "277",
                             "countryCode": "US"
                         });
+                        results.raw.should.deep.equal({
+                            lat: 40.714232,
+                            lon: -73.9612889,
+                            address: {
+                                country_code: 'US',
+                                country: 'United States',
+                                city: 'Brooklyn',
+                                state: 'New York',
+                                postcode: "11211",
+                                road: 'Bedford Avenue',
+                                house_number: "277"
+                            }
+                        });
+
                         mock.verify();
                         done();
                 });
