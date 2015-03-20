@@ -173,7 +173,6 @@
                   format: 'json',
                   addressdetails: 1,
                   city: "Paris",
-                  format: "json",
                   limit: 1,
                   street: "93 Champs-Élysèes"
                 });
