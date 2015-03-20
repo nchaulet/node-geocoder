@@ -66,7 +66,7 @@
 
                 var mapquestAdapter = new MapQuestGeocoder(mockedHttpAdapter, 'API_KEY');
 
-                mapquestAdapter.reverse(10.0235,-2.3662);
+                mapquestAdapter.reverse({lat:10.0235,lon:-2.3662});
 
                 mock.verify();
 

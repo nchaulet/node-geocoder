@@ -238,7 +238,7 @@
 
                 var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
 
-                googleAdapter.reverse(10.0235,-2.3662);
+                googleAdapter.reverse({lat:10.0235,lon:-2.3662});
 
                 mock.verify();
 
@@ -267,7 +267,7 @@
                     }]}
                 );
                 var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
-                googleAdapter.reverse(40.714232,-73.9612889, function(err, results) {
+                googleAdapter.reverse({lat:40.714232,lon:-73.9612889}, function(err, results) {
                         err.should.to.equal(false);
                         results[0].should.to.deep.equal({
                             "latitude"    : 40.714232,
@@ -313,7 +313,7 @@
 
                 var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
 
-                googleAdapter.reverse(40.714232,-73.9612889, function(err, results) {
+                googleAdapter.reverse({lat:40.714232,lon:-73.9612889}, function(err, results) {
                     err.message.should.to.equal("Status is OVER_QUERY_LIMIT. You have exceeded your rate-limit for this API.");
                     mock.verify();
                     done();
@@ -326,7 +326,7 @@
 
                 var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
 
-                googleAdapter.reverse(40.714232,-73.9612889, function(err, results) {
+                googleAdapter.reverse({lat:40.714232,lon:-73.9612889}, function(err, results) {
                     err.message.should.to.equal("Status is INVALID_REQUEST.");
                     mock.verify();
                     done();

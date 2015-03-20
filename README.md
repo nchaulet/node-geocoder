@@ -67,12 +67,12 @@ geocoder.geocode({address: '29 champs elysée', country: 'France', zipcode: '750
 // Reverse example
 
 // Using callback
-geocoder.reverse(45.767, 4.833, function(err, res) {
+geocoder.reverse({lat:45.767, lon:4.833}, function(err, res) {
     console.log(res);
 });
 
 // Or using Promise
-geocoder.reverse(45.767, 4.833)
+geocoder.reverse({lat:45.767, lon:4.833})
     .then(function(res) {
         console.log(res);
     })
@@ -135,8 +135,8 @@ You can add new geocoders by implementing the two methods `geocode` and `reverse
 
 ```javascript
 var geocoder = {
-    geocode: function(value, callback) { },
-    reverse: function(lat, lng, callback) { }
+    geocode: function(value, callback) { ... },
+    reverse: function(query, callback) { var lat = query.lat; var lon = query.lon; ... }
 }
 ```
 

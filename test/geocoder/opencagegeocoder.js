@@ -235,7 +235,7 @@
                     }
                 );
                 var ocgAdapter = new OpenCageGeocoder(mockedHttpAdapter, 'API_KEY');
-                ocgAdapter.reverse(13.3826786867678, 52.51921145, function(err, results) {
+                ocgAdapter.reverse({lat:13.3826786867678, lon:52.51921145}, function(err, results) {
                         err.should.to.equal(false);
                         results[0].should.to.deep.equal({
                             "latitude": 52.51921145,

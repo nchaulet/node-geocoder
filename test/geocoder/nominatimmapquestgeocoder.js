@@ -142,7 +142,7 @@
                     }
                 );
                 var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter);
-                nmAdapter.reverse(40.714232,-73.9612889, function(err, results) {
+                nmAdapter.reverse({lat:40.714232,lon:-73.9612889}, function(err, results) {
                     mock.verify();
                     err.should.to.equal(false);
                     results[0].should.to.deep.equal({

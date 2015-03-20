@@ -209,7 +209,7 @@ describe('AGOLGeocoder', function() {
             geocoder._getToken = function(callback) {
                 callback(false,"ABCD");
             };
-            geocoder.reverse(-104.98469734299971,39.739146640000456, function(err, results) {
+            geocoder.reverse({lat:-104.98469734299971,lon:39.739146640000456}, function(err, results) {
                     err.should.to.equal(false);
                     results[0].should.to.deep.equal({
                       latitude: 39.64942309095201,
@@ -238,7 +238,7 @@ describe('AGOLGeocoder', function() {
             geocoder._getToken = function(callback) {
                 callback(false,"ABCD");
             };
-            geocoder.reverse(40.714232,-73.9612889, function(err, results) {
+            geocoder.reverse({lat:40.714232,lon:-73.9612889}, function(err, results) {
                 err.should.to.deep.equal({"code":42,"message":"Random Error","details":[]});
                 mock.verify();
                 done();
