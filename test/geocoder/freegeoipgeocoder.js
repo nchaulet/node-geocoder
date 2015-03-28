@@ -55,12 +55,17 @@
             it('Should return a geocoded address', function(done) {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, {
-                        latitude: 37.386,
-                        longitude: -122.0838,
+                        ip: '66.249.64.0',
                         country_code: 'US',
                         country_name: 'United States',
+                        region_code: 'CA',
+                        region_name: 'California',
                         city: 'Mountain View',
-                        zip_code: 94035
+                        zip_code: '94040',
+                        time_zone: 'America/Los_Angeles',
+                        latitude: 37.386,
+                        longitude: -122.084,
+                        metro_code: 807
                     }
                 );
                 var freegeoipgeocoder = new FreegeoipGeocoder(mockedHttpAdapter);
@@ -69,14 +74,17 @@
                 freegeoipgeocoder.geocode('66.249.64.0', function(err, results) {
                     err.should.to.equal(false);
                     results[0].should.to.deep.equal({
-                        "latitude": 37.386,
-                        "longitude": -122.0838,
-                        "country": "United States",
-                        "city": "Mountain View",
-                        "zipcode": 94035,
-                        "streetName": null,
-                        "streetNumber": null,
-                        "countryCode": "US"
+                        'ip': '66.249.64.0',
+                        'countryCode': 'US',
+                        'country': 'United States',
+                        'regionCode': 'CA',
+                        'regionName': 'California',
+                        'city': 'Mountain View',
+                        'zipcode': '94040',
+                        'timeZone': 'America/Los_Angeles',
+                        'latitude': 37.386,
+                        'longitude': -122.084,
+                        'metroCode': 807
                     });
                     mock.verify();
                     done();
