@@ -73,7 +73,7 @@
                         "longitude": -122.0838,
                         "country": "United States",
                         "city": "Mountain View",
-                        "zip_code": 94035,
+                        "zipcode": 94035,
                         "streetName": null,
                         "streetNumber": null,
                         "countryCode": "US"
