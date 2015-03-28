@@ -60,7 +60,7 @@
                         country_code: 'US',
                         country_name: 'United States',
                         city: 'Mountain View',
-                        zipcode: 94035
+                        zip_code: 94035
                     }
                 );
                 var freegeoipgeocoder = new FreegeoipGeocoder(mockedHttpAdapter);
