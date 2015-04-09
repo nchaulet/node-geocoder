@@ -161,4 +161,7 @@
 
 * add village or hamlet in key city
 
+## 2.20.0
+
+* add googlePlaceId and formattedAdress
 
