@@ -175,6 +175,10 @@
                         "state"       : "Île-de-France",
                         "stateCode"   : "IDF",
                         "extra": {
+                          "premise": null,
+                          "subpremise": null,
+                          "neighborhood": null,
+                          "establishment": null,
                           "googlePlaceId": null
                         },
                         "formattedAddress": null
@@ -285,6 +289,10 @@
                             "state"       : "État de New York",
                             "stateCode"   : "NY",
                             "extra": {
+                              "premise": null,
+                              "subpremise": null,
+                              "neighborhood": null,
+                              "establishment": null,
                               "googlePlaceId": null
                             },
                             "formattedAddress": null
