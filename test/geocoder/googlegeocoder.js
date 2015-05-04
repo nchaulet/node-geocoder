@@ -364,8 +364,29 @@
 
                 mock.verify();
             });
-        });
 
+            it('Should generate signatures with all / characters replaced with _', function() {
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, {clientId: 'james', apiKey: 'foo'});
+                var params = {
+                  sensor: false,
+                  client: 'james',
+                  address:  'qqslfzxytfr'
+                };
+                googleAdapter._signedRequest('https://maps.googleapis.com/maps/api/geocode/json', params);
+                expect(params.signature).to.equal('ww_ja1wA8YBE_cfwmx9EQ_5y2pI=');
+            });
+
+            it('Should generate signatures with all + characters replaced with -', function() {
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, {clientId: 'james', apiKey: 'foo'});
+                var params = {
+                  sensor: false,
+                  client: 'james',
+                  address: 'lomxcefgkxr'
+                };
+                googleAdapter._signedRequest('https://maps.googleapis.com/maps/api/geocode/json', params);
+                expect(params.signature).to.equal('zLXE-mmcsjp2RobIXjMd9h3P-zM=');
+            });            
+        });
 
     });
 
