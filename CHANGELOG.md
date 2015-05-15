@@ -157,3 +157,11 @@
 * Made first argument of `reverse` a query object (`lat, lon` is deprecated)
 * Extended options on nominatim-based geocoders (MapQuestGeocoder, NominatimMapquestGeocoder)
 
+## 2.19.1
+
+* add village or hamlet in key city
+
+## 2.20.0
+
+* add googlePlaceId and formattedAdress
+
