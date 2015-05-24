@@ -175,6 +175,7 @@
                         "state"       : "Île-de-France",
                         "stateCode"   : "IDF",
                         "extra": {
+                          "confidence": 0,
                           "premise": null,
                           "subpremise": null,
                           "neighborhood": null,
@@ -293,7 +294,8 @@
                               "subpremise": null,
                               "neighborhood": null,
                               "establishment": null,
-                              "googlePlaceId": null
+                              "googlePlaceId": null,
+                              "confidence": 0
                             },
                             "formattedAddress": null
                         });
@@ -385,7 +387,7 @@
                 };
                 googleAdapter._signedRequest('https://maps.googleapis.com/maps/api/geocode/json', params);
                 expect(params.signature).to.equal('zLXE-mmcsjp2RobIXjMd9h3P-zM=');
-            });            
+            });
         });
 
     });

@@ -131,7 +131,10 @@
                         "countryCode": "BR",
                         "zipcode": undefined,
                         "streetNumber": undefined,
-                        "county" : "RMSP"
+                        "county" : "RMSP",
+                        "extra" : {
+                          "confidence": 0.9
+                        }
                     });
 
                     results.raw.should.deep.equal({
@@ -247,7 +250,10 @@
                             "streetName": "Reichstagufer",
                             "streetNumber": 10,
                             "countryCode": "de",
-                            "county" : undefined
+                            "county" : undefined,
+                            "extra" : {
+                              "confidence": 0
+                            }
                         });
                         mock.verify();
                         done();
