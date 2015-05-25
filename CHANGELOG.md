@@ -165,3 +165,8 @@
 
 * add googlePlaceId and formattedAdress
 
+## 2.21.0
+
+* geocodio geocoder
+* confidence extra property
+
