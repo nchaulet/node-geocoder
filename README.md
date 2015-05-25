@@ -105,6 +105,7 @@ geocoder.batchGeocode(['13 rue sainte catherine', 'another adress'], function (r
 * `nominatimmapquest`: Same geocoder as `openstreetmap`, but queries the MapQuest servers.
 * `opencage`: OpenCage Geocoder. Uses multiple open sources. Supports address and reverse geocoding. You need to specify `extra.apiKey`
 * `smartyStreet`: Smarty street geocoder (US only), you need to specify `extra.auth_id` and `extra.auth_token`
+* `geocodio`: Geocodio, Supports address geocoding and reverse geocoding (US only)
 
 ## Http adapter
 
