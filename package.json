@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --check-leaks",
-    "lint": "./node_modules/.bin/jshint lib test"
+    "lint": "./node_modules/.bin/jscs lib"
   },
   "bin": {
     "geocoder": "bin/geocoder",
@@ -37,8 +37,16 @@
   },
   "devDependencies": {
     "chai": "^1.8.1",
-    "jshint": "^2.5.11",
+    "jscs": "^1.13.1",
     "mocha": "^1.14.0",
     "sinon": "^1.7.3"
+  },
+  "jscsConfig": {
+    "preset": "airbnb",
+    "requirePaddingNewLinesAfterBlocks": {
+      "allExcept": ["inCallExpressions", "inArrayExpressions", "inProperties"]
+    },
+    "disallowQuotedKeysInObjects": null,
+    "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties"
   }
 }
