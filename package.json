@@ -1,6 +1,6 @@
 {
   "name": "node-geocoder",
-  "version": "2.21.2",
+  "version": "2.22.0",
   "description": "Node Geocoder, node geocoding library, supports google maps, mapquest, open street map, tom tom, promise",
   "main": "index.js",
   "scripts": {
@@ -33,21 +33,24 @@
   },
   "dependencies": {
     "commander": "^2.6.0",
-    "q"        : "^1.1.2"
+    "q": "^1.1.2"
   },
   "devDependencies": {
-    "chai"  : "^1.8.1",
-    "mocha" : "^1.14.0",
+    "chai": "^1.8.1",
+    "mocha": "^1.14.0",
     "eslint": "^0.24.1",
-    "sinon" : "^1.7.3"
+    "sinon": "^1.7.3"
   },
   "eslintConfig": {
     "env": {
       "node": true
     },
-    "rules" :{
+    "rules": {
       "strict": 0,
-      "quotes": [1, "single"],
+      "quotes": [
+        1,
+        "single"
+      ],
       "camelcase": 0,
       "no-underscore-dangle": 0,
       "no-shadow": 0,
