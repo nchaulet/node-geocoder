@@ -150,6 +150,8 @@ geocoder.batchGeocode([<span class="pl-s"><span class="pl-pds">'</span>13 rue sa
 </li>
 <li>
 <code>geocodio</code>: Geocodio, Supports address geocoding and reverse geocoding (US only)</li>
+<li>
+<code>yandex</code>: Yandex support address geocoding, you can use <code>extra.language</code> to specify language</li>
 </ul>
 
 <h2>
@@ -205,14 +207,14 @@ geocoder.batchGeocode([<span class="pl-s"><span class="pl-pds">'</span>13 rue sa
 <p>You can add new geocoders by implementing the two methods <code>geocode</code> and <code>reverse</code>:</p>
 
 <div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> geocoder <span class="pl-k">=</span> {
-    <span class="pl-en">geocode</span>: <span class="pl-k">function</span>(<span class="pl-smi">value</span>, <span class="pl-smi">callback</span>) { ... },
-    <span class="pl-en">reverse</span>: <span class="pl-k">function</span>(<span class="pl-smi">query</span>, <span class="pl-smi">callback</span>) { <span class="pl-k">var</span> lat <span class="pl-k">=</span> query.lat; <span class="pl-k">var</span> lon <span class="pl-k">=</span> query.lon; ... }
+    <span class="pl-en">geocode</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">value</span>, <span class="pl-smi">callback</span>) { ... },
+    <span class="pl-en">reverse</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">query</span>, <span class="pl-smi">callback</span>) { <span class="pl-k">var</span> lat <span class="pl-k">=</span> query.lat; <span class="pl-k">var</span> lon <span class="pl-k">=</span> query.lon; ... }
 }</pre></div>
 
 <p>You can also add formatter implementing the following interface</p>
 
 <div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> formatter <span class="pl-k">=</span> {
-    <span class="pl-en">format</span>: <span class="pl-k">function</span>(<span class="pl-smi">data</span>) { <span class="pl-k">return</span> formattedData; },
+    <span class="pl-en">format</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">data</span>) { <span class="pl-k">return</span> formattedData; },
 }</pre></div>
 
       <footer class="site-footer">
