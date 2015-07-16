@@ -170,3 +170,7 @@
 * geocodio geocoder
 * confidence extra property
 
+## 2.22.0
+
+* yandex geocoder
+* default https adapter
