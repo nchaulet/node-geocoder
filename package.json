@@ -51,6 +51,7 @@
         1,
         "single"
       ],
+      "no-console": 1,
       "camelcase": 0,
       "no-underscore-dangle": 0,
       "no-shadow": 0,
