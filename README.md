@@ -11,7 +11,7 @@ Node library for geocoding and reverse geocoding. Can be used as a nodejs librar
 ```shell
 npm install -g node-geocoder
 geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
-geocoder-reverse 48.858887 2.294486
+geocoder-reverse -- -37.1387194 175.5419382
 ```
 
 ## Installation (nodejs library)
