@@ -174,3 +174,9 @@
 
 * yandex geocoder
 * default https adapter
+
+## 2.23.0
+
+* google geocoder administrativeLevel
+
+
