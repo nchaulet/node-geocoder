@@ -172,8 +172,10 @@
                         "streetName"  : "Champs-Élysées",
                         "streetNumber": "1",
                         "countryCode" : "Fr",
-                        "state"       : "Île-de-France",
-                        "stateCode"   : "IDF",
+                        "administrativeLevels": {
+                            "level1long": "Île-de-France",
+                            "level1short": "IDF"
+                        },
                         "extra": {
                           "confidence": 0,
                           "premise": null,
@@ -287,8 +289,10 @@
                             "streetName"  : "Bedford Avenue",
                             "streetNumber": "277",
                             "countryCode" : "US",
-                            "state"       : "État de New York",
-                            "stateCode"   : "NY",
+                            "administrativeLevels": {
+                                "level1long": "État de New York",
+                                "level1short": "NY"
+                            },
                             "extra": {
                               "premise": null,
                               "subpremise": null,
