@@ -55,8 +55,11 @@ geocoder.geocode('29 champs elysée paris')
     zipcode: '75008',
     streetName: 'Champs-Élysées',
     streetNumber: '29',
-    state: 'Île de France',
-    stateCode: 'IDF'
+    administrativeLevels:
+     { level1long: 'Île-de-France',
+       level1short: 'IDF',
+       level2long: 'Paris',
+       level2short: '75' }
 }]
 
 ## Advanced usage (only google provider)
