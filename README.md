@@ -8,6 +8,8 @@ Node library for geocoding and reverse geocoding. Can be used as a nodejs librar
 
 ## Installation and usage (geocoder command line)
 
+!Important will be deprecated soon, you must use [ `node-geocoder-cli`](https://github.com/nchaulet/node-geocoder-cli) module
+
 ```shell
 npm install -g node-geocoder
 geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'

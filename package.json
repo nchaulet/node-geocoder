@@ -7,10 +7,6 @@
     "test": "./node_modules/.bin/mocha --check-leaks",
     "lint": "./node_modules/.bin/eslint lib"
   },
-  "bin": {
-    "geocoder": "bin/geocoder",
-    "geocoder-reverse": "bin/geocoder-reverse"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/nchaulet/node-geocoder.git"
@@ -32,7 +28,6 @@
     "url": "https://github.com/nchaulet/node-geocoder/issues"
   },
   "dependencies": {
-    "commander": "^2.6.0",
     "q": "^1.1.2"
   },
   "devDependencies": {
