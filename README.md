@@ -64,7 +64,7 @@ geocoder.geocode('29 champs elysée paris')
        level2short: '75' }
 }]
 
-## Advanced usage (only google provider)
+## Advanced usage (only google and here providers)
 geocoder.geocode({address: '29 champs elysée', country: 'France', zipcode: '75008'}, function(err, res) {
     console.log(res);
 });
@@ -98,6 +98,7 @@ geocoder.batchGeocode(['13 rue sainte catherine', 'another adress'], function (r
 ## Geocoder Provider
 
 * `google` : GoogleGeocoder. Supports address geocoding and reverse geocoding. Use `extra.clientId`and `extra.apiKey`(privateKey) for business licence. You can also use `extra.language` and `extra.region` to specify language and region, respectively. Note that 'https' is required when using an apiKey
+* `here` : HereGeocoder. Supports address geocoding and reverse geocoding. You must specify `extra.appId` and `extra.appCode` with your license keys. You can also use `extra.language`, `extra.politicalView` ([read about political views here](https://developer.here.com/rest-apis/documentation/geocoder/topics/political-views.html)), `extra.country`, and `extra.state`.
 * `freegeoip` : FreegeoipGeocoder. Supports IP geocoding
 * `datasciencetoolkit` : DataScienceToolkitGeocoder. Supports IPv4 geocoding and address geocoding. Use `extra.host` to specify a local instance
 * `openstreetmap` : OpenStreetMapGeocoder. Supports address geocoding and reverse geocoding. You can use `extra.language` and `extra.email` to specify a language and a contact email address.
