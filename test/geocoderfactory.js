@@ -5,6 +5,7 @@
         sinon = require('sinon');
 
     var GoogleGeocoder = require('../lib/geocoder/googlegeocoder.js');
+    var HereGeocoder = require('../lib/geocoder/heregeocoder.js');
     var GeocoderFactory = require('../lib/geocoderfactory.js');
     var DataScienceToolkitGeocoder = require('../lib/geocoder/datasciencetoolkitgeocoder.js');
     var OpenStreetMapGeocoder = require('../lib/geocoder/openstreetmapgeocoder.js');
@@ -70,6 +71,90 @@
 
                 geocoderAdapter.should.be.instanceof(GoogleGeocoder);
                 geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+            });
+
+            it('called with "here", "http" and extra business key must return here geocoder with http adapter and business key', function() {
+                var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE'});
+
+                var geocoderAdapter = geocoder._geocoder;
+
+                geocoderAdapter.should.be.instanceof(HereGeocoder);
+                geocoderAdapter.options.appId.should.be.equal('APP_ID');
+                geocoderAdapter.options.appCode.should.be.equal('APP_CODE');
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+            });
+
+            it('called with "here", "https" and extra business key must return here geocoder with http adapter and business key', function() {
+                var geocoder = GeocoderFactory.getGeocoder('here', 'https', {appId: 'APP_ID', appCode: 'APP_CODE'});
+
+                var geocoderAdapter = geocoder._geocoder;
+
+                geocoderAdapter.should.be.instanceof(HereGeocoder);
+                geocoderAdapter.options.appId.should.be.equal('APP_ID');
+                geocoderAdapter.options.appCode.should.be.equal('APP_CODE');
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
+            });
+
+            it('called with "here" and "http" and language must return here geocoder with http adapter and language', function() {
+                var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', language:'en'});
+
+                var geocoderAdapter = geocoder._geocoder;
+
+                geocoderAdapter.should.be.instanceof(HereGeocoder);
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+                geocoderAdapter.options.language.should.be.equal('en');
+            });
+
+            it('called with "here" and "http" and politicalView must return here geocoder with http adapter and politicalView', function() {
+                var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', politicalView:'GRE'});
+
+                var geocoderAdapter = geocoder._geocoder;
+
+                geocoderAdapter.should.be.instanceof(HereGeocoder);
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+                geocoderAdapter.options.politicalView.should.be.equal('GRE');
+            });
+
+            it('called with "here" and "http" and country must return here geocoder with http adapter and country', function() {
+                var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', country:'FR'});
+
+                var geocoderAdapter = geocoder._geocoder;
+
+                geocoderAdapter.should.be.instanceof(HereGeocoder);
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+                geocoderAdapter.options.country.should.be.equal('FR');
+            });
+
+            it('called with "here" and "http" and state must return here geocoder with http adapter and state', function() {
+                var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', state:'Île-de-France'});
+
+                var geocoderAdapter = geocoder._geocoder;
+
+                geocoderAdapter.should.be.instanceof(HereGeocoder);
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+                geocoderAdapter.options.state.should.be.equal('Île-de-France');
+            });
+
+            it('called with "here" and "http" and "gpx" must return here geocoder with http adapter and gpx formatter', function() {
+                var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', formatter : 'gpx'});
+
+                var geocoderAdapter = geocoder._geocoder;
+                var formatter = geocoder._formatter;
+
+                geocoderAdapter.should.be.instanceof(HereGeocoder);
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+                formatter.should.be.instanceof(GpxFormatter);
+            });
+
+            it('called with "here" and "http" and "string" must return here geocoder with http adapter and string formatter', function() {
+                var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', formatter : 'string', formatterPattern: 'PATTERN'});
+
+                var geocoderAdapter = geocoder._geocoder;
+                var formatter = geocoder._formatter;
+
+                geocoderAdapter.should.be.instanceof(HereGeocoder);
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+                formatter.should.be.instanceof(StringFormatter);
             });
 
             it('called with "datasciencetoolkit" and "http" must return datasciencetoolkit geocoder with http adapter', function() {
