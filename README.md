@@ -4,17 +4,7 @@
 
 ![Dependencycy status](https://david-dm.org/nchaulet/node-geocoder.png)
 
-Node library for geocoding and reverse geocoding. Can be used as a nodejs library or on command line
-
-## Installation and usage (geocoder command line)
-
-!Important will be deprecated soon, you must use [ `node-geocoder-cli`](https://github.com/nchaulet/node-geocoder-cli) module
-
-```shell
-npm install -g node-geocoder
-geocoder --provider google 'Fornino, 187 Bedford Ave, Brooklyn, NY 11211'
-geocoder-reverse -- -37.1387194 175.5419382
-```
+Node library for geocoding and reverse geocoding. Can be used as a nodejs library
 
 ## Installation (nodejs library)
 
@@ -94,7 +84,6 @@ geocoder.batchGeocode(['13 rue sainte catherine', 'another adress'], function (r
 
 ```
 
-
 ## Geocoder Provider
 
 * `google` : GoogleGeocoder. Supports address geocoding and reverse geocoding. Use `extra.clientId`and `extra.apiKey`(privateKey) for business licence. You can also use `extra.language` and `extra.region` to specify language and region, respectively. Note that 'https' is required when using an apiKey
@@ -133,11 +122,9 @@ geocoder.batchGeocode(['13 rue sainte catherine', 'another adress'], function (r
 
 ## More
 
-You can improve this project by adding new geocoders or http adapters.
+### Extra
 
-To run tests just `npm test`.
-
-To check code style install `jshint` and just run `jshint lib test`.
+[`node-geocoder-cli`](https://github.com/nchaulet/node-geocoder-cli) You can use node-geocoder-cli to geocode in shell
 
 ### Extending node geocoder
 
@@ -157,3 +144,10 @@ var formatter = {
     format: function(data) { return formattedData; },
 }
 ```
+### Contributing
+
+You can improve this project by adding new geocoders or http adapters.
+
+To run tests just `npm test`.
+
+To check code style install `jshint` and just run `jshint lib test`.

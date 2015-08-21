@@ -1,24 +1,5 @@
 # Changelog
 
-## 1.1.0
-
-* add google geocoder language option
-
-## 1.2.0
-
-* add openStreetmap geocoder language option
-* improve http error handling
-
-## 1.3.0
-
-* add host options for datasciencetoolkit
-* improve tests
-
-## 1.4.0
-
-* Added support for the ESRI AGOL geocoding service
-* Included test coverage for the new geocoder
-
 ## 2.0.0
 
 * remove requestify http adapter
@@ -179,4 +160,8 @@
 
 * google geocoder administrativeLevel
 
+## 3.0.0
 
+* remove command line geocoder: now in node-geocoder-cli
+* Remove getGeocoder from index module
+* Add Here geocoder
