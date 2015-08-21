@@ -5,7 +5,7 @@
     <title>Node-geocoder by nchaulet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
@@ -26,14 +26,7 @@
 
 <p><img src="https://david-dm.org/nchaulet/node-geocoder.png" alt="Dependencycy status"></p>
 
-<p>Node library for geocoding and reverse geocoding. Can be used as a nodejs library or on command line</p>
-
-<h2>
-<a id="installation-and-usage-geocoder-command-line" class="anchor" href="#installation-and-usage-geocoder-command-line" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation and usage (geocoder command line)</h2>
-
-<div class="highlight highlight-shell"><pre>npm install -g node-geocoder
-geocoder --provider google <span class="pl-s"><span class="pl-pds">'</span>Fornino, 187 Bedford Ave, Brooklyn, NY 11211<span class="pl-pds">'</span></span>
-geocoder-reverse 48.858887 2.294486</pre></div>
+<p>Node library for geocoding and reverse geocoding. Can be used as a nodejs library</p>
 
 <h2>
 <a id="installation-nodejs-library" class="anchor" href="#installation-nodejs-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation (nodejs library)</h2>
@@ -55,16 +48,16 @@ geocoder-reverse 48.858887 2.294486</pre></div>
 <span class="pl-k">var</span> geocoder <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>node-geocoder<span class="pl-pds">'</span></span>)(geocoderProvider, httpAdapter, extra);
 
 <span class="pl-c">// Using callback</span>
-geocoder.geocode(<span class="pl-s"><span class="pl-pds">'</span>29 champs elysée paris<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">res</span>) {
+geocoder.<span class="pl-c1">geocode</span>(<span class="pl-s"><span class="pl-pds">'</span>29 champs elysée paris<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">res</span>) {
     <span class="pl-en">console</span><span class="pl-c1">.log</span>(res);
 });
 
 <span class="pl-c">// Or using Promise</span>
-geocoder.geocode(<span class="pl-s"><span class="pl-pds">'</span>29 champs elysée paris<span class="pl-pds">'</span></span>)
-    .then(<span class="pl-k">function</span>(<span class="pl-smi">res</span>) {
+geocoder.<span class="pl-c1">geocode</span>(<span class="pl-s"><span class="pl-pds">'</span>29 champs elysée paris<span class="pl-pds">'</span></span>)
+    .<span class="pl-c1">then</span>(<span class="pl-k">function</span>(<span class="pl-smi">res</span>) {
         <span class="pl-en">console</span><span class="pl-c1">.log</span>(res);
     })
-    .catch(<span class="pl-k">function</span>(<span class="pl-smi">err</span>) {
+    .<span class="pl-c1">catch</span>(<span class="pl-k">function</span>(<span class="pl-smi">err</span>) {
         <span class="pl-en">console</span><span class="pl-c1">.log</span>(err);
     });
 
@@ -78,12 +71,15 @@ geocoder.geocode(<span class="pl-s"><span class="pl-pds">'</span>29 champs elys�
     zipcode<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>75008<span class="pl-pds">'</span></span>,
     streetName<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Champs-Élysées<span class="pl-pds">'</span></span>,
     streetNumber<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>29<span class="pl-pds">'</span></span>,
-    state<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Île de France<span class="pl-pds">'</span></span>,
-    stateCode<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>IDF<span class="pl-pds">'</span></span>
+    administrativeLevels<span class="pl-k">:</span>
+     { level1long<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Île-de-France<span class="pl-pds">'</span></span>,
+       level1short<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>IDF<span class="pl-pds">'</span></span>,
+       level2long<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Paris<span class="pl-pds">'</span></span>,
+       level2short<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>75<span class="pl-pds">'</span></span> }
 }]
 
-## Advanced usage (only google provider)
-geocoder.geocode({address<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>29 champs elysée<span class="pl-pds">'</span></span>, country<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>France<span class="pl-pds">'</span></span>, zipcode<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>75008<span class="pl-pds">'</span></span>}, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">res</span>) {
+## Advanced usage (only google and here providers)
+geocoder.<span class="pl-c1">geocode</span>({address<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>29 champs elysée<span class="pl-pds">'</span></span>, country<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>France<span class="pl-pds">'</span></span>, zipcode<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>75008<span class="pl-pds">'</span></span>}, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">res</span>) {
     <span class="pl-en">console</span><span class="pl-c1">.log</span>(res);
 });
 
@@ -96,16 +92,16 @@ geocoder.<span class="pl-c1">reverse</span>({lat<span class="pl-k">:</span><span
 
 <span class="pl-c">// Or using Promise</span>
 geocoder.<span class="pl-c1">reverse</span>({lat<span class="pl-k">:</span><span class="pl-c1">45.767</span>, lon<span class="pl-k">:</span><span class="pl-c1">4.833</span>})
-    .then(<span class="pl-k">function</span>(<span class="pl-smi">res</span>) {
+    .<span class="pl-c1">then</span>(<span class="pl-k">function</span>(<span class="pl-smi">res</span>) {
         <span class="pl-en">console</span><span class="pl-c1">.log</span>(res);
     })
-    .catch(<span class="pl-k">function</span>(<span class="pl-smi">err</span>) {
+    .<span class="pl-c1">catch</span>(<span class="pl-k">function</span>(<span class="pl-smi">err</span>) {
         <span class="pl-en">console</span><span class="pl-c1">.log</span>(err);
     });
 
 <span class="pl-c">// Batch geocode</span>
 
-geocoder.batchGeocode([<span class="pl-s"><span class="pl-pds">'</span>13 rue sainte catherine<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>another adress<span class="pl-pds">'</span></span>], <span class="pl-k">function</span> (<span class="pl-smi">results</span>) {
+geocoder.<span class="pl-c1">batchGeocode</span>([<span class="pl-s"><span class="pl-pds">'</span>13 rue sainte catherine<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>another adress<span class="pl-pds">'</span></span>], <span class="pl-k">function</span> (<span class="pl-smi">results</span>) {
     <span class="pl-c">// Return an array of type {error: false, value: []}</span>
     <span class="pl-en">console</span><span class="pl-c1">.log</span>(results) ;
 });
@@ -117,6 +113,8 @@ geocoder.batchGeocode([<span class="pl-s"><span class="pl-pds">'</span>13 rue sa
 <ul>
 <li>
 <code>google</code> : GoogleGeocoder. Supports address geocoding and reverse geocoding. Use <code>extra.clientId</code>and <code>extra.apiKey</code>(privateKey) for business licence. You can also use <code>extra.language</code> and <code>extra.region</code> to specify language and region, respectively. Note that 'https' is required when using an apiKey</li>
+<li>
+<code>here</code> : HereGeocoder. Supports address geocoding and reverse geocoding. You must specify <code>extra.appId</code> and <code>extra.appCode</code> with your license keys. You can also use <code>extra.language</code>, <code>extra.politicalView</code> (<a href="https://developer.here.com/rest-apis/documentation/geocoder/topics/political-views.html">read about political views here</a>), <code>extra.country</code>, and <code>extra.state</code>.</li>
 <li>
 <code>freegeoip</code> : FreegeoipGeocoder. Supports IP geocoding</li>
 <li>
@@ -195,11 +193,10 @@ geocoder.batchGeocode([<span class="pl-s"><span class="pl-pds">'</span>13 rue sa
 <h2>
 <a id="more" class="anchor" href="#more" aria-hidden="true"><span class="octicon octicon-link"></span></a>More</h2>
 
-<p>You can improve this project by adding new geocoders or http adapters.</p>
+<h3>
+<a id="extra" class="anchor" href="#extra" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extra</h3>
 
-<p>To run tests just <code>npm test</code>.</p>
-
-<p>To check code style install <code>jshint</code> and just run <code>jshint lib test</code>.</p>
+<p><a href="https://github.com/nchaulet/node-geocoder-cli"><code>node-geocoder-cli</code></a> You can use node-geocoder-cli to geocode in shell</p>
 
 <h3>
 <a id="extending-node-geocoder" class="anchor" href="#extending-node-geocoder" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extending node geocoder</h3>
@@ -208,7 +205,7 @@ geocoder.batchGeocode([<span class="pl-s"><span class="pl-pds">'</span>13 rue sa
 
 <div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> geocoder <span class="pl-k">=</span> {
     <span class="pl-en">geocode</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">value</span>, <span class="pl-smi">callback</span>) { ... },
-    <span class="pl-en">reverse</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">query</span>, <span class="pl-smi">callback</span>) { <span class="pl-k">var</span> lat <span class="pl-k">=</span> query.lat; <span class="pl-k">var</span> lon <span class="pl-k">=</span> query.lon; ... }
+    <span class="pl-en">reverse</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">query</span>, <span class="pl-smi">callback</span>) { <span class="pl-k">var</span> lat <span class="pl-k">=</span> query.<span class="pl-c1">lat</span>; <span class="pl-k">var</span> lon <span class="pl-k">=</span> query.<span class="pl-c1">lon</span>; ... }
 }</pre></div>
 
 <p>You can also add formatter implementing the following interface</p>
@@ -216,6 +213,15 @@ geocoder.batchGeocode([<span class="pl-s"><span class="pl-pds">'</span>13 rue sa
 <div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> formatter <span class="pl-k">=</span> {
     <span class="pl-en">format</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">data</span>) { <span class="pl-k">return</span> formattedData; },
 }</pre></div>
+
+<h3>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h3>
+
+<p>You can improve this project by adding new geocoders or http adapters.</p>
+
+<p>To run tests just <code>npm test</code>.</p>
+
+<p>To check code style install <code>jshint</code> and just run <code>jshint lib test</code>.</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/nchaulet/node-geocoder">Node-geocoder</a> is maintained by <a href="https://github.com/nchaulet">nchaulet</a>.</span>
@@ -228,4 +234,3 @@ geocoder.batchGeocode([<span class="pl-s"><span class="pl-pds">'</span>13 rue sa
   
   </body>
 </html>
-
