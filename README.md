@@ -105,8 +105,8 @@ geocoder.batchGeocode(['13 rue sainte catherine', 'another adress'], function (r
 
 ## Http adapter
 
-* `http`: This adapter uses the Http nodejs library (default)
-* `https`: This adapter uses the Https nodejs library
+* `https`: This adapter uses the Https nodejs library (default)
+* `http`: This adapter uses the Http nodejs library
 
 ## Formatter
 
