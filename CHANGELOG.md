@@ -165,3 +165,7 @@
 * remove command line geocoder: now in node-geocoder-cli
 * Remove getGeocoder from index module
 * Add Here geocoder
+
+## 3.0.2
+
+* handle no result in openstreetmap reverse
