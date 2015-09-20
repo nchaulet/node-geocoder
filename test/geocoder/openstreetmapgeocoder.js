@@ -281,6 +281,20 @@
                 });
             });
 
+            it('Should handle no results', function(done) {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().callsArgWith(2, false, {
+                    "error": "Unable to geocode"
+                });
+                var osmAdapter = new OpenStreetMapGeocoder(mockedHttpAdapter);
+                osmAdapter.reverse({lat: 40.714232, lon: -73.9612889}, function(err, results) {
+                        err.should.to.equal(false);
+                        results.should.to.be.empty();
+                        mock.verify();
+                        done();
+                });
+            });
+
             it('Should correctly set extra arguments', function(done) {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, [])
