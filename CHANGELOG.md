@@ -169,3 +169,7 @@
 ## 3.0.2
 
 * handle no result in openstreetmap reverse
+
+## 3.1.0
+
+* excludePartialMatches
