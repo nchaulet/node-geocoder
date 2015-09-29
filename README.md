@@ -54,7 +54,7 @@ geocoder.geocode('29 champs elysée paris')
        level2short: '75' }
 }]
 
-## Advanced usage (only google and here providers)
+// Advanced usage (only google and here providers)
 geocoder.geocode({address: '29 champs elysée', country: 'France', zipcode: '75008'}, function(err, res) {
     console.log(res);
 });
@@ -81,6 +81,13 @@ geocoder.batchGeocode(['13 rue sainte catherine', 'another adress'], function (r
     // Return an array of type {error: false, value: []}
     console.log(results) ;
 });
+
+// Check X-RateLimit-* Headers (Limit, Remaining, Reset)
+// - returns null if header was not given in response
+
+console.log(geocoder.rateLimit.limit)
+console.log(geocoder.rateLimit.remaining)
+console.log(geocoder.rateLimit.reset)
 
 ```
 
