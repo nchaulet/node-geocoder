@@ -47,6 +47,28 @@
                 mock.verify();
             });
 
+
+            it('get must call http request with set options', function() {
+                var http = { request: function () {} };
+                var mock = sinon.mock(http);
+                mock.expects('request')
+                .withArgs({ headers: { "user-agent": "Bla blubber" }, host: "test.fr", path: "/?" })
+                .once().returns({
+                    end: function() {},
+                    on: function() { return this; }
+                });
+
+                var httpAdapter = new HttpAdapter(http,
+                  {headers: {
+                    'user-agent': 'Bla blubber'
+                  }
+                });
+
+                httpAdapter.get('http://test.fr');
+
+                mock.verify();
+            });
+
         });
 
     });
