@@ -263,7 +263,7 @@
                         partial_match: true
                     }]}
                 );
-                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, { excludePartialMatches: true});
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, { clientId: 'clientId', apiKey: 'apiKey', excludePartialMatches: true});
 
                 googleAdapter.geocode('1 champs élysées Paris', function(err, results) {
                     err.should.to.equal(false);

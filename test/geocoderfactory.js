@@ -31,6 +31,18 @@
                 geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
             });
 
+            it('called with "google", "https" and extra business key and excludePartialMatches must return google geocoder with http adapter and business key and exclude partial matches', function() {
+                var geocoder = GeocoderFactory.getGeocoder('google', 'https', {clientId: 'CLIENT_ID', apiKey: 'API_KEY', excludePartialMatches: true});
+
+                var geocoderAdapter = geocoder._geocoder;
+
+                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+                geocoderAdapter.options.clientId.should.be.equal('CLIENT_ID');
+                geocoderAdapter.options.apiKey.should.be.equal('API_KEY');
+                geocoderAdapter.options.excludePartialMatches.should.be.equal(true);
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
+            });
+
             it('called with "google", "http", extra language key and extra region must return google geocoder with http adapter and options language', function() {
                 var geocoder = GeocoderFactory.getGeocoder('google', 'http', {language: 'fr',region:'de'});
 
