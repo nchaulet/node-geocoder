@@ -19,9 +19,14 @@
                 expect(function() {new NominatimMapquestGeocoder();}).to.throw(Error, 'NominatimMapquestGeocoder need an httpAdapter');
             });
 
+            it('an apiKey must be set', function() {
+
+                expect(function() {new NominatimMapquestGeocoder(mockedHttpAdapter);}).to.throw(Error, 'NominatimMapquestGeocoder needs an apiKey');
+            });
+
             it('Should be an instance of NominatimMapquestGeocoder', function() {
 
-                var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter);
+                var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter, {apiKey: 'API_KEY'});
 
                 nmAdapter.should.be.instanceof(NominatimMapquestGeocoder);
             });
@@ -32,7 +37,7 @@
 
             it('Should not accept IPv4', function() {
 
-                var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter);
+                var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter, {apiKey: 'API_KEY'});
 
                 expect(function() {
                         nmAdapter.geocode('127.0.0.1');
@@ -42,7 +47,7 @@
 
             it('Should not accept IPv6', function() {
 
-                var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter);
+                var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter, {apiKey: 'API_KEY'});
 
                 expect(function() {
                         nmAdapter.geocode('2001:0db8:0000:85a3:0000:0000:ac1f:8001');
@@ -53,9 +58,12 @@
             it('Should call httpAdapter get method', function() {
 
                 var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').once().returns({then: function() {}});
+                mock.expects('get').once()
+                .withArgs("http://open.mapquestapi.com/nominatim/v1/search",
+                { key: 'API_KEY', addressdetails: 1, format: "json", q: "1 champs élysée Paris" })
+                .returns({then: function() {}});
 
-                var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter);
+                var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter, {apiKey: 'API_KEY'});
 
                 nmAdapter.geocode('1 champs élysée Paris');
 
@@ -92,7 +100,7 @@
                     }]
                 );
 
-                var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter);
+                var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter, {apiKey: 'API_KEY'});
 
                 nmAdapter.geocode('135 pilkington avenue, birmingham', function(err, results) {
                     mock.verify();
@@ -120,7 +128,10 @@
         describe('#reverse' , function() {
             it('Should return geocoded address', function(done) {
                 var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').once().callsArgWith(2, false, {
+                mock.expects('get').once()
+                .withArgs("http://open.mapquestapi.com/nominatim/v1/reverse",
+                { key: 'API_KEY', addressdetails: 1, format: "json", lat:40.714232, lon:-73.9612889 })
+                .callsArgWith(2, false, {
                         "place_id": "149160357",
                         "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http:\/\/www.openstreetmap.org\/copyright",
                         "osm_type": "way",
@@ -141,7 +152,7 @@
                         }
                     }
                 );
-                var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter);
+                var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter, {apiKey: 'API_KEY'});
                 nmAdapter.reverse({lat:40.714232,lon:-73.9612889}, function(err, results) {
                     mock.verify();
                     err.should.to.equal(false);

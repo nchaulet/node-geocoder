@@ -112,7 +112,7 @@ var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 * `openmapquest` : Open MapQuestGeocoder (based on OpenStreetMapGeocoder). Supports address geocoding and reverse geocoding. Needs an apiKey
 * `agol` : ArcGis Online Geocoding service. Supports geocoding and reverse. Requires a client_id & client_secret and 'https' http adapter
 * `tomtom`: TomTomGeocoder. Supports address geocoding. You need to specify `extra.apiKey`
-* `nominatimmapquest`: Same geocoder as `openstreetmap`, but queries the MapQuest servers.
+* `nominatimmapquest`: Same geocoder as `openstreetmap`, but queries the MapQuest servers. You need to specify `extra.apiKey`
 * `opencage`: OpenCage Geocoder. Uses multiple open sources. Supports address and reverse geocoding. You need to specify `extra.apiKey`
 * `smartyStreet`: Smarty street geocoder (US only), you need to specify `extra.auth_id` and `extra.auth_token`
 * `geocodio`: Geocodio, Supports address geocoding and reverse geocoding (US only)
