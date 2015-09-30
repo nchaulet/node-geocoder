@@ -173,3 +173,8 @@
 ## 3.2.0
 
 * excludePartialMatches
+
+## 3.3.0
+
+* http adapter custom header
+* apikey for nominatiom geocoder
