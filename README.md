@@ -82,6 +82,19 @@ geocoder.batchGeocode(['13 rue sainte catherine', 'another adress'], function (r
     console.log(results) ;
 });
 
+// Set specific http request headers:
+var HttpsAdapter = require('node-geocoder/lib/httpadapter/httpsadapter.js')
+var httpAdapter = new HttpsAdapter(null,
+  {
+    headers: {
+      'user-agent': 'My application <email@domain.com>',
+      'X-Specific-Header': 'Specific value'
+    }
+  })
+
+var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
+...
+
 ```
 
 ## Geocoder Provider
@@ -93,6 +106,8 @@ geocoder.batchGeocode(['13 rue sainte catherine', 'another adress'], function (r
 * `openstreetmap` : OpenStreetMapGeocoder. Supports address geocoding and reverse geocoding. You can use `extra.language` and `extra.email` to specify a language and a contact email address.
   * For `geocode`, you can use an object as value, specifying one or several parameters from https://wiki.openstreetmap.org/wiki/Nominatim#Parameters
   * For `reverse`, you can use additional parameters from https://wiki.openstreetmap.org/wiki/Nominatim#Parameters_2
+  * You should specify a specific `user-agent` or `referrer` header field as required by
+  https://wiki.openstreetmap.org/wiki/Nominatim_usage_policy
 * `mapquest` : MapQuestGeocoder. Supports address geocoding and reverse geocoding. Needs an apiKey
 * `openmapquest` : Open MapQuestGeocoder (based on OpenStreetMapGeocoder). Supports address geocoding and reverse geocoding. Needs an apiKey
 * `agol` : ArcGis Online Geocoding service. Supports geocoding and reverse. Requires a client_id & client_secret and 'https' http adapter
