@@ -178,3 +178,7 @@
 
 * http adapter custom header
 * apikey for nominatiom geocoder
+
+## 3.4.0
+
+* Teleport Geocoder
