@@ -117,6 +117,7 @@ var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 * `smartyStreet`: Smarty street geocoder (US only), you need to specify `extra.auth_id` and `extra.auth_token`
 * `geocodio`: Geocodio, Supports address geocoding and reverse geocoding (US only)
 * `yandex`: Yandex support address geocoding, you can use `extra.language` to specify language
+* `teleport`: Teleport supports city and urban area forward and reverse geocoding; for more information, see [Teleport API documentation](https://developers.teleport.org/api/)
 
 ## Http adapter
 
