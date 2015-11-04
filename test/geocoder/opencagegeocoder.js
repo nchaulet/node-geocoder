@@ -68,6 +68,31 @@
 
             });
 
+            it('Should call httpAdapter get method with components if called with object', function() {
+
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').withArgs('http://api.opencagedata.com/geocode/v1/json', {
+                    q: '1 champs élysée Paris',
+                    bounds: '2.01,48.01,3.01,49.01',
+                    countrycode: 'fr',
+                    limit: 1,
+                    min_confidence: 0.5,
+                    key: 'API_KEY'
+                }).once().returns({then: function() {}});
+
+                var ocgAdapter = new OpenCageGeocoder(mockedHttpAdapter, 'API_KEY');
+
+                ocgAdapter.geocode({
+                    q: '1 champs élysée Paris',
+                    bounds: [2.01,48.01,3.01,49.01],
+                    countrycode: 'fr',
+                    limit: 1,
+                    min_confidence: 0.5
+                });
+
+                mock.verify();
+            });
+
             it('Should return geocoded address', function(done) {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, {
