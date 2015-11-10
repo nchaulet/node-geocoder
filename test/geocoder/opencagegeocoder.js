@@ -85,7 +85,7 @@
                 ocgAdapter.geocode({
                     address: '1 champs élysée Paris',
                     bounds: [2.01,48.01,3.01,49.01],
-                    countrycode: 'fr',
+                    countryCode: 'fr',
                     limit: 1,
                     min_confidence: 0.5
                 });
