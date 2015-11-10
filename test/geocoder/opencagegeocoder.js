@@ -83,7 +83,7 @@
                 var ocgAdapter = new OpenCageGeocoder(mockedHttpAdapter, 'API_KEY');
 
                 ocgAdapter.geocode({
-                    q: '1 champs élysée Paris',
+                    address: '1 champs élysée Paris',
                     bounds: [2.01,48.01,3.01,49.01],
                     countrycode: 'fr',
                     limit: 1,
