@@ -76,7 +76,7 @@
                     bounds: '2.01,48.01,3.01,49.01',
                     countrycode: 'fr',
                     limit: 1,
-                    min_confidence: 0.5,
+                    min_confidence: 4,
                     key: 'API_KEY'
                 }).once().returns({then: function() {}});
 
@@ -87,7 +87,7 @@
                     bounds: [2.01,48.01,3.01,49.01],
                     countryCode: 'fr',
                     limit: 1,
-                    min_confidence: 0.5
+                    minConfidence: 0.5
                 });
 
                 mock.verify();
