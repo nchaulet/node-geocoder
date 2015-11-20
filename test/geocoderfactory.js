@@ -203,6 +203,17 @@
                     .to
                     .throw(Error, 'No geocoder provider find for : zaertyazeaze');
             });
+
+            it('called with "google", "https" and extra timeout must return google geocoder with http adapter and timeout', function() {
+                var timeout = 5 * 1000;
+                var geocoder = GeocoderFactory.getGeocoder('google', 'https', {clientId: 'CLIENT_ID', apiKey: 'API_KEY', timeout: timeout});
+
+                var geocoderAdapter = geocoder._geocoder;
+
+                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+                geocoderAdapter.httpAdapter.options.timeout.should.be.equal(timeout);
+                geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
+            });
         });
     });
 
