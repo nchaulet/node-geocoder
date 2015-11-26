@@ -6,6 +6,7 @@
         sinon = require('sinon');
 
     var HttpAdapter = require('../../lib/httpadapter/httpadapter.js');
+    var HttpError = require('../../lib/error/httperror.js');
 
     describe('HttpAdapter', function() {
 
@@ -26,6 +27,14 @@
                 var httpAdapter = new HttpAdapter(mockedHttp);
 
                 httpAdapter.http.should.equal(mockedHttp);
+            });
+
+            it('if client specified timeout use it', function() {
+                var options = { timeout: 5 * 1000 };
+
+                var httpAdapter = new HttpAdapter(null, options);
+
+                httpAdapter.options.timeout.should.equal(options.timeout);
             });
 
         });
@@ -69,6 +78,21 @@
                 mock.verify();
             });
 
+            it('get must call http request with timeout', function(done) {
+                var options = { timeout: 5 * 1000 };
+
+                this.timeout(options.timeout + 1000);
+
+                var httpAdapter = new HttpAdapter(null, options);
+
+                httpAdapter.get('http://www.google.com', {}, function(err) {
+                  if(err instanceof HttpError && typeof err.code !== 'undefined') {
+                    err.code.should.equal('ETIMEDOUT');
+                  }
+
+                  done();
+                });
+            });
         });
 
     });
