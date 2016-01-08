@@ -55,7 +55,7 @@ geocoder.geocode('29 champs elysée paris')
 }]
 ```
 
-## Advanced usage (only google, here, and opencage providers)
+## Advanced usage (only google, here, mapquest, and opencage providers)
 
 ```javascript
 geocoder.geocode({address: '29 champs elysée', country: 'France', zipcode: '75008'}, function(err, res) {
