@@ -182,3 +182,8 @@
 ## 3.4.0
 
 * Teleport Geocoder
+
+## 3.6.0
+
+* Support search object for mapquest geocoder
+
