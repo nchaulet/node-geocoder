@@ -87,7 +87,7 @@
                     bounds: [2.01,48.01,3.01,49.01],
                     countryCode: 'fr',
                     limit: 1,
-                    minConfidence: 0.5
+                    minConfidence: 4
                 });
 
                 mock.verify();
@@ -158,7 +158,8 @@
                         "streetNumber": undefined,
                         "county" : "RMSP",
                         "extra" : {
-                          "confidence": 0.9
+                          "confidence": 10,
+                          "confidenceKM": 0.25
                         }
                     });
 
@@ -277,7 +278,8 @@
                             "countryCode": "de",
                             "county" : undefined,
                             "extra" : {
-                              "confidence": 0
+                                "confidence": 0,
+                                "confidenceKM": Number.NaN
                             }
                         });
                         mock.verify();
