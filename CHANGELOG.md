@@ -187,3 +187,10 @@
 
 * Support search object for mapquest geocoder
 
+
+## 3.6.1
+
+* Fix opencage callback error
+* Fix opencage confidence
+
+
