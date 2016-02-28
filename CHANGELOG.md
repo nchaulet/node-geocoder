@@ -193,7 +193,7 @@
 * Fix opencage callback error
 * Fix opencage confidence
 
-## 3.7.0
+## 3.8.0
 
 * Opendata France geocoders
 * Google neighboorhod
