@@ -21,9 +21,9 @@
 
             it('Should be an instance of OpendataFranceGeocoder', function() {
 
-                var osmAdapter = new OpendataFranceGeocoder(mockedHttpAdapter);
+                var openDataFranceGeocoder = new OpendataFranceGeocoder(mockedHttpAdapter);
 
-                osmAdapter.should.be.instanceof(OpendataFranceGeocoder);
+                openDataFranceGeocoder.should.be.instanceof(OpendataFranceGeocoder);
             });
 
         });
@@ -32,20 +32,20 @@
 
             it('Should not accept IPv4', function() {
 
-                var osmAdapter = new OpendataFranceGeocoder(mockedHttpAdapter);
+                var openDataFranceGeocoder = new OpendataFranceGeocoder(mockedHttpAdapter);
 
                 expect(function() {
-                        osmAdapter.geocode('127.0.0.1');
+                        openDataFranceGeocoder.geocode('127.0.0.1');
                 }).to.throw(Error, 'OpendataFranceGeocoder does not support geocoding IPv4');
 
             });
 
             it('Should not accept IPv6', function() {
 
-                var osmAdapter = new OpendataFranceGeocoder(mockedHttpAdapter);
+                var openDataFranceGeocoder = new OpendataFranceGeocoder(mockedHttpAdapter);
 
                 expect(function() {
-                        osmAdapter.geocode('2001:0db8:0000:85a3:0000:0000:ac1f:8001');
+                        openDataFranceGeocoder.geocode('2001:0db8:0000:85a3:0000:0000:ac1f:8001');
                 }).to.throw(Error, 'OpendataFranceGeocoder does not support geocoding IPv6');
 
             });
@@ -55,15 +55,15 @@
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().returns({then: function() {}});
 
-                var osmAdapter = new OpendataFranceGeocoder(mockedHttpAdapter);
+                var openDataFranceGeocoder = new OpendataFranceGeocoder(mockedHttpAdapter);
 
-                osmAdapter.geocode('1 champs élysée Paris');
+                openDataFranceGeocoder.geocode('1 champs élysée Paris');
 
                 mock.verify();
 
             });
 
-            it('Should return geocoded address', function(done) {
+            it('Should return geocoded address with string', function(done) {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, {
                   "licence": "ODbL 1.0",
@@ -100,9 +100,9 @@
                 }
                 );
 
-                var osmAdapter = new OpendataFranceGeocoder(mockedHttpAdapter);
+                var openDataFranceGeocoder = new OpendataFranceGeocoder(mockedHttpAdapter);
 
-                osmAdapter.geocode('135 pilkington avenue, birmingham', function(err, results) {
+                openDataFranceGeocoder.geocode('1 Rue David d\'Angers', function(err, results) {
                     mock.verify();
 
                     err.should.to.equal(false);
@@ -111,7 +111,7 @@
                         "latitude": 48.88313,
                         "longitude": 2.388491,
                         "country": "France",
-						            "state": "75, Île-de-France",
+                        "state": "75, Île-de-France",
                         "city": "Paris",
                         "zipcode": "75019",
                         "streetName": "Rue David d'Angers",
@@ -157,6 +157,120 @@
                     done();
                 });
             });
+
+            it('Should return geocoded address with object', function(done) {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().callsArgWith(2, false, {
+                  "limit": 20,
+                  "center": [
+                    47.4712,
+                    -0.554003
+                  ],
+                  "attribution": "BAN",
+                  "version": "draft",
+                  "licence": "ODbL 1.0",
+                  "query": "1 Rue David d'Angers",
+                  "type": "FeatureCollection",
+                  "features": [
+                    {
+                      "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                          -0.550624,
+                          47.472086
+                        ]
+                      },
+                      "properties": {
+                        "street": "Rue David d'Angers",
+                        "label": "1 Rue David d'Angers 49100 Angers",
+                        "distance": 272,
+                        "context": "49, Maine-et-Loire, Pays de la Loire",
+                        "id": "ADRNIVX_0000000263522758",
+                        "citycode": "49007",
+                        "name": "1 Rue David d'Angers",
+                        "city": "Angers",
+                        "postcode": "49100",
+                        "housenumber": "1",
+                        "score": 0.8585141961673092,
+                        "type": "housenumber"
+                      },
+                      "type": "Feature"
+                    }
+                  ]
+                }
+                );
+
+                var openDataFranceGeocoder = new OpendataFranceGeocoder(mockedHttpAdapter);
+
+                var queryToGeocode = {
+                  address: '1 Rue David d\'Angers',
+                  zipcode: '49000',
+                  type: 'street',
+                  lat: 47.4712,
+                  lon: -0.554003,
+                  limit: 20
+                };
+
+                openDataFranceGeocoder.geocode(queryToGeocode, function(err, results) {
+                    mock.verify();
+
+                    err.should.to.equal(false);
+
+                    results[0].should.to.deep.equal({
+                        "latitude": 47.472086,
+                        "longitude": -0.550624,
+                        "country": "France",
+                        "state": "49, Maine-et-Loire, Pays de la Loire",
+                        "city": "Angers",
+                        "zipcode": "49100",
+                        "streetName": "Rue David d'Angers",
+                        "streetNumber": "1",
+                        "countryCode": "FR"
+                    });
+
+                    results.raw.should.deep.equal({
+                      "limit": 20,
+                      "center": [
+                        47.4712,
+                        -0.554003
+                      ],
+                      "attribution": "BAN",
+                      "version": "draft",
+                      "licence": "ODbL 1.0",
+                      "query": "1 Rue David d'Angers",
+                      "type": "FeatureCollection",
+                      "features": [
+                        {
+                          "geometry": {
+                            "type": "Point",
+                            "coordinates": [
+                              -0.550624,
+                              47.472086
+                            ]
+                          },
+                          "properties": {
+                            "street": "Rue David d'Angers",
+                            "label": "1 Rue David d'Angers 49100 Angers",
+                            "distance": 272,
+                            "context": "49, Maine-et-Loire, Pays de la Loire",
+                            "id": "ADRNIVX_0000000263522758",
+                            "citycode": "49007",
+                            "name": "1 Rue David d'Angers",
+                            "city": "Angers",
+                            "postcode": "49100",
+                            "housenumber": "1",
+                            "score": 0.8585141961673092,
+                            "type": "housenumber"
+                          },
+                          "type": "Feature"
+                        }
+                      ]
+                    });
+
+                    mock.verify();
+                    done();
+                });
+            });
         });
 
         describe('#reverse' , function() {
@@ -196,8 +310,8 @@
                     "version": "draft"
                   }
                 );
-                var osmAdapter = new OpendataFranceGeocoder(mockedHttpAdapter);
-                osmAdapter.reverse({lat: 47.46653, lon: -0.550142}, function(err, results) {
+                var openDataFranceGeocoder = new OpendataFranceGeocoder(mockedHttpAdapter);
+                openDataFranceGeocoder.reverse({lat: 47.46653, lon: -0.550142}, function(err, results) {
                         err.should.to.equal(false);
                         results[0].should.to.deep.equal({
                             "latitude": 47.46653,
