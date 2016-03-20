@@ -108,15 +108,18 @@
                     err.should.to.equal(false);
 
                     results[0].should.to.deep.equal({
-                        "latitude": 48.88313,
-                        "longitude": 2.388491,
-                        "country": "France",
-                        "state": "75, Île-de-France",
-                        "city": "Paris",
-                        "zipcode": "75019",
-                        "streetName": "Rue David d'Angers",
-                        "streetNumber": "1",
-                        "countryCode": "FR"
+                        latitude: 48.88313,
+                        longitude: 2.388491,
+                        country: 'France',
+                        state: '75, Île-de-France',
+                        city: 'Paris',
+                        zipcode: '75019',
+                        streetName: 'Rue David d\'Angers',
+                        streetNumber: '1',
+                        countryCode: 'FR',
+                        citycode: '75119',
+                        id: 'ADRNIVX_0000000270725006',
+                        type: 'housenumber'
                     });
 
                     results.raw.should.deep.equal({
@@ -217,15 +220,18 @@
                     err.should.to.equal(false);
 
                     results[0].should.to.deep.equal({
-                        "latitude": 47.472086,
-                        "longitude": -0.550624,
-                        "country": "France",
-                        "state": "49, Maine-et-Loire, Pays de la Loire",
-                        "city": "Angers",
-                        "zipcode": "49100",
-                        "streetName": "Rue David d'Angers",
-                        "streetNumber": "1",
-                        "countryCode": "FR"
+                        latitude: 47.472086,
+                        longitude: -0.550624,
+                        country: 'France',
+                        state: '49, Maine-et-Loire, Pays de la Loire',
+                        city: 'Angers',
+                        zipcode: '49100',
+                        streetName: 'Rue David d\'Angers',
+                        streetNumber: '1',
+                        countryCode: 'FR',
+                        citycode: '49007',
+                        id: 'ADRNIVX_0000000263522758',
+                        type: 'housenumber'
                     });
 
                     results.raw.should.deep.equal({
@@ -271,6 +277,222 @@
                     done();
                 });
             });
+
+            it('Should return geocoded address with type city', function(done) {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().callsArgWith(2, false, {
+                    "limit": 1,
+                    "filters": {
+                      "type": "city"
+                    },
+                    "attribution": "BAN",
+                    "version": "draft",
+                    "licence": "ODbL 1.0",
+                    "query": "Plessis",
+                    "type": "FeatureCollection",
+                    "features": [
+                      {
+                        "geometry": {
+                          "type": "Point",
+                          "coordinates": [
+                            2.262349,
+                            48.782912
+                          ]
+                        },
+                        "properties": {
+                          "citycode": "92060",
+                          "adm_weight": "2",
+                          "name": "Le Plessis-Robinson",
+                          "city": "Le Plessis-Robinson",
+                          "postcode": "92350",
+                          "context": "92, Hauts-de-Seine, Île-de-France",
+                          "score": 0.6722272727272727,
+                          "label": "Le Plessis-Robinson",
+                          "id": "92060",
+                          "type": "city",
+                          "population": "26.6"
+                        },
+                        "type": "Feature"
+                      }
+                    ]
+                  }
+                );
+
+                var openDataFranceGeocoder = new OpendataFranceGeocoder(mockedHttpAdapter);
+
+                var queryToGeocode = {
+                  address: 'Plessis',
+                  type: 'city',
+                  limit: 1
+                };
+
+                openDataFranceGeocoder.geocode(queryToGeocode, function(err, results) {
+                    mock.verify();
+
+                    err.should.to.equal(false);
+
+                    results[0].should.to.deep.equal({
+                        latitude: 48.782912,
+                        longitude: 2.262349,
+                        country: 'France',
+                        state: '92, Hauts-de-Seine, Île-de-France',
+                        city: 'Le Plessis-Robinson',
+                        zipcode: '92350',
+                        citycode: '92060',
+                        countryCode: 'FR',
+                        type: 'city',
+                        population: '26.6',
+                        id: '92060',
+                        adm_weight: '2'
+                    });
+
+                    mock.verify();
+                    done();
+                });
+            });
+
+            it('Should return geocoded address with type locality', function(done) {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().callsArgWith(2, false, {
+                    "limit": 1,
+                    "filters": {
+                      "type": "locality"
+                    },
+                    "attribution": "BAN",
+                    "version": "draft",
+                    "licence": "ODbL 1.0",
+                    "query": "Plessis",
+                    "type": "FeatureCollection",
+                    "features": [
+                      {
+                        "geometry": {
+                          "type": "Point",
+                          "coordinates": [
+                            -2.134949,
+                            47.666011
+                          ]
+                        },
+                        "properties": {
+                          "citycode": "56001",
+                          "postcode": "56350",
+                          "name": "Plessis-Rivault",
+                          "city": "Allaire",
+                          "context": "56, Morbihan, Bretagne",
+                          "score": 0.8246272727272728,
+                          "label": "Plessis-Rivault 56350 Allaire",
+                          "id": "56001_D393_0c0627",
+                          "type": "locality"
+                        },
+                        "type": "Feature"
+                      }
+                    ]
+                  }
+                );
+
+                var openDataFranceGeocoder = new OpendataFranceGeocoder(mockedHttpAdapter);
+
+                var queryToGeocode = {
+                  address: 'Plessis',
+                  type: 'locality',
+                  limit: 1
+                };
+
+                openDataFranceGeocoder.geocode(queryToGeocode, function(err, results) {
+                    mock.verify();
+
+                    err.should.to.equal(false);
+
+                    results[0].should.to.deep.equal({
+                        latitude: 47.666011,
+                        longitude: -2.134949,
+                        country: 'France',
+                        state: '56, Morbihan, Bretagne',
+                        city: 'Allaire',
+                        streetName: 'Plessis-Rivault',
+                        zipcode: '56350',
+                        citycode: '56001',
+                        countryCode: 'FR',
+                        type: 'locality',
+                        id: '56001_D393_0c0627'
+                    });
+
+                    mock.verify();
+                    done();
+                });
+            });
+
+            it('Should return geocoded address with type village', function(done) {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').once().callsArgWith(2, false, {
+                    "limit": 1,
+                    "filters": {
+                      "type": "village"
+                    },
+                    "attribution": "BAN",
+                    "version": "draft",
+                    "licence": "ODbL 1.0",
+                    "query": "1 Rue Plessis",
+                    "type": "FeatureCollection",
+                    "features": [
+                      {
+                        "geometry": {
+                          "type": "Point",
+                          "coordinates": [
+                            2.831393,
+                            49.578021
+                          ]
+                        },
+                        "properties": {
+                          "citycode": "60499",
+                          "adm_weight": "1",
+                          "name": "Plessis-de-Roye",
+                          "city": "Plessis-de-Roye",
+                          "postcode": "60310",
+                          "context": "60, Oise, Picardie",
+                          "score": 0.4108585858585858,
+                          "label": "Plessis-de-Roye",
+                          "id": "60499",
+                          "type": "village",
+                          "population": "0.2"
+                        },
+                        "type": "Feature"
+                      }
+                    ]
+                  }
+                );
+
+                var openDataFranceGeocoder = new OpendataFranceGeocoder(mockedHttpAdapter);
+
+                var queryToGeocode = {
+                  address: 'Plessis',
+                  type: 'village',
+                  limit: 1
+                };
+
+                openDataFranceGeocoder.geocode(queryToGeocode, function(err, results) {
+                    mock.verify();
+
+                    err.should.to.equal(false);
+
+                    results[0].should.to.deep.equal({
+                        latitude: 49.578021,
+                        longitude: 2.831393,
+                        country: 'France',
+                        state: '60, Oise, Picardie',
+                        city: 'Plessis-de-Roye',
+                        zipcode: '60310',
+                        citycode: '60499',
+                        countryCode: 'FR',
+                        type: 'village',
+                        id: '60499',
+                        population: '0.2'
+                    });
+
+                    mock.verify();
+                    done();
+                });
+            });
+
         });
 
         describe('#reverse' , function() {
@@ -314,15 +536,18 @@
                 openDataFranceGeocoder.reverse({lat: 47.46653, lon: -0.550142}, function(err, results) {
                         err.should.to.equal(false);
                         results[0].should.to.deep.equal({
-                            "latitude": 47.46653,
-                            "longitude": -0.54994,
-                            "country": "France",
-                            "state": "49, Maine-et-Loire, Pays de la Loire",
-                            "city": "Angers",
-                            "zipcode": "49100",
-                            "streetName": "Rue Chateaugontier",
-                            "streetNumber": "16",
-                            "countryCode": "FR"
+                            latitude: 47.46653,
+                            longitude: -0.54994,
+                            country: 'France',
+                            state: '49, Maine-et-Loire, Pays de la Loire',
+                            city: 'Angers',
+                            zipcode: '49100',
+                            streetName: 'Rue Chateaugontier',
+                            streetNumber: '16',
+                            countryCode: 'FR',
+                            citycode: '49007',
+                            id: '49007_1720_665e82',
+                            type: 'housenumber'
                         });
                         results.raw.should.deep.equal({
                           "licence": "ODbL 1.0",
