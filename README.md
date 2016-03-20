@@ -16,7 +16,7 @@ Node library for geocoding and reverse geocoding. Can be used as a nodejs librar
 ```javascript
 var geocoderProvider = 'google';
 var httpAdapter = 'http';
-// optionnal
+// optional
 var extra = {
     apiKey: 'YOUR_API_KEY', // for Mapquest, OpenCage, Google Premier
     formatter: null         // 'gpx', 'string', ...
