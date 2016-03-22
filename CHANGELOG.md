@@ -198,3 +198,9 @@
 * Opendata France geocoders
 * Google neighboorhod
 * Google fix Substitute character
+
+## 3.9.1
+
+* clean up algol geocoder
+* fix opendata france geocoder
+
