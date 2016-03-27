@@ -28,13 +28,13 @@
     "url": "https://github.com/nchaulet/node-geocoder/issues"
   },
   "dependencies": {
-    "q": "^1.1.2"
+    "bluebird": "3.3.4"
   },
   "devDependencies": {
     "chai": "^1.8.1",
-    "mocha": "^1.14.0",
+    "mocha": "2.4.5",
     "eslint": "^0.24.1",
-    "sinon": "^1.7.3"
+    "sinon": "^1.17.3"
   },
   "eslintConfig": {
     "env": {
