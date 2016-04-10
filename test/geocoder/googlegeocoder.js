@@ -213,6 +213,46 @@
                 });
             });
 
+            it('Should correctly match most specific neighborhood response value', function(done) {
+               var response = { results : [{
+                   address_components : [
+                       { long_name : '350', 'short_name' : '350', 'types' : [ 'street_number' ] },
+                       { long_name : '5th Avenue', short_name : '5th Ave', types : [ 'route' ] },
+                       { long_name : 'Midtown', short_name : 'Midtown', types : [ 'neighborhood', 'political' ] },
+                       { long_name : 'Manhattan', short_name : 'Manhattan', types : [ 'sublocality_level_1', 'sublocality', 'political' ] },
+                       { long_name : 'New York', short_name : 'New York', types : [ 'locality', 'political' ] },
+                       { long_name : 'New York County', short_name : 'New York County', types : [ 'administrative_area_level_2', 'political' ]},
+                       { long_name : 'New York', short_name : 'NY', types : [ 'administrative_area_level_1', 'political' ] },
+                       { long_name : 'United States', short_name : 'US', types : [ 'country', 'political' ] },
+                       { long_name : '10118', short_name : '10118', types : [ 'postal_code' ] }
+                   ],
+                   formatted_address : '350 5th Ave, New York, NY 10118, USA',
+                   geometry : {
+                       location : {
+                           lat : 40.7484799,
+                           lng : -73.9854246
+                       },
+                       location_type : 'ROOFTOP',
+                       viewport : {
+                           northeast : { lat : 40.7498288802915, lng : -73.98407561970849 },
+                           southwest : { lat : 40.7471309197085, lng : -73.98677358029151 }
+                       }
+                   },
+                   place_id : 'ChIJn6wOs6lZwokRLKy1iqRcoKw',
+                   types : [ 'street_address' ]
+               }], status : 'OK' };
+
+               var mock = sinon.mock(mockedHttpAdapter);
+               mock.expects('get').once().callsArgWith(2, false, response);
+               var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+
+               googleAdapter.geocode('350 5th Ave, New York, NY 10118', function(err, results) {
+                   results[0].should.have.deep.property('extra.neighborhood', 'Midtown');
+                   mock.verify();
+                   done();
+                });
+            });
+            
             it('Should handle a not "OK" status', function(done) {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, { status: "OVER_QUERY_LIMIT", error_message: "You have exceeded your rate-limit for this API.", results: [] });
