@@ -1,220 +1,229 @@
-(function() {
-    var chai = require('chai'),
-        should = chai.should(),
-        expect = chai.expect,
-        sinon = require('sinon');
 
-    var GoogleGeocoder = require('../lib/geocoder/googlegeocoder.js');
-    var HereGeocoder = require('../lib/geocoder/heregeocoder.js');
-    var GeocoderFactory = require('../lib/geocoderfactory.js');
-    var DataScienceToolkitGeocoder = require('../lib/geocoder/datasciencetoolkitgeocoder.js');
-    var OpenStreetMapGeocoder = require('../lib/geocoder/openstreetmapgeocoder.js');
+var chai = require('chai'),
+    should = chai.should(),
+    expect = chai.expect,
+    sinon = require('sinon');
 
-    var HttpAdapter  = require('../lib/httpadapter/httpadapter.js'),
-        HttpsAdapter = require('../lib/httpadapter/httpsadapter.js');
+var GoogleGeocoder = require('../lib/geocoder/googlegeocoder.js');
+var HereGeocoder = require('../lib/geocoder/heregeocoder.js');
+var GeocoderFactory = require('../lib/geocoderfactory.js');
+var DataScienceToolkitGeocoder = require('../lib/geocoder/datasciencetoolkitgeocoder.js');
+var OpenStreetMapGeocoder = require('../lib/geocoder/openstreetmapgeocoder.js');
 
-    var GpxFormatter = require('../lib/formatter/gpxformatter.js');
-    var StringFormatter = require('../lib/formatter/stringformatter.js');
+var HttpAdapter  = require('../lib/httpadapter/httpadapter.js'),
+    HttpsAdapter = require('../lib/httpadapter/httpsadapter.js');
 
-    describe('GeocoderFactory', function() {
+var GpxFormatter = require('../lib/formatter/gpxformatter.js');
+var StringFormatter = require('../lib/formatter/stringformatter.js');
 
-        describe('getGeocoder' , function() {
+describe('GeocoderFactory', function() {
 
-            it('called with "google", "https" and extra business key must return google geocoder with http adapter and business key', function() {
-                var geocoder = GeocoderFactory.getGeocoder('google', 'https', {clientId: 'CLIENT_ID', apiKey: 'API_KEY'});
+    describe('getGeocoder' , function() {
 
-                var geocoderAdapter = geocoder._geocoder;
+        it('called with "google", "http" and extra business key must return google geocoder with https adapter and business key', function() {
+            var geocoder = GeocoderFactory.getGeocoder('google', 'https', {clientId: 'CLIENT_ID', apiKey: 'API_KEY'});
 
-                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
-                geocoderAdapter.options.clientId.should.be.equal('CLIENT_ID');
-                geocoderAdapter.options.apiKey.should.be.equal('API_KEY');
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
-            });
+            var geocoderAdapter = geocoder._geocoder;
 
-            it('called with "google", "https" and extra business key and excludePartialMatches must return google geocoder with http adapter and business key and exclude partial matches', function() {
-                var geocoder = GeocoderFactory.getGeocoder('google', 'https', {clientId: 'CLIENT_ID', apiKey: 'API_KEY', excludePartialMatches: true});
+            geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+            geocoderAdapter.options.clientId.should.be.equal('CLIENT_ID');
+            geocoderAdapter.options.apiKey.should.be.equal('API_KEY');
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
+        it('called with "google", and extra business key must return google geocoder with https adapter and business key', function() {
+            var geocoder = GeocoderFactory.getGeocoder({provider: 'google', clientId: 'CLIENT_ID', apiKey: 'API_KEY'});
 
-                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
-                geocoderAdapter.options.clientId.should.be.equal('CLIENT_ID');
-                geocoderAdapter.options.apiKey.should.be.equal('API_KEY');
-                geocoderAdapter.options.excludePartialMatches.should.be.equal(true);
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
-            });
+            var geocoderAdapter = geocoder._geocoder;
 
-            it('called with "google", "http", extra language key and extra region must return google geocoder with http adapter and options language', function() {
-                var geocoder = GeocoderFactory.getGeocoder('google', 'http', {language: 'fr',region:'de'});
+            geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+            geocoderAdapter.options.clientId.should.be.equal('CLIENT_ID');
+            geocoderAdapter.options.apiKey.should.be.equal('API_KEY');
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
+        it('called with "google", "https" and extra business key and excludePartialMatches must return google geocoder with http adapter and business key and exclude partial matches', function() {
+            var geocoder = GeocoderFactory.getGeocoder('google', 'https', {clientId: 'CLIENT_ID', apiKey: 'API_KEY', excludePartialMatches: true});
 
-                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
-                geocoderAdapter.options.language.should.be.equal('fr');
-                geocoderAdapter.options.region.should.be.equal('de');
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
-            });
+            var geocoderAdapter = geocoder._geocoder;
 
-            it('called with "google" and "http" and "gpx" must return google geocoder with http adapter and gpx formatter', function() {
-                var geocoder = GeocoderFactory.getGeocoder('google', 'http', { formatter : 'gpx'});
+            geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+            geocoderAdapter.options.clientId.should.be.equal('CLIENT_ID');
+            geocoderAdapter.options.apiKey.should.be.equal('API_KEY');
+            geocoderAdapter.options.excludePartialMatches.should.be.equal(true);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
-                var formatter = geocoder._formatter;
+        it('called with "google", "http", extra language key and extra region must return google geocoder with http adapter and options language', function() {
+            var geocoder = GeocoderFactory.getGeocoder('google', 'http', {language: 'fr',region:'de'});
 
-                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
-                formatter.should.be.instanceof(GpxFormatter);
-            });
+            var geocoderAdapter = geocoder._geocoder;
 
-            it('called with "google" and "http" and "string" must return google geocoder with http adapter and string formatter', function() {
-                var geocoder = GeocoderFactory.getGeocoder('google', 'http', { formatter : 'string', formatterPattern: 'PATTERN'});
+            geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+            geocoderAdapter.options.language.should.be.equal('fr');
+            geocoderAdapter.options.region.should.be.equal('de');
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
-                var formatter = geocoder._formatter;
+        it('called with "google" and "http" and "gpx" must return google geocoder with http adapter and gpx formatter', function() {
+            var geocoder = GeocoderFactory.getGeocoder('google', 'http', { formatter : 'gpx'});
 
-                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
-                formatter.should.be.instanceof(StringFormatter);
-            });
+            var geocoderAdapter = geocoder._geocoder;
+            var formatter = geocoder._formatter;
 
-            it('called with "google" must return google geocoder with http adapter', function() {
-                var geocoder = GeocoderFactory.getGeocoder('google');
+            geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+            formatter.should.be.instanceof(GpxFormatter);
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
+        it('called with "google" and "http" and "string" must return google geocoder with http adapter and string formatter', function() {
+            var geocoder = GeocoderFactory.getGeocoder('google', 'http', { formatter : 'string', formatterPattern: 'PATTERN'});
 
-                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
-            });
+            var geocoderAdapter = geocoder._geocoder;
+            var formatter = geocoder._formatter;
 
-            it('called with "here", "http" and extra business key must return here geocoder with http adapter and business key', function() {
-                var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE'});
+            geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+            formatter.should.be.instanceof(StringFormatter);
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
+        it('called with "google" must return google geocoder with http adapter', function() {
+            var geocoder = GeocoderFactory.getGeocoder('google');
 
-                geocoderAdapter.should.be.instanceof(HereGeocoder);
-                geocoderAdapter.options.appId.should.be.equal('APP_ID');
-                geocoderAdapter.options.appCode.should.be.equal('APP_CODE');
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
-            });
+            var geocoderAdapter = geocoder._geocoder;
 
-            it('called with "here", "https" and extra business key must return here geocoder with http adapter and business key', function() {
-                var geocoder = GeocoderFactory.getGeocoder('here', 'https', {appId: 'APP_ID', appCode: 'APP_CODE'});
+            geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
+        it('called with "here", "http" and extra business key must return here geocoder with http adapter and business key', function() {
+            var geocoder = GeocoderFactory.getGeocoder({provider: 'here', httpAdapter: 'http', appId: 'APP_ID', appCode: 'APP_CODE'});
 
-                geocoderAdapter.should.be.instanceof(HereGeocoder);
-                geocoderAdapter.options.appId.should.be.equal('APP_ID');
-                geocoderAdapter.options.appCode.should.be.equal('APP_CODE');
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
-            });
+            var geocoderAdapter = geocoder._geocoder;
 
-            it('called with "here" and "http" and language must return here geocoder with http adapter and language', function() {
-                var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', language:'en'});
+            geocoderAdapter.should.be.instanceof(HereGeocoder);
+            geocoderAdapter.options.appId.should.be.equal('APP_ID');
+            geocoderAdapter.options.appCode.should.be.equal('APP_CODE');
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
+        it('called with "here", "https" and extra business key must return here geocoder with http adapter and business key', function() {
+            var geocoder = GeocoderFactory.getGeocoder('here', 'https', {appId: 'APP_ID', appCode: 'APP_CODE'});
 
-                geocoderAdapter.should.be.instanceof(HereGeocoder);
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
-                geocoderAdapter.options.language.should.be.equal('en');
-            });
+            var geocoderAdapter = geocoder._geocoder;
 
-            it('called with "here" and "http" and politicalView must return here geocoder with http adapter and politicalView', function() {
-                var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', politicalView:'GRE'});
+            geocoderAdapter.should.be.instanceof(HereGeocoder);
+            geocoderAdapter.options.appId.should.be.equal('APP_ID');
+            geocoderAdapter.options.appCode.should.be.equal('APP_CODE');
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
+        it('called with "here" and "http" and language must return here geocoder with http adapter and language', function() {
+            var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', language:'en'});
 
-                geocoderAdapter.should.be.instanceof(HereGeocoder);
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
-                geocoderAdapter.options.politicalView.should.be.equal('GRE');
-            });
+            var geocoderAdapter = geocoder._geocoder;
 
-            it('called with "here" and "http" and country must return here geocoder with http adapter and country', function() {
-                var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', country:'FR'});
+            geocoderAdapter.should.be.instanceof(HereGeocoder);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+            geocoderAdapter.options.language.should.be.equal('en');
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
+        it('called with "here" and "http" and politicalView must return here geocoder with http adapter and politicalView', function() {
+            var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', politicalView:'GRE'});
 
-                geocoderAdapter.should.be.instanceof(HereGeocoder);
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
-                geocoderAdapter.options.country.should.be.equal('FR');
-            });
+            var geocoderAdapter = geocoder._geocoder;
 
-            it('called with "here" and "http" and state must return here geocoder with http adapter and state', function() {
-                var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', state:'Île-de-France'});
+            geocoderAdapter.should.be.instanceof(HereGeocoder);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+            geocoderAdapter.options.politicalView.should.be.equal('GRE');
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
+        it('called with "here" and "http" and country must return here geocoder with http adapter and country', function() {
+            var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', country:'FR'});
 
-                geocoderAdapter.should.be.instanceof(HereGeocoder);
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
-                geocoderAdapter.options.state.should.be.equal('Île-de-France');
-            });
+            var geocoderAdapter = geocoder._geocoder;
 
-            it('called with "here" and "http" and "gpx" must return here geocoder with http adapter and gpx formatter', function() {
-                var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', formatter : 'gpx'});
+            geocoderAdapter.should.be.instanceof(HereGeocoder);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+            geocoderAdapter.options.country.should.be.equal('FR');
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
-                var formatter = geocoder._formatter;
+        it('called with "here" and "http" and state must return here geocoder with http adapter and state', function() {
+            var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', state:'Île-de-France'});
 
-                geocoderAdapter.should.be.instanceof(HereGeocoder);
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
-                formatter.should.be.instanceof(GpxFormatter);
-            });
+            var geocoderAdapter = geocoder._geocoder;
 
-            it('called with "here" and "http" and "string" must return here geocoder with http adapter and string formatter', function() {
-                var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', formatter : 'string', formatterPattern: 'PATTERN'});
+            geocoderAdapter.should.be.instanceof(HereGeocoder);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+            geocoderAdapter.options.state.should.be.equal('Île-de-France');
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
-                var formatter = geocoder._formatter;
+        it('called with "here" and "http" and "gpx" must return here geocoder with http adapter and gpx formatter', function() {
+            var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', formatter : 'gpx'});
 
-                geocoderAdapter.should.be.instanceof(HereGeocoder);
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
-                formatter.should.be.instanceof(StringFormatter);
-            });
+            var geocoderAdapter = geocoder._geocoder;
+            var formatter = geocoder._formatter;
 
-            it('called with "datasciencetoolkit" and "http" must return datasciencetoolkit geocoder with http adapter', function() {
-                var geocoder = GeocoderFactory.getGeocoder('datasciencetoolkit', 'http');
+            geocoderAdapter.should.be.instanceof(HereGeocoder);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+            formatter.should.be.instanceof(GpxFormatter);
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
+        it('called with "here" and "http" and "string" must return here geocoder with http adapter and string formatter', function() {
+            var geocoder = GeocoderFactory.getGeocoder('here', 'http', {appId: 'APP_ID', appCode: 'APP_CODE', formatter : 'string', formatterPattern: 'PATTERN'});
 
-                geocoderAdapter.should.be.instanceof(DataScienceToolkitGeocoder);
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
-            });
+            var geocoderAdapter = geocoder._geocoder;
+            var formatter = geocoder._formatter;
 
-            it('called with "datasciencetoolkit" "http" and "host" option must return datasciencetoolkit geocoder with host extra', function() {
-                var geocoder = GeocoderFactory.getGeocoder('datasciencetoolkit', 'http', {'host' : 'raoul.io'});
+            geocoderAdapter.should.be.instanceof(HereGeocoder);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+            formatter.should.be.instanceof(StringFormatter);
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
+        it('called with "datasciencetoolkit" and "http" must return datasciencetoolkit geocoder with http adapter', function() {
+            var geocoder = GeocoderFactory.getGeocoder('datasciencetoolkit', 'http');
 
-                geocoderAdapter.should.be.instanceof(DataScienceToolkitGeocoder);
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
-                geocoderAdapter.options.host.should.be.equal('raoul.io');
-            });
+            var geocoderAdapter = geocoder._geocoder;
 
-            it('called with "openstreetmap" and "http" must return openstreetmap geocoder with http adapter', function() {
-                var geocoder = GeocoderFactory.getGeocoder('openstreetmap', 'http');
+            geocoderAdapter.should.be.instanceof(DataScienceToolkitGeocoder);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+        });
 
-                var geocoderAdapter = geocoder._geocoder;
+        it('called with "datasciencetoolkit" "http" and "host" option must return datasciencetoolkit geocoder with host extra', function() {
+            var geocoder = GeocoderFactory.getGeocoder('datasciencetoolkit', 'http', {'host' : 'raoul.io'});
 
-                geocoderAdapter.should.be.instanceof(OpenStreetMapGeocoder);
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
-            });
+            var geocoderAdapter = geocoder._geocoder;
 
-            it('called with "zaertyazeaze" and "http" must throw an error', function() {
+            geocoderAdapter.should.be.instanceof(DataScienceToolkitGeocoder);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+            geocoderAdapter.options.host.should.be.equal('raoul.io');
+        });
 
-                expect(function() {GeocoderFactory.getGeocoder('zaertyazeaze', 'http');})
-                    .to
-                    .throw(Error, 'No geocoder provider find for : zaertyazeaze');
-            });
+        it('called with "openstreetmap" and "http" must return openstreetmap geocoder with http adapter', function() {
+            var geocoder = GeocoderFactory.getGeocoder('openstreetmap', 'http');
 
-            it('called with "google", "https" and extra timeout must return google geocoder with http adapter and timeout', function() {
-                var timeout = 5 * 1000;
-                var geocoder = GeocoderFactory.getGeocoder('google', 'https', {clientId: 'CLIENT_ID', apiKey: 'API_KEY', timeout: timeout});
+            var geocoderAdapter = geocoder._geocoder;
 
-                var geocoderAdapter = geocoder._geocoder;
+            geocoderAdapter.should.be.instanceof(OpenStreetMapGeocoder);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+        });
 
-                geocoderAdapter.should.be.instanceof(GoogleGeocoder);
-                geocoderAdapter.httpAdapter.options.timeout.should.be.equal(timeout);
-                geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
-            });
+        it('called with "zaertyazeaze" and "http" must throw an error', function() {
+
+            expect(function() {GeocoderFactory.getGeocoder('zaertyazeaze', 'http');})
+                .to
+                .throw(Error, 'No geocoder provider find for : zaertyazeaze');
+        });
+
+        it('called with "google", "https" and extra timeout must return google geocoder with http adapter and timeout', function() {
+            var timeout = 5 * 1000;
+            var geocoder = GeocoderFactory.getGeocoder('google', 'https', {clientId: 'CLIENT_ID', apiKey: 'API_KEY', timeout: timeout});
+
+            var geocoderAdapter = geocoder._geocoder;
+
+            geocoderAdapter.should.be.instanceof(GoogleGeocoder);
+            geocoderAdapter.httpAdapter.options.timeout.should.be.equal(timeout);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
         });
     });
-
-})();
+});
