@@ -20,112 +20,140 @@
 
     <section class="main-content">
       <h1>
-<a id="node-geocoder" class="anchor" href="#node-geocoder" aria-hidden="true"><span class="octicon octicon-link"></span></a>node-geocoder</h1>
+<a id="node-geocoder" class="anchor" href="#node-geocoder" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>node-geocoder</h1>
 
-<p><a href="https://travis-ci.org/nchaulet/node-geocoder"><img src="https://travis-ci.org/nchaulet/node-geocoder.png?branch=master" alt="Build Status"></a></p>
-
-<p><img src="https://david-dm.org/nchaulet/node-geocoder.png" alt="Dependencycy status"></p>
+<p><a href="https://travis-ci.org/nchaulet/node-geocoder"><img src="https://img.shields.io/travis/nchaulet/node-geocoder.svg?style=flat-square" alt="Build Status"></a>
+<img src="https://img.shields.io/david/nchaulet/node-geocoder.svg?style=flat-square" alt="Dependencycy status">
+<a href="https://www.npmjs.com/package/node-geocoder"><img src="https://img.shields.io/npm/v/node-geocoder.svg?style=flat-square" alt="npm version"></a></p>
 
 <p>Node library for geocoding and reverse geocoding. Can be used as a nodejs library</p>
 
 <h2>
-<a id="installation-nodejs-library" class="anchor" href="#installation-nodejs-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation (nodejs library)</h2>
+<a id="installation-nodejs-library" class="anchor" href="#installation-nodejs-library" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation (nodejs library)</h2>
 
 <pre><code>npm install node-geocoder
 </code></pre>
 
 <h2>
-<a id="usage-example" class="anchor" href="#usage-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage example</h2>
+<a id="usage-example" class="anchor" href="#usage-example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage example</h2>
 
-<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> geocoderProvider <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>google<span class="pl-pds">'</span></span>;
-<span class="pl-k">var</span> httpAdapter <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>http<span class="pl-pds">'</span></span>;
-<span class="pl-c">// optionnal</span>
-<span class="pl-k">var</span> extra <span class="pl-k">=</span> {
-    apiKey<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>YOUR_API_KEY<span class="pl-pds">'</span></span>, <span class="pl-c">// for Mapquest, OpenCage, Google Premier</span>
-    formatter<span class="pl-k">:</span> <span class="pl-c1">null</span>         <span class="pl-c">// 'gpx', 'string', ...</span>
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> NodeGeocoder <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>node-geocoder<span class="pl-pds">'</span></span>);
+
+<span class="pl-k">var</span> options <span class="pl-k">=</span> {
+  provider<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>google<span class="pl-pds">'</span></span>,
+
+  <span class="pl-c">// Optionnal depending of the providers</span>
+  httpAdapter<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>https<span class="pl-pds">'</span></span>, <span class="pl-c">// Default</span>
+  apiKey<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>YOUR_API_KEY<span class="pl-pds">'</span></span>, <span class="pl-c">// for Mapquest, OpenCage, Google Premier</span>
+  formatter<span class="pl-k">:</span> <span class="pl-c1">null</span>         <span class="pl-c">// 'gpx', 'string', ...</span>
 };
 
-<span class="pl-k">var</span> geocoder <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>node-geocoder<span class="pl-pds">'</span></span>)(geocoderProvider, httpAdapter, extra);
+<span class="pl-k">var</span> geocoder <span class="pl-k">=</span> <span class="pl-en">NodeGeocoder</span>(options);
 
 <span class="pl-c">// Using callback</span>
-geocoder.<span class="pl-c1">geocode</span>(<span class="pl-s"><span class="pl-pds">'</span>29 champs elysée paris<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">res</span>) {
-    <span class="pl-en">console</span><span class="pl-c1">.log</span>(res);
+<span class="pl-smi">geocoder</span>.<span class="pl-en">geocode</span>(<span class="pl-s"><span class="pl-pds">'</span>29 champs elysée paris<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">res</span>) {
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(res);
 });
 
 <span class="pl-c">// Or using Promise</span>
-geocoder.<span class="pl-c1">geocode</span>(<span class="pl-s"><span class="pl-pds">'</span>29 champs elysée paris<span class="pl-pds">'</span></span>)
-    .<span class="pl-c1">then</span>(<span class="pl-k">function</span>(<span class="pl-smi">res</span>) {
-        <span class="pl-en">console</span><span class="pl-c1">.log</span>(res);
-    })
-    .<span class="pl-c1">catch</span>(<span class="pl-k">function</span>(<span class="pl-smi">err</span>) {
-        <span class="pl-en">console</span><span class="pl-c1">.log</span>(err);
-    });
+<span class="pl-smi">geocoder</span>.<span class="pl-en">geocode</span>(<span class="pl-s"><span class="pl-pds">'</span>29 champs elysée paris<span class="pl-pds">'</span></span>)
+  .<span class="pl-en">then</span>(<span class="pl-k">function</span>(<span class="pl-smi">res</span>) {
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(res);
+  })
+  .<span class="pl-en">catch</span>(<span class="pl-k">function</span>(<span class="pl-smi">err</span>) {
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(err);
+  });
 
 <span class="pl-c">// output :</span>
 [{
-    latitude<span class="pl-k">:</span> <span class="pl-c1">48.8698679</span>,
-    longitude<span class="pl-k">:</span> <span class="pl-c1">2.3072976</span>,
-    country<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>France<span class="pl-pds">'</span></span>,
-    countryCode<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>FR<span class="pl-pds">'</span></span>,
-    city<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Paris<span class="pl-pds">'</span></span>,
-    zipcode<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>75008<span class="pl-pds">'</span></span>,
-    streetName<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Champs-Élysées<span class="pl-pds">'</span></span>,
-    streetNumber<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>29<span class="pl-pds">'</span></span>,
-    administrativeLevels<span class="pl-k">:</span>
-     { level1long<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Île-de-France<span class="pl-pds">'</span></span>,
-       level1short<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>IDF<span class="pl-pds">'</span></span>,
-       level2long<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Paris<span class="pl-pds">'</span></span>,
-       level2short<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>75<span class="pl-pds">'</span></span> }
-}]
+  latitude<span class="pl-k">:</span> <span class="pl-c1">48.8698679</span>,
+  longitude<span class="pl-k">:</span> <span class="pl-c1">2.3072976</span>,
+  country<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>France<span class="pl-pds">'</span></span>,
+  countryCode<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>FR<span class="pl-pds">'</span></span>,
+  city<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Paris<span class="pl-pds">'</span></span>,
+  zipcode<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>75008<span class="pl-pds">'</span></span>,
+  streetName<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Champs-Élysées<span class="pl-pds">'</span></span>,
+  streetNumber<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>29<span class="pl-pds">'</span></span>,
+  administrativeLevels<span class="pl-k">:</span> {
+    level1long<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Île-de-France<span class="pl-pds">'</span></span>,
+    level1short<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>IDF<span class="pl-pds">'</span></span>,
+    level2long<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Paris<span class="pl-pds">'</span></span>,
+    level2short<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>75<span class="pl-pds">'</span></span>
+  },
+  provider<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>google<span class="pl-pds">'</span></span>
+}]</pre></div>
 
-## Advanced usage (only google and here providers)
-geocoder.<span class="pl-c1">geocode</span>({address<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>29 champs elysée<span class="pl-pds">'</span></span>, country<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>France<span class="pl-pds">'</span></span>, zipcode<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>75008<span class="pl-pds">'</span></span>}, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">res</span>) {
-    <span class="pl-en">console</span><span class="pl-c1">.log</span>(res);
+<h2>
+<a id="advanced-usage-only-google-here-mapquest-and-opencage-providers" class="anchor" href="#advanced-usage-only-google-here-mapquest-and-opencage-providers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Advanced usage (only google, here, mapquest, and opencage providers)</h2>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">geocoder</span>.<span class="pl-en">geocode</span>({address<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>29 champs elysée<span class="pl-pds">'</span></span>, country<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>France<span class="pl-pds">'</span></span>, zipcode<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>75008<span class="pl-pds">'</span></span>}, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">res</span>) {
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(res);
+});
+
+<span class="pl-c">// OpenCage advanced usage example</span>
+<span class="pl-smi">geocoder</span>.<span class="pl-en">geocode</span>({address<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>29 champs elysée<span class="pl-pds">'</span></span>, countryCode<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>fr<span class="pl-pds">'</span></span>, minConfidence<span class="pl-k">:</span> <span class="pl-c1">0.5</span>, limit<span class="pl-k">:</span> <span class="pl-c1">5</span>}, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">res</span>) {
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(res);
 });
 
 <span class="pl-c">// Reverse example</span>
 
 <span class="pl-c">// Using callback</span>
-geocoder.<span class="pl-c1">reverse</span>({lat<span class="pl-k">:</span><span class="pl-c1">45.767</span>, lon<span class="pl-k">:</span><span class="pl-c1">4.833</span>}, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">res</span>) {
-    <span class="pl-en">console</span><span class="pl-c1">.log</span>(res);
+<span class="pl-smi">geocoder</span>.<span class="pl-c1">reverse</span>({lat<span class="pl-k">:</span><span class="pl-c1">45.767</span>, lon<span class="pl-k">:</span><span class="pl-c1">4.833</span>}, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">res</span>) {
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(res);
 });
 
 <span class="pl-c">// Or using Promise</span>
-geocoder.<span class="pl-c1">reverse</span>({lat<span class="pl-k">:</span><span class="pl-c1">45.767</span>, lon<span class="pl-k">:</span><span class="pl-c1">4.833</span>})
-    .<span class="pl-c1">then</span>(<span class="pl-k">function</span>(<span class="pl-smi">res</span>) {
-        <span class="pl-en">console</span><span class="pl-c1">.log</span>(res);
-    })
-    .<span class="pl-c1">catch</span>(<span class="pl-k">function</span>(<span class="pl-smi">err</span>) {
-        <span class="pl-en">console</span><span class="pl-c1">.log</span>(err);
-    });
+<span class="pl-smi">geocoder</span>.<span class="pl-c1">reverse</span>({lat<span class="pl-k">:</span><span class="pl-c1">45.767</span>, lon<span class="pl-k">:</span><span class="pl-c1">4.833</span>})
+  .<span class="pl-en">then</span>(<span class="pl-k">function</span>(<span class="pl-smi">res</span>) {
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(res);
+  })
+  .<span class="pl-en">catch</span>(<span class="pl-k">function</span>(<span class="pl-smi">err</span>) {
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(err);
+  });
 
 <span class="pl-c">// Batch geocode</span>
 
-geocoder.<span class="pl-c1">batchGeocode</span>([<span class="pl-s"><span class="pl-pds">'</span>13 rue sainte catherine<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>another adress<span class="pl-pds">'</span></span>], <span class="pl-k">function</span> (<span class="pl-smi">results</span>) {
-    <span class="pl-c">// Return an array of type {error: false, value: []}</span>
-    <span class="pl-en">console</span><span class="pl-c1">.log</span>(results) ;
+<span class="pl-smi">geocoder</span>.<span class="pl-en">batchGeocode</span>([<span class="pl-s"><span class="pl-pds">'</span>13 rue sainte catherine<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>another adress<span class="pl-pds">'</span></span>], <span class="pl-k">function</span> (<span class="pl-smi">results</span>) {
+  <span class="pl-c">// Return an array of type {error: false, value: []}</span>
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(results) ;
 });
-</pre></div>
+
+<span class="pl-c">// Set specific http request headers:</span>
+<span class="pl-k">var</span> HttpsAdapter <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>node-geocoder/lib/httpadapter/httpsadapter.js<span class="pl-pds">'</span></span>)
+<span class="pl-k">var</span> httpAdapter <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">HttpsAdapter</span>(<span class="pl-c1">null</span>, {
+  headers<span class="pl-k">:</span> {
+    <span class="pl-s"><span class="pl-pds">'</span>user-agent<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>My application &lt;email@domain.com&gt;<span class="pl-pds">'</span></span>,
+    <span class="pl-s"><span class="pl-pds">'</span>X-Specific-Header<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Specific value<span class="pl-pds">'</span></span>
+  }
+});
+
+<span class="pl-k">var</span> geocoder <span class="pl-k">=</span> <span class="pl-en">NodeGeocoder</span>({
+  provider<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>google<span class="pl-pds">'</span></span>,
+  httpAdapter<span class="pl-k">:</span> httpAdapter
+});</pre></div>
 
 <h2>
-<a id="geocoder-provider" class="anchor" href="#geocoder-provider" aria-hidden="true"><span class="octicon octicon-link"></span></a>Geocoder Provider</h2>
+<a id="geocoder-provider" class="anchor" href="#geocoder-provider" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Geocoder Provider</h2>
 
 <ul>
 <li>
-<code>google</code> : GoogleGeocoder. Supports address geocoding and reverse geocoding. Use <code>extra.clientId</code>and <code>extra.apiKey</code>(privateKey) for business licence. You can also use <code>extra.language</code> and <code>extra.region</code> to specify language and region, respectively. Note that 'https' is required when using an apiKey</li>
+<code>google</code> : GoogleGeocoder. Supports address geocoding and reverse geocoding. Use <code>options.clientId</code>and <code>options.apiKey</code>(privateKey) for business licence. You can also use <code>options.language</code> and <code>options.region</code> to specify language and region, respectively. Note that 'https' is required when using an apiKey</li>
 <li>
-<code>here</code> : HereGeocoder. Supports address geocoding and reverse geocoding. You must specify <code>extra.appId</code> and <code>extra.appCode</code> with your license keys. You can also use <code>extra.language</code>, <code>extra.politicalView</code> (<a href="https://developer.here.com/rest-apis/documentation/geocoder/topics/political-views.html">read about political views here</a>), <code>extra.country</code>, and <code>extra.state</code>.</li>
+<code>here</code> : HereGeocoder. Supports address geocoding and reverse geocoding. You must specify <code>options.appId</code> and <code>options.appCode</code> with your license keys. You can also use <code>options.language</code>, <code>options.politicalView</code> (<a href="https://developer.here.com/rest-apis/documentation/geocoder/topics/political-views.html">read about political views here</a>), <code>options.country</code>, and <code>options.state</code>.</li>
 <li>
 <code>freegeoip</code> : FreegeoipGeocoder. Supports IP geocoding</li>
 <li>
-<code>datasciencetoolkit</code> : DataScienceToolkitGeocoder. Supports IPv4 geocoding and address geocoding. Use <code>extra.host</code> to specify a local instance</li>
+<code>datasciencetoolkit</code> : DataScienceToolkitGeocoder. Supports IPv4 geocoding and address geocoding. Use <code>options.host</code> to specify a local instance</li>
 <li>
-<code>openstreetmap</code> : OpenStreetMapGeocoder. Supports address geocoding and reverse geocoding. You can use <code>extra.language</code> and <code>extra.email</code> to specify a language and a contact email address.
+<code>openstreetmap</code> : OpenStreetMapGeocoder. Supports address geocoding and reverse geocoding. You can use <code>options.language</code> and <code>options.email</code> to specify a language and a contact email address.
 
 <ul>
 <li>For <code>geocode</code>, you can use an object as value, specifying one or several parameters from <a href="https://wiki.openstreetmap.org/wiki/Nominatim#Parameters">https://wiki.openstreetmap.org/wiki/Nominatim#Parameters</a>
 </li>
 <li>For <code>reverse</code>, you can use additional parameters from <a href="https://wiki.openstreetmap.org/wiki/Nominatim#Parameters_2">https://wiki.openstreetmap.org/wiki/Nominatim#Parameters_2</a>
+</li>
+<li>You should specify a specific <code>user-agent</code> or <code>referrer</code> header field as required by
+<a href="https://wiki.openstreetmap.org/wiki/Nominatim_usage_policy">https://wiki.openstreetmap.org/wiki/Nominatim_usage_policy</a>
 </li>
 </ul>
 </li>
@@ -136,40 +164,49 @@ geocoder.<span class="pl-c1">batchGeocode</span>([<span class="pl-s"><span class
 <li>
 <code>agol</code> : ArcGis Online Geocoding service. Supports geocoding and reverse. Requires a client_id &amp; client_secret and 'https' http adapter</li>
 <li>
-<code>tomtom</code>: TomTomGeocoder. Supports address geocoding. You need to specify <code>extra.apiKey</code>
+<code>tomtom</code>: TomTomGeocoder. Supports address geocoding. You need to specify <code>options.apiKey</code>
 </li>
 <li>
-<code>nominatimmapquest</code>: Same geocoder as <code>openstreetmap</code>, but queries the MapQuest servers.</li>
-<li>
-<code>opencage</code>: OpenCage Geocoder. Uses multiple open sources. Supports address and reverse geocoding. You need to specify <code>extra.apiKey</code>
+<code>nominatimmapquest</code>: Same geocoder as <code>openstreetmap</code>, but queries the MapQuest servers. You need to specify <code>options.apiKey</code>
 </li>
 <li>
-<code>smartyStreet</code>: Smarty street geocoder (US only), you need to specify <code>extra.auth_id</code> and <code>extra.auth_token</code>
+<code>opencage</code>: OpenCage Geocoder. Uses multiple open sources. Supports address and reverse geocoding. You need to specify <code>options.apiKey</code>
+</li>
+<li>
+<code>smartyStreet</code>: Smarty street geocoder (US only), you need to specify <code>options.auth_id</code> and <code>options.auth_token</code>
 </li>
 <li>
 <code>geocodio</code>: Geocodio, Supports address geocoding and reverse geocoding (US only)</li>
 <li>
-<code>yandex</code>: Yandex support address geocoding, you can use <code>extra.language</code> to specify language</li>
+<code>yandex</code>: Yandex support address geocoding, you can use <code>options.language</code> to specify language</li>
+<li>
+<code>teleport</code>: Teleport supports city and urban area forward and reverse geocoding; for more information, see <a href="https://developers.teleport.org/api/">Teleport API documentation</a>
+</li>
+<li>
+<code>opendata france</code>: OpendataFranceGeocoder supports forward and reverse geocoding in France; for more information, see <a href="https://adresse.data.gouv.fr/api/">OpendataFrance API documentation</a>
+</li>
 </ul>
 
 <h2>
-<a id="http-adapter" class="anchor" href="#http-adapter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Http adapter</h2>
+<a id="http-adapter" class="anchor" href="#http-adapter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Http adapter</h2>
 
 <ul>
 <li>
-<code>http</code>: This adapter uses the Http nodejs library (default)</li>
+<code>https</code>: This adapter uses the Https nodejs library (default)</li>
 <li>
-<code>https</code>: This adapter uses the Https nodejs library</li>
+<code>http</code>: This adapter uses the Http nodejs library</li>
 </ul>
 
+<p>You can specify request timeout using paramater <code>options.timeout</code></p>
+
 <h2>
-<a id="formatter" class="anchor" href="#formatter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Formatter</h2>
+<a id="formatter" class="anchor" href="#formatter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Formatter</h2>
 
 <ul>
 <li>
 <code>gpx</code>    : format result using GPX format</li>
 <li>
-<code>string</code> : format result to an String array (you need to specify <code>extra.formatterPattern</code> key)
+<code>string</code> : format result to an String array (you need to specify <code>options.formatterPattern</code> key)
 
 <ul>
 <li>
@@ -191,31 +228,31 @@ geocoder.<span class="pl-c1">batchGeocode</span>([<span class="pl-s"><span class
 </ul>
 
 <h2>
-<a id="more" class="anchor" href="#more" aria-hidden="true"><span class="octicon octicon-link"></span></a>More</h2>
+<a id="more" class="anchor" href="#more" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>More</h2>
 
 <h3>
-<a id="extra" class="anchor" href="#extra" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extra</h3>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>options</h3>
 
 <p><a href="https://github.com/nchaulet/node-geocoder-cli"><code>node-geocoder-cli</code></a> You can use node-geocoder-cli to geocode in shell</p>
 
 <h3>
-<a id="extending-node-geocoder" class="anchor" href="#extending-node-geocoder" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extending node geocoder</h3>
+<a id="extending-node-geocoder" class="anchor" href="#extending-node-geocoder" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Extending node geocoder</h3>
 
 <p>You can add new geocoders by implementing the two methods <code>geocode</code> and <code>reverse</code>:</p>
 
-<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> geocoder <span class="pl-k">=</span> {
-    <span class="pl-en">geocode</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">value</span>, <span class="pl-smi">callback</span>) { ... },
-    <span class="pl-en">reverse</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">query</span>, <span class="pl-smi">callback</span>) { <span class="pl-k">var</span> lat <span class="pl-k">=</span> query.<span class="pl-c1">lat</span>; <span class="pl-k">var</span> lon <span class="pl-k">=</span> query.<span class="pl-c1">lon</span>; ... }
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> geocoder <span class="pl-k">=</span> {
+    <span class="pl-en">geocode</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">value</span>, <span class="pl-smi">callback</span>) { <span class="pl-k">...</span> },
+    <span class="pl-en">reverse</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">query</span>, <span class="pl-smi">callback</span>) { <span class="pl-k">var</span> lat <span class="pl-k">=</span> <span class="pl-smi">query</span>.<span class="pl-smi">lat</span>; <span class="pl-k">var</span> lon <span class="pl-k">=</span> <span class="pl-smi">query</span>.<span class="pl-smi">lon</span>; <span class="pl-k">...</span> }
 }</pre></div>
 
 <p>You can also add formatter implementing the following interface</p>
 
-<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> formatter <span class="pl-k">=</span> {
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> formatter <span class="pl-k">=</span> {
     <span class="pl-en">format</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">data</span>) { <span class="pl-k">return</span> formattedData; },
 }</pre></div>
 
 <h3>
-<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h3>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h3>
 
 <p>You can improve this project by adding new geocoders or http adapters.</p>
 
