@@ -56,7 +56,8 @@ geocoder.geocode('29 champs elysée paris')
     level1short: 'IDF',
     level2long: 'Paris',
     level2short: '75'
-  }
+  },
+  provider: 'google'
 }]
 ```
 
