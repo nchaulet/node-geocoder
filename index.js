@@ -1,7 +1,7 @@
-(function() {
-	var GeocoderFactory = require('./lib/geocoderfactory.js');
+'use strict';
 
-    var Exports = GeocoderFactory.getGeocoder.bind(GeocoderFactory);
+var GeocoderFactory = require('./lib/geocoderfactory.js');
 
-	module.exports =  Exports;
-})();
+var Exports = GeocoderFactory.getGeocoder.bind(GeocoderFactory);
+
+module.exports =  Exports;
