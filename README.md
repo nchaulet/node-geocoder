@@ -61,7 +61,7 @@ geocoder.geocode('29 champs elysée paris')
 }]
 ```
 
-## Advanced usage (only google, here, mapquest, and opencage providers)
+## Advanced usage (only google, here, mapquest, locationiq, and opencage providers)
 
 ```javascript
 geocoder.geocode({address: '29 champs elysée', country: 'France', zipcode: '75008'}, function(err, res) {
@@ -122,6 +122,10 @@ var geocoder = NodeGeocoder({
   * For `reverse`, you can use additional parameters from https://wiki.openstreetmap.org/wiki/Nominatim#Parameters_2
   * You should specify a specific `user-agent` or `referrer` header field as required by
   https://wiki.openstreetmap.org/wiki/Nominatim_usage_policy
+* `locationiq` : LocationIQGeocoder. Supports address geocoding and reverse geocoding just like openstreetmap but does require only a locationiq api key to be set.
+  * For `geocode` you can use simple `q` parameter or an object containing th edifferent parameters defined here: http://locationiq.org/#docs
+  * For `reverse`, you can pass over `{lat, lon}` and additional parameters defined in http://locationiq.org/#docs
+  * No need to specify referer or email addresses, just locationiq api key, note that there are rate limits!
 * `mapquest` : MapQuestGeocoder. Supports address geocoding and reverse geocoding. Needs an apiKey
 * `openmapquest` : Open MapQuestGeocoder (based on OpenStreetMapGeocoder). Supports address geocoding and reverse geocoding. Needs an apiKey
 * `agol` : ArcGis Online Geocoding service. Supports geocoding and reverse. Requires a client_id & client_secret and 'https' http adapter

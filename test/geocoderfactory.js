@@ -9,6 +9,7 @@ var HereGeocoder = require('../lib/geocoder/heregeocoder.js');
 var GeocoderFactory = require('../lib/geocoderfactory.js');
 var DataScienceToolkitGeocoder = require('../lib/geocoder/datasciencetoolkitgeocoder.js');
 var OpenStreetMapGeocoder = require('../lib/geocoder/openstreetmapgeocoder.js');
+var LocationIQGeocoder = require('../lib/geocoder/locationiqgeocoder.js');
 
 var HttpAdapter  = require('../lib/httpadapter/httpadapter.js'),
     HttpsAdapter = require('../lib/httpadapter/httpsadapter.js');
@@ -205,6 +206,15 @@ describe('GeocoderFactory', function() {
             var geocoderAdapter = geocoder._geocoder;
 
             geocoderAdapter.should.be.instanceof(OpenStreetMapGeocoder);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
+        });
+
+        it('called with "locationiq" and "http" must return locationiq geocoder with http adapter', function() {
+            var geocoder = GeocoderFactory.getGeocoder('locationiq', 'http', {apiKey: 'API_KEY'});
+
+            var geocoderAdapter = geocoder._geocoder;
+
+            geocoderAdapter.should.be.instanceof(LocationIQGeocoder, 'api-key');
             geocoderAdapter.httpAdapter.should.be.instanceof(HttpAdapter);
         });
 
