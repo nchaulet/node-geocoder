@@ -204,3 +204,7 @@
 * clean up algol geocoder
 * fix opendata france geocoder
 
+## 3.13.0
+
+* add locationIQ geocoder
+
