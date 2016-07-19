@@ -91,7 +91,7 @@ geocoder.reverse({lat:45.767, lon:4.833})
 
 // Batch geocode
 
-geocoder.batchGeocode(['13 rue sainte catherine', 'another adress'], function (results) {
+geocoder.batchGeocode(['13 rue sainte catherine', 'another adress'], function (err, results) {
   // Return an array of type {error: false, value: []}
   console.log(results) ;
 });
