@@ -3,7 +3,8 @@
     var chai = require('chai'),
         should = chai.should(),
         expect = chai.expect,
-        sinon = require('sinon');
+        sinon = require('sinon'),
+        nock = require('nock');
 
     var HttpAdapter = require('../../lib/httpadapter/httpadapter.js');
     var HttpError = require('../../lib/error/httperror.js');
@@ -92,6 +93,38 @@
 
                   done();
                 });
+            });
+
+            it('get must return error with raw response body', function(done){
+
+                var responseBody = {
+                    "error_message" : "Invalid request. Missing the 'address', 'bounds', 'components', 'latlng' or 'place_id' parameter.",
+                    "results" : [],
+                    "status" : "INVALID_REQUEST"
+                };
+
+                // mock request call
+                nock('http://some.apis.com:80')
+                    .get('/geocode')
+                    .query({address: ''})
+                    .reply(400, responseBody);
+
+
+                var httpAdapter = new HttpAdapter(null);
+
+                httpAdapter.get('https://some.apis.com/geocode', {address: ''}, function(err, result) {
+
+                    expect(err).to.not.be.a('null');
+                    expect(err).to.hasOwnProperty('message');
+                    expect(err.message).to.be.equal('Response status code is 400');
+                    expect(result).to.haveOwnProperty("error_message");
+                    expect(result).to.haveOwnProperty("results");
+                    expect(result).to.haveOwnProperty("status");
+                    expect(result.status).to.be.equal("INVALID_REQUEST");
+
+                    done();
+                });
+
             });
         });
 

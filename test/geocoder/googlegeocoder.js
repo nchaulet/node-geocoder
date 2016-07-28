@@ -252,7 +252,7 @@
                    done();
                 });
             });
-            
+
             it('Should handle a not "OK" status', function(done) {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, { status: "OVER_QUERY_LIMIT", error_message: "You have exceeded your rate-limit for this API.", results: [] });
@@ -575,6 +575,25 @@
 
                 googleAdapter.reverse({lat:40.714232,lon:-73.9612889}, function(err, results) {
                     err.message.should.to.equal("Status is INVALID_REQUEST.");
+                    mock.verify();
+                    done();
+                });
+            });
+
+            it('Should handle error from httpAdapter with result from http call', function(done) {
+                var mock = sinon.mock(mockedHttpAdapter);
+                var error = new Error('An error from Google API with status code 400 or 500.');
+                mock.expects('get').once().callsArgWith(2, error, { status: "INVALID_REQUEST", results: [] });
+
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+
+                googleAdapter.reverse({lat:40.714232,lon:-73.9612889}, function(err, results) {
+                    err.message.should.to.equal("An error from Google API with status code 400 or 500.");
+                    expect(err).to.haveOwnProperty('raw');
+                    expect(err.raw.status).to.be.equal('INVALID_REQUEST');
+                    expect(results).to.hasOwnProperty('raw');
+                    expect(results.raw.status).to.be.equal('INVALID_REQUEST');
+
                     mock.verify();
                     done();
                 });
