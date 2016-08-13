@@ -62,6 +62,23 @@
 
             });
 
+            it('Should accept `language` and `region` as options', function() {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {
+                    address: "1 champs élysée Paris",
+                    language: "ru-RU",
+                    region: ".de",
+                    components: null,
+                    sensor: false
+                }).once().returns({then: function() {}});
+
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, { language: 'fr', region: '.ru' });
+
+                googleAdapter.geocode({ address: '1 champs élysée Paris', language: 'ru-RU', region: '.de' });
+
+                mock.verify();
+            });
+
             it('Should call httpAdapter get method', function() {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {
@@ -552,6 +569,22 @@
                         mock.verify();
                         done();
                 });
+            });
+
+            it('Should accept `language` and `region` as options', function() {
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {
+                    latlng: "40.714232,-73.9612889",
+                    language: "ru-RU",
+                    region: ".de",
+                    sensor: false
+                }).once().returns({then: function() {}});
+
+                var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, { language: 'fr', region: '.ru' });
+
+                googleAdapter.reverse({ lat:40.714232, lon:-73.9612889, language: 'ru-RU', region: '.de' });
+
+                mock.verify();
             });
 
             it('Should handle a not "OK" status', function(done) {
