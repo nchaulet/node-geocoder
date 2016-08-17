@@ -208,3 +208,6 @@
 
 * add locationIQ geocoder
 
+## 3.14.0
+
+* support language, region as parameter of google geocoder
