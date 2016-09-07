@@ -211,3 +211,7 @@
 ## 3.14.0
 
 * support language, region as parameter of google geocoder
+
+## 3.15.0
+
+* supports request-promise as an adapter
