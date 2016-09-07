@@ -28,7 +28,9 @@
     "url": "https://github.com/nchaulet/node-geocoder/issues"
   },
   "dependencies": {
-    "bluebird": "3.3.4"
+    "bluebird": "3.3.4",
+    "request": "^2.74.0",
+    "request-promise": "^4.1.1"
   },
   "devDependencies": {
     "chai": "^1.8.1",
