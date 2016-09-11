@@ -188,4 +188,4 @@ You can improve this project by adding new geocoders or http adapters.
 
 To run tests just `npm test`.
 
-To check code style install `jshint` and just run `jshint lib test`.
+To check code style just run `npm run lint`.
