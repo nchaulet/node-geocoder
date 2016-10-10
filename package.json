@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --check-leaks",
-    "lint": "eslint lib"
+    "lint": "eslint lib",
+    "ci": "npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
