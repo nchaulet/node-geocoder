@@ -35,8 +35,8 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^0.24.1",
-    "mocha": "^3.0.2",
+    "eslint": "^3.11.0",
+    "mocha": "^3.2.0",
     "sinon": "^1.17.3"
   },
   "eslintConfig": {
@@ -56,7 +56,8 @@
       "no-multi-spaces": 0,
       "eqeqeq": 0,
       "key-spacing": 0,
-      "comma-spacing": 0
+      "comma-spacing": 0,
+      "no-unreachable": 1
     }
   }
 }
