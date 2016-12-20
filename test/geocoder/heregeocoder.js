@@ -94,7 +94,7 @@
 
             it('Should call httpAdapter get method with politicalView if specified', function() {
                 var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').withArgs('https://geocoder.api.here.com/6.2/geocode.json', {
+                mock.expects('get').withArgs('https://geocoder.cit.api.here.com/6.2/geocode.json', {
                     searchtext: "1 champs élysée Paris",
                     politicalview: "GRE",
                     app_code: "APP_CODE",
@@ -112,7 +112,7 @@
 
             it('Should call httpAdapter get method with country if specified', function() {
                 var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').withArgs('https://geocoder.api.here.com/6.2/geocode.json', {
+                mock.expects('get').withArgs('https://geocoder.cit.api.here.com/6.2/geocode.json', {
                     searchtext: "1 champs élysée Paris",
                     country: "FR",
                     app_code: "APP_CODE",
@@ -130,7 +130,7 @@
 
             it('Should call httpAdapter get method with state if specified', function() {
                 var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').withArgs('https://geocoder.api.here.com/6.2/geocode.json', {
+                mock.expects('get').withArgs('https://geocoder.cit.api.here.com/6.2/geocode.json', {
                     searchtext: "1 champs élysée Paris",
                     state: "Île-de-France",
                     app_code: "APP_CODE",
@@ -148,7 +148,7 @@
 
             it('Should call httpAdapter get method with components if called with object', function() {
                 var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').withArgs('https://geocoder.api.here.com/6.2/geocode.json', {
+                mock.expects('get').withArgs('https://geocoder.cit.api.here.com/6.2/geocode.json', {
                     searchtext: "1 champs élysée Paris",
                     country: "FR",
                     postalcode: "75008",
@@ -171,7 +171,7 @@
 
             it('Should call httpAdapter get method without default state if called with object containing country', function() {
                 var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').withArgs('https://geocoder.api.here.com/6.2/geocode.json', {
+                mock.expects('get').withArgs('https://geocoder.cit.api.here.com/6.2/geocode.json', {
                     searchtext: "Kaiserswerther Str 10, Berlin",
                     country: "DE",
                     app_code: "APP_CODE",
