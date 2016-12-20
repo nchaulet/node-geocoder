@@ -59,7 +59,7 @@
 
             it('Should call httpAdapter get method', function() {
                 var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').withArgs('https://geocoder.api.here.com/6.2/geocode.json', {
+                mock.expects('get').withArgs('https://geocoder.cit.api.here.com/6.2/geocode.json', {
                     searchtext: "1 champs élysée Paris",
                     app_code: "APP_CODE",
                     app_id: "APP_ID",
@@ -76,7 +76,7 @@
 
             it('Should call httpAdapter get method with language if specified', function() {
                 var mock = sinon.mock(mockedHttpAdapter);
-                mock.expects('get').withArgs('https://geocoder.api.here.com/6.2/geocode.json', {
+                mock.expects('get').withArgs('https://geocoder.cit.api.here.com/6.2/geocode.json', {
                     searchtext: "1 champs élysée Paris",
                     language: "en",
                     app_code: "APP_CODE",
