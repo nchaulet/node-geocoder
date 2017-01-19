@@ -136,7 +136,7 @@ var geocoder = NodeGeocoder({
 * `geocodio`: Geocodio, Supports address geocoding and reverse geocoding (US only)
 * `yandex`: Yandex support address geocoding, you can use `options.language` to specify language
 * `teleport`: Teleport supports city and urban area forward and reverse geocoding; for more information, see [Teleport API documentation](https://developers.teleport.org/api/)
-* `opendata france`: OpendataFranceGeocoder supports forward and reverse geocoding in France; for more information, see [OpendataFrance API documentation](https://adresse.data.gouv.fr/api/)
+* `opendatafrance`: OpendataFranceGeocoder supports forward and reverse geocoding in France; for more information, see [OpendataFrance API documentation](https://adresse.data.gouv.fr/api/)
 
 ## Http adapter
 
