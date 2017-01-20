@@ -571,18 +571,25 @@ describe('GoogleGeocoder', function() {
       });
     });
 
-    it('Should accept `language` and `region` as options', function() {
+    it('Should accept `language`, `result_type` and `location_type` as options', function() {
       var mock = sinon.mock(mockedHttpAdapter);
       mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {
         latlng: "40.714232,-73.9612889",
         language: "ru-RU",
-        region: ".de",
-        sensor: false
+        sensor: false,
+        result_type: 'country',
+        location_type: 'ROOFTOP',
       }).once().returns({then: function() {}});
 
-      var googleAdapter = new GoogleGeocoder(mockedHttpAdapter, { language: 'fr', region: '.ru' });
+      var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
 
-      googleAdapter.reverse({ lat:40.714232, lon:-73.9612889, language: 'ru-RU', region: '.de' });
+      googleAdapter.reverse({
+        lat: 40.714232,
+        lon: -73.9612889,
+        language: 'ru-RU',
+        result_type: 'country',
+        location_type: 'ROOFTOP',
+      });
 
       mock.verify();
     });
