@@ -215,3 +215,7 @@
 ## 3.15.0
 
 * supports request-promise as an adapter
+
+## 3.16.0
+
+* supports result_type and location_type for google geocoder
