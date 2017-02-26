@@ -160,7 +160,11 @@ You can specify request timeout using paramater `options.timeout`
 
 ## More
 
-### options
+### Playground
+
+You can try node-geocoder here http://node-geocoder.herokuapp.com/
+
+### Command line tools
 
 [`node-geocoder-cli`](https://github.com/nchaulet/node-geocoder-cli) You can use node-geocoder-cli to geocode in shell
 
