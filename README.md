@@ -115,6 +115,7 @@ var geocoder = NodeGeocoder({
 
 * `google` : GoogleGeocoder. Supports address geocoding and reverse geocoding. Use `options.clientId`and `options.apiKey`(privateKey) for business licence. You can also use `options.language` and `options.region` to specify language and region, respectively. Note that 'https' is required when using an apiKey
 * `here` : HereGeocoder. Supports address geocoding and reverse geocoding. You must specify `options.appId` and `options.appCode` with your license keys. You can also use `options.language`, `options.politicalView` ([read about political views here](https://developer.here.com/rest-apis/documentation/geocoder/topics/political-views.html)), `options.country`, and `options.state`.
+* `here with suggestions`: HereGeocoderWithSuggestions. The here geocoder with suggestions to a given search term.  
 * `freegeoip` : FreegeoipGeocoder. Supports IP geocoding
 * `datasciencetoolkit` : DataScienceToolkitGeocoder. Supports IPv4 geocoding and address geocoding. Use `options.host` to specify a local instance
 * `openstreetmap` : OpenStreetMapGeocoder. Supports address geocoding and reverse geocoding. You can use `options.language` and `options.email` to specify a language and a contact email address.
