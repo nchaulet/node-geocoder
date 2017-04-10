@@ -3,6 +3,9 @@
   "version": "3.16.0",
   "description": "Node Geocoder, node geocoding library, supports google maps, mapquest, open street map, tom tom, promise",
   "main": "index.js",
+  "browser": {
+    "net": "net-browserify"
+  },
   "scripts": {
     "test": "mocha --check-leaks",
     "lint": "eslint lib",
@@ -30,6 +33,7 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
+    "net-browserify": "^0.2.4",
     "request": "^2.74.0",
     "request-promise": "^4.1.1"
   },
