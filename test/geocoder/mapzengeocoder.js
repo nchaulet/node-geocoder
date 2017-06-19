@@ -56,33 +56,6 @@
 
             });
 
-            it('Should return a geocoded address', function(done) {
-
-                var mapzenAdapter = new MapzenGeocoder(new HttpAdapter(), 'API_KEY');
-
-                mapzenAdapter.geocode('2600 Clifton Ave, Cincinnati, OH 45220', function(err, results) {
-                    err.should.to.equal(false);
-
-                    results[0].should.to.deep.equal({
-                        "latitude": 39.12968,
-                        "longitude": -84.52065,
-                        "country": "United States",
-						            "state": "Ohio",
-                        "city": "Cincinnati",
-                        "zipcode": null,
-                        "streetName": "Clifton Avenue",
-                        "streetNumber": "2600",
-                        "countryCode": "USA",
-                        "extra": {
-                          "confidence": 0.7000000000000001
-                        }
-                    });
-
-                    done();
-                });
-
-            });
-
         });
 
         describe('#reverse' , function() {
