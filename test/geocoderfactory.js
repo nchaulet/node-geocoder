@@ -10,6 +10,7 @@ var GeocoderFactory = require('../lib/geocoderfactory.js');
 var DataScienceToolkitGeocoder = require('../lib/geocoder/datasciencetoolkitgeocoder.js');
 var OpenStreetMapGeocoder = require('../lib/geocoder/openstreetmapgeocoder.js');
 var LocationIQGeocoder = require('../lib/geocoder/locationiqgeocoder.js');
+var PickPointGeocoder = require('../lib/geocoder/pickpointgeocoder.js');
 
 var HttpAdapter  = require('../lib/httpadapter/httpadapter.js'),
     HttpsAdapter = require('../lib/httpadapter/httpsadapter.js');
@@ -233,6 +234,15 @@ describe('GeocoderFactory', function() {
 
             geocoderAdapter.should.be.instanceof(GoogleGeocoder);
             geocoderAdapter.httpAdapter.options.timeout.should.be.equal(timeout);
+            geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
+        });
+
+        it('called with "pickpoint", "https" and API key must return pickpoint geocoder with https adapter', function() {
+            var geocoder = GeocoderFactory.getGeocoder('pickpoint', 'https', {apiKey: 'API_KEY'});
+
+            var geocoderAdapter = geocoder._geocoder;
+
+            geocoderAdapter.should.be.instanceof(PickPointGeocoder);
             geocoderAdapter.httpAdapter.should.be.instanceof(HttpsAdapter);
         });
     });
