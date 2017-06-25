@@ -223,3 +223,7 @@
 ## 3.17.0
 
 * supports mapzen
+
+## 3.18.0
+
+* Add PickPoint geocoder
