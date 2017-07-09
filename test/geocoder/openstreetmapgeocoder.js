@@ -108,7 +108,8 @@
                         "zipcode": "B72 1LH",
                         "streetName": "Pilkington Avenue",
                         "streetNumber": "135",
-                        "countryCode": "GB"
+                        "countryCode": "GB",
+                        "neighbourhood": ""
                     });
 
                     results.raw.should.deep.equal([{
@@ -166,7 +167,8 @@
                             "state": "\u00cele-de-France",
                             "country": "France",
                             "postcode": "75008",
-                            "country_code": "fr"
+                            "country_code": "fr",
+                            "neighbourhood": "Williamsburg"
                         }
                     }]
                 ).withArgs('http://nominatim.openstreetmap.org/search', {
@@ -193,7 +195,8 @@
                         "zipcode": "75008",
                         "streetName": "Avenue des Champs-\u00c9lys\u00e9es",
                         "streetNumber": "93",
-                        "countryCode": "FR"
+                        "countryCode": "FR",
+                        "neighbourhood": "Williamsburg"
                     });
 
                     done();
@@ -253,7 +256,8 @@
                             "zipcode": "11211",
                             "streetName": "Bedford Avenue",
                             "streetNumber": "277",
-                            "countryCode": "US"
+                            "countryCode": "US",
+                            "neighbourhood": "Williamsburg"
                         });
                         results.raw.should.deep.equal({
                             "place_id": "119109484",
