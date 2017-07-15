@@ -116,7 +116,8 @@
                         "zipcode": "B72 1LH",
                         "streetName": "Pilkington Avenue",
                         "streetNumber": "135",
-                        "countryCode": "GB"
+                        "countryCode": "GB",
+                        "neighbourhood": ""
                     });
 
                     done();
@@ -165,7 +166,8 @@
                         "zipcode": "11211",
                         "streetName": "Bedford Avenue",
                         "streetNumber": "279",
-                        "countryCode": "US"
+                        "countryCode": "US",
+                        "neighbourhood": "Williamsburg"
                     });
                     done();
                 });
