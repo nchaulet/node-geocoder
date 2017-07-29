@@ -227,3 +227,8 @@
 ## 3.18.0
 
 * Add PickPoint geocoder
+
+
+## 3.19.0
+
+* Add formattedAddress to the open street map geocoder
