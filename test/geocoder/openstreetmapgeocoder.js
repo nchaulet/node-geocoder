@@ -102,6 +102,7 @@
                     results[0].should.to.deep.equal({
                         "latitude": 52.5487921,
                         "longitude": -1.8164307339635,
+                        "formattedAddress": "135, Pilkington Avenue, Castle Vale, Maney, Birmingham, West Midlands, England, B72 1LH, United Kingdom",
                         "country": "United Kingdom",
 						            "state": "England",
                         "city": "Birmingham",
@@ -189,6 +190,7 @@
                     results[0].should.to.deep.equal({
                         "latitude": 48.8712611,
                         "longitude": 2.3018454,
+                        "formattedAddress": "93, Avenue des Champs-\u00c9lys\u00e9es, Champs-\u00c9lys\u00e9es, 8e, Paris, \u00cele-de-France, France m\u00e9tropolitaine, 75008, France",
                         "country": "France",
 						            "state": "\u00cele-de-France",
                         "city": "Paris",
@@ -250,6 +252,7 @@
                         results[0].should.to.deep.equal({
                             "latitude": 40.714205,
                             "longitude": -73.9613150927476,
+                            "formattedAddress": "277, Bedford Avenue, Williamsburg, Kings County, NYC, New York, 11211, United States of America",
                             "country": "United States of America",
                             "state": "New York",
                             "city": "NYC",

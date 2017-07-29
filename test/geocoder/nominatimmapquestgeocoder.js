@@ -110,6 +110,7 @@
                     results[0].should.to.deep.equal({
                         "latitude": 52.5487921,
                         "longitude": -1.8164307339635,
+                        "formattedAddress": "135, Pilkington Avenue, Castle Vale, Maney, Birmingham, West Midlands, England, B72 1LH, United Kingdom",
                         "country": "United Kingdom",
 						            "state": "England",
                         "city": "Birmingham",
@@ -160,6 +161,7 @@
                     results[0].should.to.deep.equal({
                         "latitude": 40.714205,
                         "longitude": -73.9613150927476,
+                        "formattedAddress": "279, Bedford Avenue, Williamsburg, Kings County, NYC, New York, 11211, United States of America",
                         "country": "United States of America",
                         "city": "NYC",
 					              "state": "New York",
