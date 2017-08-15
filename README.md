@@ -130,6 +130,7 @@ var geocoder = NodeGeocoder({
 * `openmapquest` : Open MapQuestGeocoder (based on OpenStreetMapGeocoder). Supports address geocoding and reverse geocoding. Needs an apiKey
 * `agol` : ArcGis Online Geocoding service. Supports geocoding and reverse. Requires a client_id & client_secret and 'https' http adapter
 * `tomtom`: TomTomGeocoder. Supports address geocoding. You need to specify `options.apiKey`
+* `virtualearth`: VirtualEarthGeocoder (Bing maps). Supports address geocoding. You need to specify `options.apiKey`
 * `nominatimmapquest`: Same geocoder as `openstreetmap`, but queries the MapQuest servers. You need to specify `options.apiKey`
 * `opencage`: OpenCage Geocoder. Uses multiple open sources. Supports address and reverse geocoding. You need to specify `options.apiKey`
 * `smartyStreet`: Smarty street geocoder (US only), you need to specify `options.auth_id` and `options.auth_token`
@@ -138,7 +139,7 @@ var geocoder = NodeGeocoder({
 * `teleport`: Teleport supports city and urban area forward and reverse geocoding; for more information, see [Teleport API documentation](https://developers.teleport.org/api/)
 * `opendatafrance`: OpendataFranceGeocoder supports forward and reverse geocoding in France; for more information, see [OpendataFrance API documentation](https://adresse.data.gouv.fr/api/)
 * `pickpoint`: PickPoint Geocoder. Supports address geocoding and reverse geocoding. You need to specify `options.apiKey` obtained at [PickPoint](https://pickpoint.io). `https` is required.
-  * As parameter for `geocode` function you can use a string representing an address like "13 rue sainte catherine" or an object with parameters described in [Forward Geocoding Reference](https://pickpoint.io/api-reference#forward-geocoding). 
+  * As parameter for `geocode` function you can use a string representing an address like "13 rue sainte catherine" or an object with parameters described in [Forward Geocoding Reference](https://pickpoint.io/api-reference#forward-geocoding).
   * For `geocode` function you should use an object where `{lat, lon}` are required parameters. Additional parameters like `zoom` are available, see details in [Reverse Geocoding Reference](https://pickpoint.io/api-reference#reverse-geocoding).
 
 
