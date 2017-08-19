@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "phin": "^2.2.81"
+    "phin": "^2.2.90"
   },
   "devDependencies": {
     "chai": "^3.5.0",
