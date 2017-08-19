@@ -146,7 +146,7 @@ var geocoder = NodeGeocoder({
 
 * `https`: This adapter uses the Https nodejs library (default)
 * `http`: This adapter uses the Http nodejs library
-* `request`: This adapter uses the request nodejs library
+* `phin`: This adapter uses the phin nodejs library
 
 You can specify request timeout using paramater `options.timeout`
 
