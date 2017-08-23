@@ -70,3 +70,8 @@
 ## 3.19.0
 
 * Add formattedAddress to the open street map geocoder
+
+## 3.20.0
+
+* fix yandex geocoder
+* virtualearth geocoder
