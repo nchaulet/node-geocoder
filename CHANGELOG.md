@@ -75,3 +75,8 @@
 
 * fix yandex geocoder
 * virtualearth geocoder
+
+## 3.20.1
+
+* Fix yandex geocoder
+
