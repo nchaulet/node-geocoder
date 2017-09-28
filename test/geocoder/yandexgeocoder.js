@@ -55,8 +55,8 @@ describe('YandexGeocoder', function() {
             err.should.to.equal(false);
 
             results[0].should.to.deep.equal({
-                'latitude': '40.653388',
-                'longitude': '-73.944050',
+                'latitude': 40.653388,
+                'longitude': -73.944050,
                 'country': 'United States',
                 'city': 'New York',
                 'state' : 'New York',
@@ -197,8 +197,8 @@ describe('YandexGeocoder', function() {
           'city': 'Собинка',
           'country': 'Россия',
           'countryCode': 'RU',
-          'latitude': '55.98507',
-          'longitude': '40.018571',
+          'latitude': 55.98507,
+          'longitude': 40.018571,
           'state': 'Владимирская область',
           'streetName': 'Центральная улица',
           'streetNumber': '15',
