@@ -11,30 +11,30 @@
         supportsHttps: sinon.stub()
     };
 
-    describe('PickPointGeocoder', function () {
+    describe('PickPointGeocoder', () => {
 
-        describe('#constructor', function () {
+        describe('#constructor', () => {
 
-            it('should be an instance of PickPointGeocoder', function () {
+            test('should be an instance of PickPointGeocoder', () => {
                 mockedHttpAdapter.supportsHttps.returns(true);
                 var geocoder = new PickPointGeocoder(mockedHttpAdapter, {apiKey: 'API_KEY'});
                 geocoder.should.be.instanceof(PickPointGeocoder);
             });
 
-            it('an http adapter must be set', function () {
+            test('an http adapter must be set', () => {
                 expect(function () {
                     new PickPointGeocoder();
                 }).to.throw(Error, 'PickPointGeocoder need an httpAdapter');
             });
 
-            it('the adapter should support https', function () {
+            test('the adapter should support https', () => {
                 mockedHttpAdapter.supportsHttps.returns(false);
                 expect(function () {
                     new PickPointGeocoder(mockedHttpAdapter);
                 }).to.throw(Error, 'You must use https http adapter');
             });
 
-            it('an apiKey must be set', function () {
+            test('an apiKey must be set', () => {
                 mockedHttpAdapter.supportsHttps.returns(true);
                 expect(function () {
                     new PickPointGeocoder(mockedHttpAdapter);

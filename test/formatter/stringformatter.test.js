@@ -6,14 +6,14 @@ var expect = chai.expect;
 
 var StringFormatter = require('../../lib/formatter/stringformatter.js');
 
-describe('StringFormatter', function() {
-  describe('#constructor' , function() {
-    it('a string pattern must be set', function() {
+describe('StringFormatter', () => {
+  describe('#constructor' , () => {
+    test('a string pattern must be set', () => {
       expect(function() {new StringFormatter();}).to.throw(Error, 'StringFormatter need a pattern');
     });
   });
-  describe('#format' , function() {
-    it('should replace pattern with correct values', function() {
+  describe('#format' , () => {
+    test('should replace pattern with correct values', () => {
       var formatter = new StringFormatter('%P %p %n %S %z %T %t');
 
       var results = formatter.format([{

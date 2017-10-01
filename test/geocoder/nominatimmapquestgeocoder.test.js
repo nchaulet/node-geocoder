@@ -10,21 +10,21 @@
         get: function() {}
     };
 
-    describe('NominatimMapquestGeocoder', function() {
+    describe('NominatimMapquestGeocoder', () => {
 
-        describe('#constructor' , function() {
+        describe('#constructor' , () => {
 
-            it('an http adapter must be set', function() {
+            test('an http adapter must be set', () => {
 
                 expect(function() {new NominatimMapquestGeocoder();}).to.throw(Error, 'NominatimMapquestGeocoder need an httpAdapter');
             });
 
-            it('an apiKey must be set', function() {
+            test('an apiKey must be set', () => {
 
                 expect(function() {new NominatimMapquestGeocoder(mockedHttpAdapter);}).to.throw(Error, 'NominatimMapquestGeocoder needs an apiKey');
             });
 
-            it('Should be an instance of NominatimMapquestGeocoder', function() {
+            test('Should be an instance of NominatimMapquestGeocoder', () => {
 
                 var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter, {apiKey: 'API_KEY'});
 
@@ -33,9 +33,9 @@
 
         });
 
-        describe('#geocode' , function() {
+        describe('#geocode' , () => {
 
-            it('Should not accept IPv4', function() {
+            test('Should not accept IPv4', () => {
 
                 var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter, {apiKey: 'API_KEY'});
 
@@ -45,7 +45,7 @@
 
             });
 
-            it('Should not accept IPv6', function() {
+            test('Should not accept IPv6', () => {
 
                 var nmAdapter = new NominatimMapquestGeocoder(mockedHttpAdapter, {apiKey: 'API_KEY'});
 
@@ -55,7 +55,7 @@
 
             });
 
-            it('Should call httpAdapter get method', function() {
+            test('Should call httpAdapter get method', () => {
 
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once()
@@ -71,7 +71,7 @@
 
             });
 
-            it('Should return geocoded address', function(done) {
+            test('Should return geocoded address', done => {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, [{
                         "place_id": "80515867",
@@ -127,8 +127,8 @@
 
         });
 
-        describe('#reverse' , function() {
-            it('Should return geocoded address', function(done) {
+        describe('#reverse' , () => {
+            test('Should return geocoded address', done => {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once()
                 .withArgs("http://open.mapquestapi.com/nominatim/v1/reverse",

@@ -11,21 +11,21 @@
         get: function() {}
     };
 
-    describe('MapzenGeocoder', function() {
+    describe('MapzenGeocoder', () => {
 
-        describe('#constructor' , function() {
+        describe('#constructor' , () => {
 
-            it('an http adapter must be set', function() {
+            test('an http adapter must be set', () => {
 
                 expect(function() {new MapzenGeocoder();}).to.throw(Error, 'MapzenGeocoder need an httpAdapter');
             });
 
-            it('an apiKey must be set', function() {
+            test('an apiKey must be set', () => {
 
                 expect(function() {new MapzenGeocoder(mockedHttpAdapter);}).to.throw(Error, 'MapzenGeocoder needs an apiKey');
             });
 
-            it('Should be an instance of MapzenGeocoder', function() {
+            test('Should be an instance of MapzenGeocoder', () => {
 
                 var mapzenAdapter = new MapzenGeocoder(mockedHttpAdapter, 'API_KEY');
 
@@ -34,9 +34,9 @@
 
         });
 
-        describe('#geocode' , function() {
+        describe('#geocode' , () => {
 
-            it('Should not accept IPv4', function() {
+            test('Should not accept IPv4', () => {
 
                 var mapzenAdapter = new MapzenGeocoder(mockedHttpAdapter, 'API_KEY');
 
@@ -46,7 +46,7 @@
 
             });
 
-            it('Should not accept IPv6', function() {
+            test('Should not accept IPv6', () => {
 
                 var mapzenAdapter = new MapzenGeocoder(mockedHttpAdapter, 'API_KEY');
 
@@ -58,8 +58,8 @@
 
         });
 
-        describe('#reverse' , function() {
-            it('Should call httpAdapter get method', function() {
+        describe('#reverse' , () => {
+            test('Should call httpAdapter get method', () => {
 
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().returns({then: function() {}});
