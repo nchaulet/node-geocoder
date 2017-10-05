@@ -80,3 +80,6 @@
 
 * Fix yandex geocoder
 
+## 3.21.0
+
+Add suppot for osmServer option
