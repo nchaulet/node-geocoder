@@ -122,6 +122,7 @@ var geocoder = NodeGeocoder({
   * For `reverse`, you can use additional parameters from https://wiki.openstreetmap.org/wiki/Nominatim#Parameters_2
   * You should specify a specific `user-agent` or `referrer` header field as required by
   https://wiki.openstreetmap.org/wiki/Nominatim_usage_policy
+  * Set `options.osmServer` to use custom nominatim server. Example: you can setup local nominatim server from instructions at [this page](http://wiki.openstreetmap.org/wiki/Nominatim/Installation) and set `options.osmServer: http://localhost:8000` to use local server. 
 * `locationiq` : LocationIQGeocoder. Supports address geocoding and reverse geocoding just like openstreetmap but does require only a locationiq api key to be set.
   * For `geocode` you can use simple `q` parameter or an object containing th edifferent parameters defined here: http://locationiq.org/#docs
   * For `reverse`, you can pass over `{lat, lon}` and additional parameters defined in http://locationiq.org/#docs
