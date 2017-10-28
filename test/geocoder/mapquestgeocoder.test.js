@@ -11,21 +11,21 @@
         get: function() {}
     };
 
-    describe('MapQuestGeocoder', function() {
+    describe('MapQuestGeocoder', () => {
 
-        describe('#constructor' , function() {
+        describe('#constructor' , () => {
 
-            it('an http adapter must be set', function() {
+            test('an http adapter must be set', () => {
 
                 expect(function() {new MapQuestGeocoder();}).to.throw(Error, 'MapQuestGeocoder need an httpAdapter');
             });
 
-            it('an apiKey must be set', function() {
+            test('an apiKey must be set', () => {
 
                 expect(function() {new MapQuestGeocoder(mockedHttpAdapter);}).to.throw(Error, 'MapQuestGeocoder needs an apiKey');
             });
 
-            it('Should be an instance of MapQuestGeocoder', function() {
+            test('Should be an instance of MapQuestGeocoder', () => {
 
                 var mapquestAdapter = new MapQuestGeocoder(mockedHttpAdapter, 'API_KEY');
 
@@ -34,9 +34,9 @@
 
         });
 
-        describe('#geocode' , function() {
+        describe('#geocode' , () => {
 
-            it('Should not accept IPv4', function() {
+            test('Should not accept IPv4', () => {
 
                 var mapquestAdapter = new MapQuestGeocoder(mockedHttpAdapter, 'API_KEY');
 
@@ -46,7 +46,7 @@
 
             });
 
-            it('Should not accept IPv6', function() {
+            test('Should not accept IPv6', () => {
 
                 var mapquestAdapter = new MapQuestGeocoder(mockedHttpAdapter, 'API_KEY');
 
@@ -56,7 +56,7 @@
 
             });
 
-            it('Should call httpAdapter get method', function() {
+            test('Should call httpAdapter get method', () => {
 
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').withArgs(
@@ -74,8 +74,8 @@
 
         });
 
-        describe('#reverse' , function() {
-            it('Should call httpAdapter get method', function() {
+        describe('#reverse' , () => {
+            test('Should call httpAdapter get method', () => {
 
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().returns({then: function() {}});

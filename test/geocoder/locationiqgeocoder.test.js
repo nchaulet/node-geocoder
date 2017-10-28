@@ -10,46 +10,46 @@
     get: function() {}
   };
 
-  describe('LocationIQGeocoder', function() {
+  describe('LocationIQGeocoder', () => {
 
-    describe('#constructor', function() {
+    describe('#constructor', () => {
 
-      it('an http adapter must be set', function() {
+      test('an http adapter must be set', () => {
         expect(function() {
           new LocationIQGeocoder();
         }).to.throw(Error, 'ocationIQGeocoder need an httpAdapter');
       });
 
-      it('must have an api key as second argument', function() {
+      test('must have an api key as second argument', () => {
         expect(function() {
           new LocationIQGeocoder(mockedHttpAdapter);
         }).to.throw(Error, 'LocationIQGeocoder needs an apiKey');
       });
 
-      it('Should be an instance of LocationIQGeocoder', function() {
+      test('Should be an instance of LocationIQGeocoder', () => {
         var adapter = new LocationIQGeocoder(mockedHttpAdapter, 'API_KEY');
         adapter.should.be.instanceOf(LocationIQGeocoder);
       });
 
     });
 
-    describe('#geocode', function() {
+    describe('#geocode', () => {
 
-      it('Should not accept IPv4', function() {
+      test('Should not accept IPv4', () => {
         var adapter = new LocationIQGeocoder(mockedHttpAdapter, 'API_KEY');
         expect(function() {
                 adapter.geocode('127.0.0.1');
         }).to.throw(Error, 'LocationIQGeocoder does not support geocoding IPv4');
       });
 
-      it('Should not accept IPv6', function() {
+      test('Should not accept IPv6', () => {
         var adapter = new LocationIQGeocoder(mockedHttpAdapter, 'API_KEY');
         expect(function() {
                 adapter.geocode('2001:0db8:0000:85a3:0000:0000:ac1f:8001');
         }).to.throw(Error, 'LocationIQGeocoder does not support geocoding IPv6');
       });
 
-      it('Should call httpAdapter get method', function() {
+      test('Should call httpAdapter get method', () => {
         var mock = sinon.mock(mockedHttpAdapter);
         mock.expects('get').once().returns({then: function() {}});
         var adapter = new LocationIQGeocoder(mockedHttpAdapter, 'API_KEY');
@@ -57,7 +57,7 @@
         mock.verify();
       });
 
-      it('Should return geocoded address', function(done) {
+      test('Should return geocoded address', done => {
         var mock = sinon.mock(mockedHttpAdapter);
         var rawResponse = [{
           "place_id": "49220656",
@@ -118,72 +118,75 @@
         done();
       });
 
-      it('Should return geocoded address when queried with an object', function(done) {
-        var mock = sinon.mock(mockedHttpAdapter);
-        var rawResponse = [{
-          "place_id": "49220656",
-          "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright",
-          "osm_type": "node",
-          "osm_id": "3674260525",
-          "boundingbox": [
-            "40.7487227",
-            "40.7488227",
-            "-73.9849836",
-            "-73.9848836"
-          ],
-          "lat": "40.7487727",
-          "lon": "-73.9849336",
-          "display_name": "Empire State Building, 362, 5th Avenue, Diamond District, Manhattan, New York County, NYC, New York, 10035, United States of America",
-          "class": "tourism",
-          "type": "attraction",
-          "importance": 0.401,
-          "icon": "http://158.69.3.42/nominatim/images/mapicons/poi_point_of_interest.p.20.png",
-          "address": {
-            "attraction": "Empire State Building",
-            "house_number": "362",
-            "road": "5th Avenue",
-            "neighbourhood": "Diamond District",
-            "suburb": "Manhattan",
-            "county": "New York County",
-            "city": "NYC",
-            "state": "New York",
-            "postcode": "10035",
-            "country": "United States of America",
-            "country_code": "us"
-          }
-        }];
-        mock.expects('get').once().callsArgWith(2, false, rawResponse);
+      test(
+        'Should return geocoded address when queried with an object',
+        done => {
+          var mock = sinon.mock(mockedHttpAdapter);
+          var rawResponse = [{
+            "place_id": "49220656",
+            "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright",
+            "osm_type": "node",
+            "osm_id": "3674260525",
+            "boundingbox": [
+              "40.7487227",
+              "40.7488227",
+              "-73.9849836",
+              "-73.9848836"
+            ],
+            "lat": "40.7487727",
+            "lon": "-73.9849336",
+            "display_name": "Empire State Building, 362, 5th Avenue, Diamond District, Manhattan, New York County, NYC, New York, 10035, United States of America",
+            "class": "tourism",
+            "type": "attraction",
+            "importance": 0.401,
+            "icon": "http://158.69.3.42/nominatim/images/mapicons/poi_point_of_interest.p.20.png",
+            "address": {
+              "attraction": "Empire State Building",
+              "house_number": "362",
+              "road": "5th Avenue",
+              "neighbourhood": "Diamond District",
+              "suburb": "Manhattan",
+              "county": "New York County",
+              "city": "NYC",
+              "state": "New York",
+              "postcode": "10035",
+              "country": "United States of America",
+              "country_code": "us"
+            }
+          }];
+          mock.expects('get').once().callsArgWith(2, false, rawResponse);
 
-        var adapter = new LocationIQGeocoder(mockedHttpAdapter, 'API_KEY');
-        var query = {
-          'street': '5th Avenue 263',
-          'city': 'New York'
-        };
-        adapter.geocode(query, function(err, results) {
-          mock.verify();
-          err.should.equal(false);
+          var adapter = new LocationIQGeocoder(mockedHttpAdapter, 'API_KEY');
+          var query = {
+            'street': '5th Avenue 263',
+            'city': 'New York'
+          };
+          adapter.geocode(query, function(err, results) {
+            mock.verify();
+            err.should.equal(false);
 
-          results.should.have.length.of(1);
-          results[0].should.deep.equal({
-            'city': 'NYC',
-            'country': 'United States of America',
-            'countryCode': 'US',
-            'latitude': 40.7487727,
-            'longitude': -73.9849336,
-            'state': 'New York',
-            'streetName': '5th Avenue',
-            'streetNumber': '362',
-            'zipcode': '10035'
+            results.should.have.length.of(1);
+            results[0].should.deep.equal({
+              'city': 'NYC',
+              'country': 'United States of America',
+              'countryCode': 'US',
+              'latitude': 40.7487727,
+              'longitude': -73.9849336,
+              'state': 'New York',
+              'streetName': '5th Avenue',
+              'streetNumber': '362',
+              'zipcode': '10035'
+            });
+
+            results.should.have.property('raw');
+            results.raw.should.deep.equal(rawResponse);
           });
+          mock.verify();
+          done();
+        }
+      );
 
-          results.should.have.property('raw');
-          results.raw.should.deep.equal(rawResponse);
-        });
-        mock.verify();
-        done();
-      });
-
-      it('should ignore "format" and "addressdetails" arguments', function(done) {
+      test('should ignore "format" and "addressdetails" arguments', done => {
         var mock = sinon.mock(mockedHttpAdapter);
         mock.expects('get').once().callsArgWith(2, false, [])
           .withArgs('http://locationiq.org/v1/search.php', {
@@ -205,9 +208,9 @@
 
     });
 
-    describe('#reverse', function() {
+    describe('#reverse', () => {
 
-      it('Should correctly set extra arguments', function(done) {
+      test('Should correctly set extra arguments', done => {
         var mock = sinon.mock(mockedHttpAdapter);
         mock.expects('get').once().callsArgWith(2, false, [])
           .withArgs('http://osm1.unwiredlabs.com/locationiq/v1/reverse.php', {
@@ -231,7 +234,7 @@
         });
       });
 
-      it('should ignore "format" and "addressdetails" arguments', function(done) {
+      test('should ignore "format" and "addressdetails" arguments', done => {
         var mock = sinon.mock(mockedHttpAdapter);
         mock.expects('get').once().callsArgWith(2, false, [])
           .withArgs('http://osm1.unwiredlabs.com/locationiq/v1/reverse.php', {

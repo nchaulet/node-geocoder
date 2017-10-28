@@ -10,16 +10,16 @@
         get: function() {}
     };
 
-    describe('FreegeoipGeocoder', function() {
+    describe('FreegeoipGeocoder', () => {
 
-        describe('#constructor' , function() {
+        describe('#constructor' , () => {
 
-            it('an http adapter must be set', function() {
+            test('an http adapter must be set', () => {
 
                 expect(function() {new FreegeoipGeocoder();}).to.throw(Error, 'FreegeoipGeocoder need an httpAdapter');
             });
 
-            it('Should be an instance of FreegeoipGeocoder', function() {
+            test('Should be an instance of FreegeoipGeocoder', () => {
 
                 var freegeoipgeocoder = new FreegeoipGeocoder(mockedHttpAdapter);
 
@@ -28,9 +28,9 @@
 
         });
 
-        describe('#geocode' , function() {
+        describe('#geocode' , () => {
 
-            it('Should not accept address', function() {
+            test('Should not accept address', () => {
 
                 var freegeoipgeocoder = new FreegeoipGeocoder(mockedHttpAdapter);
                 expect(function() {freegeoipgeocoder.geocode('1 rue test');})
@@ -40,7 +40,7 @@
 
             });
 
-            it('Should call httpAdapter get method', function() {
+            test('Should call httpAdapter get method', () => {
 
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().returns({then: function() {}});
@@ -52,7 +52,7 @@
                 mock.verify();
             });
 
-            it('Should return a geocoded address', function(done) {
+            test('Should return a geocoded address', done => {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, {
                         ip: '66.249.64.0',
@@ -93,8 +93,8 @@
             });
         });
 
-        describe('#reverse' , function() {
-            it('Should throw an error', function() {
+        describe('#reverse' , () => {
+            test('Should throw an error', () => {
 
                   var freegeoipgeocoder = new FreegeoipGeocoder(mockedHttpAdapter);
                 expect(function() {freegeoipgeocoder.reverse(10.0235,-2.3662);})

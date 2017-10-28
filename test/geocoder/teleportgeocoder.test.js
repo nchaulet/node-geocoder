@@ -10,18 +10,18 @@
         get: function() {}
     };
 
-    describe('TeleportGeocoder', function() {
+    describe('TeleportGeocoder', () => {
 
-        describe('#constructor', function() {
+        describe('#constructor', () => {
 
-            it('an http adapter must be set', function() {
+            test('an http adapter must be set', () => {
 
                 expect(function() {
                     new TeleportGeocoder();
                 }).to.Throw(Error, 'TeleportGeocoder need an httpAdapter');
             });
 
-            it('Should be an instance of TeleportGeocoder', function() {
+            test('Should be an instance of TeleportGeocoder', () => {
 
                 var tpAdapter = new TeleportGeocoder(mockedHttpAdapter);
 
@@ -30,9 +30,9 @@
 
         });
 
-        describe('#geocode', function() {
+        describe('#geocode', () => {
 
-            it('Should not accept IPv4', function() {
+            test('Should not accept IPv4', () => {
 
                 var tpAdapter = new TeleportGeocoder(mockedHttpAdapter);
 
@@ -42,7 +42,7 @@
 
             });
 
-            it('Should not accept IPv6', function() {
+            test('Should not accept IPv6', () => {
 
                 var tpAdapter = new TeleportGeocoder(mockedHttpAdapter);
 
@@ -52,7 +52,7 @@
 
             });
 
-            it('Should call mockedHttpAdapter get method', function() {
+            test('Should call mockedHttpAdapter get method', () => {
 
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().returns({then: function() {}});
@@ -63,7 +63,7 @@
                 mock.verify();
             });
 
-            it('Should return geocoded address', function(done) {
+            test('Should return geocoded address', done => {
                 var response = {
                     "_embedded": {
                         "city:search-results": [{
@@ -150,8 +150,8 @@
 
         });
 
-        describe('#reverse', function() {
-            it('Should return geocoded address', function(done) {
+        describe('#reverse', () => {
+            test('Should return geocoded address', done => {
                 var response = {
                     "_embedded": {
                         "location:nearest-cities": [{

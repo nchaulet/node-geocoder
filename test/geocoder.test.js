@@ -2,7 +2,7 @@
 
 var chai   = require('chai');
 var should = chai.should();
-var expect = chai.expect;
+var assert = chai.assert;
 var sinon  = require('sinon');
 
 var Geocoder = require('../lib/geocoder.js');
@@ -16,28 +16,28 @@ var stupidGeocoder = {
   }
 };
 
-describe('Geocoder', function() {
-  beforeEach(function() {
+describe('Geocoder', () => {
+  beforeEach(() => {
     sinon.spy(stupidGeocoder, 'geocode');
     sinon.spy(stupidGeocoder, 'reverse');
   });
 
-  afterEach(function() {
+  afterEach(() => {
     stupidGeocoder.geocode.restore();
     stupidGeocoder.reverse.restore();
   });
 
 
-  describe('#constructor' , function() {
-    it('Should set _geocoder', function() {
+  describe('#constructor' , () => {
+    test('Should set _geocoder', () => {
       var geocoder = new Geocoder(stupidGeocoder);
 
       geocoder._geocoder.should.be.equal(stupidGeocoder);
     });
   });
 
-  describe('#geocode' , function() {
-    it('Should call geocoder geocode method', function() {
+  describe('#geocode' , () => {
+    test('Should call geocoder geocode method', () => {
       var geocoder = new Geocoder(stupidGeocoder);
 
       return geocoder.geocode('127.0.0.1')
@@ -46,37 +46,39 @@ describe('Geocoder', function() {
         });
     });
 
-    it('Should return a promise', function() {
+    test('Should return a promise', () => {
       var geocoder = new Geocoder(stupidGeocoder);
 
       var promise = geocoder.geocode('127.0.0.1');
       promise.then.should.be.a('function');
+
+      return promise;
     });
   });
 
-  describe('#batchGeocode' , function() {
-    it('Should call stupidGeocoder geocoder method x times', function() {
+  describe('#batchGeocode' , () => {
+    test('Should call stupidGeocoder geocoder method x times', () => {
       var geocoder = new Geocoder(stupidGeocoder);
-
       return geocoder.batchGeocode([
-          '127.0.0.1',
-          '127.0.0.1',
-          '127.0.0.1'
+        '127.0.0.1',
+        '127.0.0.1'
       ]).then(function() {
-        stupidGeocoder.geocode.calledThrice.should.be.true;
+        assert.isTrue(stupidGeocoder.geocode.calledTwice);
       });
     });
 
-    it('Should return a promise', function() {
+    test('Should return a promise', () => {
       var geocoder = new Geocoder(stupidGeocoder);
 
       var promise = geocoder.batchGeocode(['127.0.0.1']);
       promise.then.should.be.a('function');
+
+      return promise;
     });
   });
 
-  describe('#reverse' , function() {
-    it('Should call stupidGeocoder reverse method', function() {
+  describe('#reverse' , () => {
+    test('Should call stupidGeocoder reverse method', () => {
       var geocoder = new Geocoder(stupidGeocoder);
 
       return geocoder.reverse(1, 2)
@@ -85,7 +87,7 @@ describe('Geocoder', function() {
         });
     });
 
-    it('Should return a promise', function() {
+    test('Should return a promise', () => {
       var geocoder = new Geocoder(stupidGeocoder);
 
       var promise = geocoder.reverse('127.0.0.1');

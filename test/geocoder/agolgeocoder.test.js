@@ -40,38 +40,44 @@ var mockedOptions = {
   'client_secret': "CLIENT_SECRET"
 };
 
-describe('AGOLGeocoder', function() {
+describe('AGOLGeocoder', () => {
 
-  describe('#constructor' , function() {
-    it('an http adapter must be set', function() {
+  describe('#constructor' , () => {
+    test('an http adapter must be set', () => {
       expect(function() {new AGOLGeocoder();}).to.throw(Error, 'ArcGis Online Geocoder requires a httpAdapter to be defined');
     });
 
-    it('client_id should be set', function() {
+    test('client_id should be set', () => {
       expect(function() {new AGOLGeocoder(mockedRequestifyAdapter, {client_secret: 'CLIENT_SECRET'});}).to.throw(Error, 'You must specify the client_id and the client_secret');
     });
 
-    it('client_secret should be set', function() {
+    test('client_secret should be set', () => {
       expect(function() {new AGOLGeocoder(mockedRequestifyAdapter, {client_id: 'CLIENT_ID'});}).to.throw(Error, 'You must specify the client_id and the client_secret');
     });
 
-    it('expect an error if HTTPAdapter is provided while options are not', function() {
-      expect(
-        function() {
-          new AGOLGeocoder(mockedRequestifyAdapter);
-        }).to.throw(
-        Error,'You must specify the client_id and the client_secret');
-      });
+    test(
+      'expect an error if HTTPAdapter is provided while options are not',
+      () => {
+        expect(
+          function() {
+            new AGOLGeocoder(mockedRequestifyAdapter);
+          }).to.throw(
+          Error,'You must specify the client_id and the client_secret');
+        }
+    );
 
-    it('Should be an instance of AGOLGeocoder if an http adapter and proper options are supplied', function() {
-      var geocoder = new AGOLGeocoder(mockedRequestifyAdapter, mockedOptions);
+    test(
+      'Should be an instance of AGOLGeocoder if an http adapter and proper options are supplied',
+      () => {
+        var geocoder = new AGOLGeocoder(mockedRequestifyAdapter, mockedOptions);
 
-      geocoder.should.be.instanceof(AGOLGeocoder);
-    });
+        geocoder.should.be.instanceof(AGOLGeocoder);
+      }
+    );
   });
 
-  describe('#geocode' , function() {
-    it('Should not accept IPv4', function() {
+  describe('#geocode' , () => {
+    test('Should not accept IPv4', () => {
 
       var geocoder = new AGOLGeocoder(mockedRequestifyAdapter,mockedOptions);
 
@@ -81,7 +87,7 @@ describe('AGOLGeocoder', function() {
 
     });
 
-    it('Should not accept IPv6', function() {
+    test('Should not accept IPv6', () => {
 
       var geocoder = new AGOLGeocoder(mockedRequestifyAdapter,mockedOptions);
 
@@ -91,7 +97,7 @@ describe('AGOLGeocoder', function() {
 
     });
 
-    it('Should call out for authentication', function() {
+    test('Should call out for authentication', () => {
       var mock = sinon.mock(mockedAuthHttpAdapter);
       mock.expects('get').withArgs("https://www.arcgis.com/sharing/oauth2/token", {
         'client_id': mockedOptions.client_id,
@@ -106,7 +112,7 @@ describe('AGOLGeocoder', function() {
       mock.verify();
     });
 
-    it('Should return cached token', function() {
+    test('Should return cached token', () => {
       var geocoder = new AGOLGeocoder(mockedAuthHttpAdapter,mockedOptions);
 
       geocoder._getToken(function(err,token) {
@@ -117,7 +123,7 @@ describe('AGOLGeocoder', function() {
       });
     });
 
-    it('Should assume cached token is invalid', function() {
+    test('Should assume cached token is invalid', () => {
       var geocoder = new AGOLGeocoder(mockedAuthHttpAdapter,mockedOptions);
 
       geocoder.cache.token = "AAA";
@@ -133,7 +139,7 @@ describe('AGOLGeocoder', function() {
 
           });
 
-    it('Should return geocoded address', function(done) {
+    test('Should return geocoded address', done => {
       var mock = sinon.mock(mockedRequestifyAdapter);
 
       mock.expects('get').once().callsArgWith(2, false,
@@ -164,7 +170,7 @@ describe('AGOLGeocoder', function() {
             });
           });
 
-    it('Should handle a not "OK" status', function(done) {
+    test('Should handle a not "OK" status', done => {
       var mock = sinon.mock(mockedRequestifyAdapter);
 
       mock.expects('get').once().callsArgWith(2, false,
@@ -185,8 +191,8 @@ describe('AGOLGeocoder', function() {
           });
   });
 
-  describe('#reverse' , function() {
-    it('Should call httpAdapter get method', function() {
+  describe('#reverse' , () => {
+    test('Should call httpAdapter get method', () => {
 
       var mock = sinon.mock(mockedRequestifyAdapter);
       mock.expects('get').once().returns({then: function() {}});
@@ -199,7 +205,7 @@ describe('AGOLGeocoder', function() {
 
     });
 
-    it('Should return geocoded address', function(done) {
+    test('Should return geocoded address', done => {
       var mock = sinon.mock(mockedRequestifyAdapter);
       mock.expects('get').once().callsArgWith(2, false,
         '{"address":{"Address":"1190 E Kenyon Ave","Neighborhood":null,"City":"Englewood","Subregion":null,"Region":"Colorado","Postal":"80113","PostalExt":null,"CountryCode":"USA","Loc_name":"USA.PointAddress"},"location":{"x":-104.97389993455704,"y":39.649423090952013,"spatialReference":{"wkid":4326,"latestWkid":4326}}}'
@@ -227,7 +233,7 @@ describe('AGOLGeocoder', function() {
               });
             });
 
-    it('Should handle a not "OK" status', function(done) {
+    test('Should handle a not "OK" status', done => {
       var mock = sinon.mock(mockedRequestifyAdapter);
       mock.expects('get').once().callsArgWith(2, false,
         '{"error":{"code":42,"message":"Random Error","details":[]}}'

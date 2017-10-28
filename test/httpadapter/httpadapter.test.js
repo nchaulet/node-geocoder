@@ -1,29 +1,29 @@
 'use strict';
   var chai = require('chai');
   var should = chai.should();
-  var expect = chai.expect;
+  var assert = chai.assert;
   var sinon = require('sinon');
 
   var HttpAdapter = require('../../lib/httpadapter/httpadapter.js');
   var HttpError = require('../../lib/error/httperror.js');
 
-describe('HttpAdapter', function() {
-  describe('#constructor' , function() {
-    it('if no http specified must instanciate one', function() {
+describe('HttpAdapter', () => {
+  describe('#constructor' , () => {
+    test('if no http specified must instanciate one', () => {
       var http = require('http');
       var httpAdapter = new HttpAdapter();
 
-      httpAdapter.http.should.equal(http);
+      assert.equal(httpAdapter.http, http);
     });
 
-    it('if client specified must use it', function() {
+    test('if client specified must use it', () => {
       var mockedHttp = {'test' : 1};
       var httpAdapter = new HttpAdapter(mockedHttp);
 
       httpAdapter.http.should.equal(mockedHttp);
     });
 
-    it('if client specified timeout use it', function() {
+    test('if client specified timeout use it', () => {
       var options = { timeout: 5 * 1000 };
       var httpAdapter = new HttpAdapter(null, options);
 
@@ -32,8 +32,8 @@ describe('HttpAdapter', function() {
 
   });
 
-  describe('#get' , function() {
-    it('get must call http  request', function() {
+  describe('#get' , () => {
+    test('get must call http  request', () => {
       var http = { request: function () {} };
       var mock = sinon.mock(http);
       mock.expects('request').once().returns({
@@ -49,7 +49,7 @@ describe('HttpAdapter', function() {
     });
 
 
-    it('get must call http request with set options', function() {
+    test('get must call http request with set options', () => {
       var http = { request: function () {} };
       var mock = sinon.mock(http);
       mock.expects('request')
@@ -70,10 +70,8 @@ describe('HttpAdapter', function() {
       mock.verify();
     });
 
-    it('get must call http request with timeout', function(done) {
-      var options = { timeout: 5 * 1000 };
-
-      this.timeout(options.timeout + 1000);
+    test('get must call http request with timeout', done => {
+      var options = { timeout: 1 * 1000 };
 
       var httpAdapter = new HttpAdapter(null, options);
 
