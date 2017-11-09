@@ -74,7 +74,7 @@ describe('GoogleGeocoder', () => {
         address: "1 champs élysée Paris",
         language: "ru-RU",
         region: ".de",
-        components: null,
+        components: "",
         sensor: false
       }).once().returns({then: function() {}});
 
@@ -151,6 +151,27 @@ describe('GoogleGeocoder', () => {
           address: '1 champs élysée Paris',
           zipcode: '75008',
           country: 'FR'
+        });
+
+        mock.verify();
+      }
+    );
+
+    test(
+      'Should call httpAdapter get method with zipcode if country is missing',
+      () => {
+        var mock = sinon.mock(mockedHttpAdapter);
+        mock.expects('get').withArgs('https://maps.googleapis.com/maps/api/geocode/json', {
+          address: "1 champs élysée Paris",
+          sensor: false,
+          components: "postal_code:75008"
+        }).once().returns({then: function() {}});
+
+        var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
+
+        googleAdapter.geocode({
+          address: '1 champs élysée Paris',
+          zipcode: '75008'
         });
 
         mock.verify();
