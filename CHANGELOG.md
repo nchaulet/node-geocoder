@@ -83,3 +83,7 @@
 ## 3.21.0
 
 Add suppot for osmServer option
+
+## 3.21.1
+
+* Fix google geocoder gecoder with no country
