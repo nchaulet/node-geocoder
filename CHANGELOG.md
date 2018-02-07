@@ -87,3 +87,7 @@ Add suppot for osmServer option
 ## 3.21.1
 
 * Fix google geocoder gecoder with no country
+
+## 3.22.0
+
+* add reverse geocoder to bing geocoder.
