@@ -62,7 +62,8 @@ describe('YandexGeocoder', () => {
                 'state' : 'New York',
                 'streetName': 'Brooklyn Ave',
                 'countryCode': 'US',
-                'streetNumber': null
+                'streetNumber': null,
+                'formattedAddress': 'New York, Kings, Brooklyn Ave'
             });
 
             mock.verify();
@@ -202,6 +203,7 @@ describe('YandexGeocoder', () => {
           'state': 'Владимирская область',
           'streetName': 'Центральная улица',
           'streetNumber': '15',
+          'formattedAddress': 'Владимирская область, Собинка, Центральная улица, 15'
         });
 
         mock.verify();
