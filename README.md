@@ -163,6 +163,7 @@ You can specify request timeout using paramater `options.timeout`
     * `%z` zip code
     * `%T` State
     * `%t` state code
+    * `%c` City
 
 ## More
 
