@@ -60,7 +60,7 @@
 
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').withArgs(
-                    'http://www.mapquestapi.com/geocoding/v1/address',
+                    'https://www.mapquestapi.com/geocoding/v1/address',
                     { key: "API_KEY", location: "test" }
                 ).once().returns({then: function() {}});
 
