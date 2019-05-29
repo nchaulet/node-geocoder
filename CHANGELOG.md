@@ -91,3 +91,7 @@ Add suppot for osmServer option
 ## 3.22.0
 
 * add reverse geocoder to bing geocoder.
+
+## 3.23.0
+
+* Fix tom tom geocoder to use new API.
