@@ -138,7 +138,7 @@ var geocoder = NodeGeocoder({
   * For `geocode` function you should use an object where `{lat, lon}` are required parameters. Additional parameters like `zoom` are available, see details in [Reverse Geocoding Reference](https://pickpoint.io/api-reference#reverse-geocoding).
 * `smartyStreet`: Smarty street geocoder (US only), you need to specify `options.auth_id` and `options.auth_token`
 * `teleport`: Teleport supports city and urban area forward and reverse geocoding; for more information, see [Teleport API documentation](https://developers.teleport.org/api/)
-* `tomtom`: TomTomGeocoder. Supports address geocoding. You need to specify `options.apiKey`
+* `tomtom`: TomTomGeocoder. Supports address geocoding. You need to specify `options.apiKey` and can use `options.language` to specify a language 
 * `virtualearth`: VirtualEarthGeocoder (Bing maps). Supports address geocoding. You need to specify `options.apiKey`
 * `yandex`: Yandex support address geocoding, you can use `options.language` to specify language
 
