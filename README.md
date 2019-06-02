@@ -128,20 +128,19 @@ var geocoder = NodeGeocoder({
 * `opendatafrance`: OpendataFranceGeocoder supports forward and reverse geocoding in France; for more information, see [OpendataFrance API documentation](https://adresse.data.gouv.fr/api/)
 * `openmapquest` : Open MapQuestGeocoder (based on OpenStreetMapGeocoder). Supports address geocoding and reverse geocoding. Needs an apiKey
 * `openstreetmap` : OpenStreetMapGeocoder. Supports address geocoding and reverse geocoding. You can use `options.language` and `options.email` to specify a language and a contact email address.
-  * For `geocode`, you can use an object as value, specifying [one or several parameters](https://wiki.openstreetmap.org/wiki/Nominatim#Parameters)
-  * For `reverse`, you can use [additional parameters](https://wiki.openstreetmap.org/wiki/Nominatim#Parameters_2)
-  * You should specify a specific `user-agent` or `referrer` header field as required by the [OpenStreetMap Usage Policy](https://wiki.openstreetmap.org/wiki/Nominatim_usage_policy)
-  * Set `options.osmServer` to use custom nominatim server. Example: you can setup local nominatim server by following [these instructions](http://wiki.openstreetmap.org/wiki/Nominatim/Installation) and set `options.osmServer: http://localhost:8000` to use local server. 
+  * For `geocode`, you can use an object as value, specifying [one or several parameters](http://nominatim.org/release-docs/latest/api/Search/)
+  * For `reverse`, you can use [additional parameters](http://nominatim.org/release-docs/latest/api/Reverse/)
+  * You should specify a specific `user-agent` or `referrer` header field as required by the [OpenStreetMap Usage Policy](https://operations.osmfoundation.org/policies/nominatim/)
+  * Set `options.osmServer` to use custom nominatim server. Example: you can setup local nominatim server by following [these instructions](http://nominatim.org/release-docs/latest/admin/Installation/) and set `options.osmServer: http://localhost:8000` to use local server.
 * `nominatimmapquest`: Same geocoder as `openstreetmap`, but queries the MapQuest servers. You need to specify `options.apiKey`
 * `pickpoint`: PickPoint Geocoder. Supports address geocoding and reverse geocoding. You need to specify `options.apiKey` obtained at [PickPoint](https://pickpoint.io). `https` is required.
   * As parameter for `geocode` function you can use a string representing an address like "13 rue sainte catherine" or an object with parameters described in [Forward Geocoding Reference](https://pickpoint.io/api-reference#forward-geocoding).
   * For `geocode` function you should use an object where `{lat, lon}` are required parameters. Additional parameters like `zoom` are available, see details in [Reverse Geocoding Reference](https://pickpoint.io/api-reference#reverse-geocoding).
 * `smartyStreet`: Smarty street geocoder (US only), you need to specify `options.auth_id` and `options.auth_token`
 * `teleport`: Teleport supports city and urban area forward and reverse geocoding; for more information, see [Teleport API documentation](https://developers.teleport.org/api/)
-* `tomtom`: TomTomGeocoder. Supports address geocoding. You need to specify `options.apiKey` and can use `options.language` to specify a language 
+* `tomtom`: TomTomGeocoder. Supports address geocoding. You need to specify `options.apiKey` and can use `options.language` to specify a language
 * `virtualearth`: VirtualEarthGeocoder (Bing maps). Supports address geocoding. You need to specify `options.apiKey`
 * `yandex`: Yandex support address geocoding, you can use `options.language` to specify language
-
 
 ## Http adapter
 
