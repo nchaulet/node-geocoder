@@ -37,6 +37,20 @@
                     hereAdapter.should.be.instanceof(HereGeocoder);
                 }
             );
+
+            test('Should use CIT endpoint, if production is not provided', () => {
+                var hereAdapter = new HereGeocoder(mockedHttpAdapter, {appId: 'APP_ID', appCode: 'APP_CODE'});
+
+                hereAdapter._geocodeEndpoint.should.equal('https://geocoder.cit.api.here.com/6.2/geocode.json');
+                hereAdapter._reverseEndpoint.should.equal('https://reverse.geocoder.cit.api.here.com/6.2/reversegeocode.json');
+            });
+
+            test('Should use production endpoint, if production is provided', () => {
+                var hereAdapter = new HereGeocoder(mockedHttpAdapter, {appId: 'APP_ID', appCode: 'APP_CODE', production: true});
+
+                hereAdapter._geocodeEndpoint.should.equal('https://geocoder.api.here.com/6.2/geocode.json');
+                hereAdapter._reverseEndpoint.should.equal('https://reverse.geocoder.api.here.com/6.2/reversegeocode.json');
+            });
         });
 
         describe('#geocode' , () => {
