@@ -99,3 +99,7 @@ Add suppot for osmServer option
 - Fix tom tom geocoder to use new API.
 - Fix production endpoint
 - Drop node 4 support
+
+# 3.25.0
+
+- support yandex api Key
