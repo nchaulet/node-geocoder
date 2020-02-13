@@ -1,8 +1,9 @@
 {
-  "name": "node-geocoder",
+  "name": "dotup-node-geocoder",
   "version": "3.25.0",
   "description": "Node Geocoder, node geocoding library, supports google maps, mapquest, open street map, tom tom, promise",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "jest",
     "lint": "eslint lib",
@@ -10,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nchaulet/node-geocoder.git"
+    "url": "https://github.com/dotupNET/dotup-node-geocoder.git"
   },
   "keywords": [
     "geocoder",
