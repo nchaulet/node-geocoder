@@ -103,3 +103,7 @@ Add suppot for osmServer option
 # 3.25.0
 
 - support yandex api Key
+
+# 3.25.1
+
+- fix yander parameter usage
