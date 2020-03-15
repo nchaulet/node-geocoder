@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^3.11.0",
+    "eslint": "^4.18.2",
     "jest": "^25.1.0",
     "sinon": "^1.17.3"
   },
