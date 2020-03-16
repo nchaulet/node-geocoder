@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "bluebird": "^3.5.2",
+    "node-fetch": "^2.6.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2"
   },
@@ -41,7 +42,12 @@
   },
   "eslintConfig": {
     "env": {
-      "node": true
+      "node": true,
+      "es6": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2019,
+      "sourceType": "module"
     },
     "rules": {
       "strict": 0,

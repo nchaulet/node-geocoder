@@ -107,3 +107,8 @@ Add suppot for osmServer option
 # 3.25.1
 
 - fix yander parameter usage
+
+# 3.26.0
+
+- Introduce fetch option.
+- Deprecate httpAdapters.
