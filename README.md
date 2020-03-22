@@ -13,9 +13,9 @@ Node library for geocoding and reverse geocoding. Can be used as a nodejs librar
 ## Usage example
 
 ```javascript
-var NodeGeocoder = require('node-geocoder');
+const NodeGeocoder = require('node-geocoder');
 
-var options = {
+const options = {
   provider: 'google',
 
   // Optional depending on the providers
@@ -24,22 +24,10 @@ var options = {
   formatter: null // 'gpx', 'string', ...
 };
 
-var geocoder = NodeGeocoder(options);
+const geocoder = NodeGeocoder(options);
 
 // Using callback
-geocoder.geocode('29 champs elysée paris', function(err, res) {
-  console.log(res);
-});
-
-// Or using Promise
-geocoder
-  .geocode('29 champs elysée paris')
-  .then(function(res) {
-    console.log(res);
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
+const res = await geocoder.geocode('29 champs elysée paris');
 
 // output :
 [
@@ -66,52 +54,30 @@ geocoder
 ## Advanced usage (only google, here, mapquest, locationiq, and opencage providers)
 
 ```javascript
-geocoder.geocode(
-  { address: '29 champs elysée', country: 'France', zipcode: '75008' },
-  function(err, res) {
-    console.log(res);
-  }
-);
+const res = await geocoder.geocode({
+  address: '29 champs elysée',
+  country: 'France',
+  zipcode: '75008'
+});
 
 // OpenCage advanced usage example
-geocoder.geocode(
-  {
-    address: '29 champs elysée',
-    countryCode: 'fr',
-    minConfidence: 0.5,
-    limit: 5
-  },
-  function(err, res) {
-    console.log(res);
-  }
-);
+const res = await geocoder.geocode({
+  address: '29 champs elysée',
+  countryCode: 'fr',
+  minConfidence: 0.5,
+  limit: 5
+});
 
 // Reverse example
 
-// Using callback
-geocoder.reverse({ lat: 45.767, lon: 4.833 }, function(err, res) {
-  console.log(res);
-});
-
-// Or using Promise
-geocoder
-  .reverse({ lat: 45.767, lon: 4.833 })
-  .then(function(res) {
-    console.log(res);
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
+const res = await geocoder.reverse({ lat: 45.767, lon: 4.833 });
 
 // Batch geocode
 
-geocoder.batchGeocode(['13 rue sainte catherine', 'another adress'], function(
-  err,
-  results
-) {
-  // Return an array of type {error: false, value: []}
-  console.log(results);
-});
+const results = await geocoder.batchGeocode([
+  '13 rue sainte catherine',
+  'another adress'
+]);
 
 // Set specific http request headers:
 const nodeFetch = require('node-fetch');
@@ -200,7 +166,7 @@ You can try node-geocoder here http://node-geocoder.herokuapp.com/
 You can add new geocoders by implementing the two methods `geocode` and `reverse`:
 
 ```javascript
-var geocoder = {
+const geocoder = {
     geocode: function(value, callback) { ... },
     reverse: function(query, callback) { var lat = query.lat; var lon = query.lon; ... }
 }
@@ -209,7 +175,7 @@ var geocoder = {
 You can also add formatter implementing the following interface
 
 ```javascript
-var formatter = {
+const formatter = {
   format: function(data) {
     return formattedData;
   }
