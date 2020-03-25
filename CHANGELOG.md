@@ -98,7 +98,7 @@ Add suppot for osmServer option
 
 - Fix tom tom geocoder to use new API.
 - Fix production endpoint
-- Drop node 4 support
+- Drop node 4 and 6 support
 
 # 3.25.0
 
