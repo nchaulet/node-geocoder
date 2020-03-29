@@ -1,3 +1,10 @@
 test
 .jshintrc
 .travis.yml
+node_modules/
+.idea
+test.js
+package-lock.json
+playground.js
+
+

@@ -112,3 +112,8 @@ Add suppot for osmServer option
 
 - Introduce fetch option.
 - Deprecate httpAdapters.
+
+# 3.27,0
+
+- Update here geocoder to support `apiKey`
+- Allow passing of limit parameter to opendatafrance
