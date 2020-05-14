@@ -1,7 +1,7 @@
 # node-geocoder
 
 [![Build Status](https://img.shields.io/travis/nchaulet/node-geocoder.svg?style=flat-square)](https://travis-ci.org/nchaulet/node-geocoder)
-![Dependencycy status](https://img.shields.io/david/nchaulet/node-geocoder.svg?style=flat-square)
+![Dependency status](https://img.shields.io/david/nchaulet/node-geocoder.svg?style=flat-square)
 [![npm version](https://img.shields.io/npm/v/node-geocoder.svg?style=flat-square)](https://www.npmjs.com/package/node-geocoder)
 
 Node library for geocoding and reverse geocoding. Can be used as a nodejs library
@@ -76,7 +76,7 @@ const res = await geocoder.reverse({ lat: 45.767, lon: 4.833 });
 
 const results = await geocoder.batchGeocode([
   '13 rue sainte catherine',
-  'another adress'
+  'another address'
 ]);
 
 // Set specific http request headers:
@@ -105,7 +105,7 @@ const geocoder = NodeGeocoder({
 - `google` : GoogleGeocoder. Supports address geocoding and reverse geocoding. Use `options.clientId`and `options.apiKey`(privateKey) for business licence. You can also use `options.language` and `options.region` to specify language and region, respectively.
 - `here` : HereGeocoder. Supports address geocoding and reverse geocoding. You must specify `options.apiKey` with your Here API key. You can also use `options.language`, `options.politicalView` ([read about political views here](https://developer.here.com/rest-apis/documentation/geocoder/topics/political-views.html)), `options.country`, and `options.state`.
 - `locationiq` : LocationIQGeocoder. Supports address geocoding and reverse geocoding just like openstreetmap but does require only a locationiq api key to be set.
-  - For `geocode` you can use simple `q` parameter or an object containing th edifferent parameters defined here: http://locationiq.org/#docs
+  - For `geocode` you can use simple `q` parameter or an object containing the different parameters defined here: http://locationiq.org/#docs
   - For `reverse`, you can pass over `{lat, lon}` and additional parameters defined in http://locationiq.org/#docs
   - No need to specify referer or email addresses, just locationiq api key, note that there are rate limits!
 - `mapquest` : MapQuestGeocoder. Supports address geocoding and reverse geocoding. Needs an apiKey
