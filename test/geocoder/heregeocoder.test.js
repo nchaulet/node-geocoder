@@ -52,10 +52,10 @@
         });
 
         hereAdapter._geocodeEndpoint.should.equal(
-          'https://geocoder.api.hereapi.com/6.2/geocode.json'
+          'https://geocoder.api.here.com/6.2/geocode.json'
         );
         hereAdapter._reverseEndpoint.should.equal(
-          'https://reverse.geocoder.api.hereapi.com/6.2/reversegeocode.json'
+          'https://reverse.geocoder.api.here.com/6.2/reversegeocode.json'
         );
       });
       
