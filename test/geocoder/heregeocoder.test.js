@@ -45,25 +45,23 @@
         hereAdapter.should.be.instanceof(HereGeocoder);
       });
 
-      test('Should use CIT endpoint, if production is not provided', () => {
+      test('Should use api endpoint when using appCode', () => {
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
           appId: 'APP_ID',
           appCode: 'APP_CODE'
         });
 
         hereAdapter._geocodeEndpoint.should.equal(
-          'https://geocoder.ls.hereapi.com/6.2/geocode.json'
+          'https://geocoder.api.hereapi.com/6.2/geocode.json'
         );
         hereAdapter._reverseEndpoint.should.equal(
-          'https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json'
+          'https://reverse.geocoder.api.hereapi.com/6.2/reversegeocode.json'
         );
       });
-
-      test('Should use production endpoint, if production is provided', () => {
+      
+      test('Should use ls endpoint when using apiKey', () => {
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE',
-          production: true
+          apiKey: 'API_KEY'
         });
 
         hereAdapter._geocodeEndpoint.should.equal(
