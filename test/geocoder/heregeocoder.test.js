@@ -45,25 +45,23 @@
         hereAdapter.should.be.instanceof(HereGeocoder);
       });
 
-      test('Should use CIT endpoint, if production is not provided', () => {
+      test('Should use api endpoint when using appCode', () => {
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
           appId: 'APP_ID',
           appCode: 'APP_CODE'
         });
 
         hereAdapter._geocodeEndpoint.should.equal(
-          'https://geocoder.ls.hereapi.com/6.2/geocode.json'
+          'https://geocoder.api.here.com/6.2/geocode.json'
         );
         hereAdapter._reverseEndpoint.should.equal(
-          'https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json'
+          'https://reverse.geocoder.api.here.com/6.2/reversegeocode.json'
         );
       });
 
-      test('Should use production endpoint, if production is provided', () => {
+      test('Should use ls endpoint when using apiKey', () => {
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE',
-          production: true
+          apiKey: 'API_KEY'
         });
 
         hereAdapter._geocodeEndpoint.should.equal(
@@ -104,8 +102,7 @@
           .expects('get')
           .withArgs('https://geocoder.ls.hereapi.com/6.2/geocode.json', {
             searchtext: '1 champs élysée Paris',
-            app_code: 'APP_CODE',
-            app_id: 'APP_ID',
+            apiKey: 'API_KEY',
             additionaldata: 'Country2,true',
             gen: 8
           })
@@ -113,8 +110,7 @@
           .returns({ then: function() {} });
 
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE'
+          apiKey: 'API_KEY',
         });
 
         hereAdapter.geocode('1 champs élysée Paris');
@@ -129,8 +125,7 @@
           .withArgs('https://geocoder.ls.hereapi.com/6.2/geocode.json', {
             searchtext: '1 champs élysée Paris',
             language: 'en',
-            app_code: 'APP_CODE',
-            app_id: 'APP_ID',
+            apiKey: 'API_KEY',
             additionaldata: 'Country2,true',
             gen: 8
           })
@@ -138,8 +133,7 @@
           .returns({ then: function() {} });
 
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE',
+          apiKey: 'API_KEY',
           language: 'en'
         });
 
@@ -155,8 +149,7 @@
           .withArgs('https://geocoder.ls.hereapi.com/6.2/geocode.json', {
             searchtext: '1 champs élysée Paris',
             politicalview: 'GRE',
-            app_code: 'APP_CODE',
-            app_id: 'APP_ID',
+            apiKey: 'API_KEY',
             additionaldata: 'Country2,true',
             gen: 8
           })
@@ -164,8 +157,7 @@
           .returns({ then: function() {} });
 
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE',
+          apiKey: 'API_KEY',
           politicalView: 'GRE'
         });
 
@@ -181,8 +173,7 @@
           .withArgs('https://geocoder.ls.hereapi.com/6.2/geocode.json', {
             searchtext: '1 champs élysée Paris',
             country: 'FR',
-            app_code: 'APP_CODE',
-            app_id: 'APP_ID',
+            apiKey: 'API_KEY',
             additionaldata: 'Country2,true',
             gen: 8
           })
@@ -190,8 +181,7 @@
           .returns({ then: function() {} });
 
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE',
+          apiKey: 'API_KEY',
           country: 'FR'
         });
 
@@ -207,8 +197,7 @@
           .withArgs('https://geocoder.ls.hereapi.com/6.2/geocode.json', {
             searchtext: '1 champs élysée Paris',
             state: 'Île-de-France',
-            app_code: 'APP_CODE',
-            app_id: 'APP_ID',
+            apiKey: 'API_KEY',
             additionaldata: 'Country2,true',
             gen: 8
           })
@@ -216,8 +205,7 @@
           .returns({ then: function() {} });
 
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE',
+          apiKey: 'API_KEY',
           state: 'Île-de-France'
         });
 
@@ -234,8 +222,7 @@
             searchtext: '1 champs élysée Paris',
             country: 'FR',
             postalcode: '75008',
-            app_code: 'APP_CODE',
-            app_id: 'APP_ID',
+            apiKey: 'API_KEY',
             additionaldata: 'Country2,true',
             gen: 8
           })
@@ -243,8 +230,7 @@
           .returns({ then: function() {} });
 
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE'
+          apiKey: 'API_KEY',
         });
 
         hereAdapter.geocode({
@@ -263,8 +249,7 @@
           .withArgs('https://geocoder.ls.hereapi.com/6.2/geocode.json', {
             searchtext: 'Kaiserswerther Str 10, Berlin',
             country: 'DE',
-            app_code: 'APP_CODE',
-            app_id: 'APP_ID',
+            apiKey: 'API_KEY',
             additionaldata: 'Country2,true',
             gen: 8
           })
@@ -272,8 +257,7 @@
           .returns({ then: function() {} });
 
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE',
+          apiKey: 'API_KEY',
           country: 'FR',
           state: 'Île-de-France'
         });
@@ -350,8 +334,7 @@
             }
           });
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE'
+          apiKey: 'API_KEY',
         });
 
         hereAdapter.geocode('Kaiserswerther Str 10, Berlin', function(
@@ -458,8 +441,7 @@
           });
 
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE'
+          apiKey: 'API_KEY',
         });
 
         hereAdapter.geocode('1 champs élysées Paris', function(err, results) {
@@ -490,8 +472,7 @@
           });
 
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE'
+          apiKey: 'API_KEY',
         });
 
         hereAdapter.geocode('1 champs élysées Paris', function(err, results) {
@@ -521,8 +502,7 @@
           .returns({ then: function() {} });
 
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE'
+          apiKey: 'API_KEY',
         });
 
         hereAdapter.reverse({ lat: 10.0235, lon: -2.3662 });
@@ -610,8 +590,7 @@
           });
 
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE'
+          apiKey: 'API_KEY',
         });
 
         hereAdapter.reverse({ lat: 40.714232, lon: -73.9612889 }, function(
@@ -735,8 +714,7 @@
           });
 
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE'
+          apiKey: 'API_KEY',
         });
 
         hereAdapter.reverse({ lat: 40.714232, lon: -73.9612889 }, function(
@@ -770,8 +748,7 @@
           });
 
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
-          appId: 'APP_ID',
-          appCode: 'APP_CODE'
+          apiKey: 'API_KEY',
         });
 
         hereAdapter.reverse({ lat: 40.714232, lon: -73.9612889 }, function(
