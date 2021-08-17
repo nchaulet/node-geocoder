@@ -118,7 +118,6 @@ const geocoder = NodeGeocoder({
   - For `reverse`, you can use [additional parameters](http://nominatim.org/release-docs/latest/api/Reverse/)
   - You should specify a specific `user-agent` or `referrer` header field as required by the [OpenStreetMap Usage Policy](https://operations.osmfoundation.org/policies/nominatim/)
   - Set `options.osmServer` to use custom nominatim server. Example: you can setup local nominatim server by following [these instructions](http://nominatim.org/release-docs/latest/admin/Installation/) and set `options.osmServer: http://localhost:8000` to use local server.
-- `nominatimmapquest`: Same geocoder as `openstreetmap`, but queries the MapQuest servers. You need to specify `options.apiKey`
 - `pickpoint`: PickPoint Geocoder. Supports address geocoding and reverse geocoding. You need to specify `options.apiKey` obtained at [PickPoint](https://pickpoint.io).
   - As parameter for `geocode` function you can use a string representing an address like "13 rue sainte catherine" or an object with parameters described in [Forward Geocoding Reference](https://pickpoint.io/api-reference#forward-geocoding).
   - For `geocode` function you should use an object where `{lat, lon}` are required parameters. Additional parameters like `zoom` are available, see details in [Reverse Geocoding Reference](https://pickpoint.io/api-reference#reverse-geocoding).
