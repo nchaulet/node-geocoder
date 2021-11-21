@@ -117,3 +117,8 @@ Add suppot for osmServer option
 
 - Update here geocoder to support `apiKey`
 - Allow passing of limit parameter to opendatafrance
+
+# 3.28.0
+
+- Fixed GeoCodio Object with formattedAddress and country (#322)
+- Support language feature for open cage (#309)
