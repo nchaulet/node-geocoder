@@ -13,6 +13,16 @@ var stupidGeocoder = {
   },
   reverse: function(data, cb) {
     cb(null, []);
+  },
+  batchGeocode: function(data, cb) {
+    throw new Error('not implemented');
+  }
+};
+
+var stupidBatchGeocoder = {
+  ...stupidGeocoder,
+  batchGeocode: function(data, cb) {
+    cb(null, data);
   }
 };
 
@@ -20,13 +30,16 @@ describe('Geocoder', () => {
   beforeEach(() => {
     sinon.spy(stupidGeocoder, 'geocode');
     sinon.spy(stupidGeocoder, 'reverse');
+    sinon.spy(stupidGeocoder, 'batchGeocode');
+    sinon.spy(stupidBatchGeocoder, 'batchGeocode');
   });
 
   afterEach(() => {
     stupidGeocoder.geocode.restore();
     stupidGeocoder.reverse.restore();
+    stupidGeocoder.batchGeocode.restore();
+    stupidBatchGeocoder.batchGeocode.restore();
   });
-
 
   describe('#constructor' , () => {
     test('Should set _geocoder', () => {
@@ -74,6 +87,16 @@ describe('Geocoder', () => {
       promise.then.should.be.a('function');
 
       return promise;
+    });
+
+    test('Should call stupidBatchGeocoder.batchGeocoder method only once when implemented', () => {
+      var geocoder = new Geocoder(stupidBatchGeocoder);
+      return geocoder.batchGeocode([
+        '127.0.0.1',
+        '127.0.0.1'
+      ]).then(function() {
+        assert.isTrue(stupidBatchGeocoder.batchGeocode.calledOnce);
+      });
     });
   });
 
