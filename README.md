@@ -108,6 +108,7 @@ const geocoder = NodeGeocoder({
   - For `geocode` you can use simple `q` parameter or an object containing the different parameters defined here: http://locationiq.org/#docs
   - For `reverse`, you can pass over `{lat, lon}` and additional parameters defined in http://locationiq.org/#docs
   - No need to specify referer or email addresses, just locationiq api key, note that there are rate limits!
+- `mapbox` : MapBoxGeocoder. Supports address geocoding and reverse geocoding. Needs an apiKey
 - `mapquest` : MapQuestGeocoder. Supports address geocoding and reverse geocoding. Needs an apiKey
 - `nominatimmapquest`: Same geocoder as `openstreetmap`, but queries the MapQuest servers. You need to specify `options.apiKey`
 - `opencage`: OpenCage Geocoder. Aggregates many different open geocoder. Supports address and reverse geocoding with [many optional parameters](https://opencagedata.com/api#forward-opt). You need to specify `options.apiKey` which can be obtained at [OpenCage](https://opencagedata.com).
