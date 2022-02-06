@@ -1,12 +1,10 @@
 name: Test integration CI
 
 on:
-  issue_comment:
-    types: [ created ]
+  workflow_dispatch:
     
 jobs:
   build:
-    if: github.event.issue.pull_request && github.event.comment.body == 'run integrations test'
     runs-on: ubuntu-latest
 
     steps:
