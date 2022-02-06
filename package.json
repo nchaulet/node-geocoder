@@ -4,9 +4,10 @@
   "description": "Node Geocoder, node geocoding library, supports google maps, mapquest, open street map, tom tom, promise",
   "main": "index.js",
   "scripts": {
-    "test": "jest --maxWorkers=2",
+    "test": "jest --maxWorkers=2 ./test",
     "lint": "eslint lib",
-    "ci": "npm run lint && npm run test"
+    "ci": "npm run lint && npm run test",
+    "test:integration": "jest --maxWorkers=2 ./integration_test"
   },
   "repository": {
     "type": "git",
@@ -37,7 +38,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^6.8.0",
-    "jest": "^25.1.0",
+    "jest": "^27.5.0",
     "sinon": "^1.17.3"
   },
   "eslintConfig": {
