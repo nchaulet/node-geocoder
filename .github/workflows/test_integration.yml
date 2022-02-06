@@ -1,8 +1,12 @@
 name: Test integration CI
 
+on:
+  issue_comment:
+    types: [ created ]
+    
 jobs:
   build:
-
+    if: github.event.issue.pull_request && github.event.comment.body == 'run integrations test'
     runs-on: ubuntu-latest
 
     strategy:
