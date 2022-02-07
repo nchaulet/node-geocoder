@@ -6,6 +6,7 @@ var assert = chai.assert;
 var sinon  = require('sinon');
 
 var Geocoder = require('../lib/geocoder.js');
+const AbstractGeocoder = require('../lib/geocoder/abstractgeocoder.js');
 
 var stupidGeocoder = {
   geocode: function(data, cb) {
@@ -13,6 +14,14 @@ var stupidGeocoder = {
   },
   reverse: function(data, cb) {
     cb(null, []);
+  },
+  batchGeocode: AbstractGeocoder.prototype.batchGeocode 
+};
+
+var stupidBatchGeocoder = {
+  ...stupidGeocoder,
+  _batchGeocode: function(data, cb) {
+    cb(null, data);
   }
 };
 
@@ -20,13 +29,14 @@ describe('Geocoder', () => {
   beforeEach(() => {
     sinon.spy(stupidGeocoder, 'geocode');
     sinon.spy(stupidGeocoder, 'reverse');
+    sinon.spy(stupidBatchGeocoder, '_batchGeocode');
   });
 
   afterEach(() => {
     stupidGeocoder.geocode.restore();
     stupidGeocoder.reverse.restore();
+    stupidBatchGeocoder._batchGeocode.restore();
   });
-
 
   describe('#constructor' , () => {
     test('Should set _geocoder', () => {
@@ -74,6 +84,16 @@ describe('Geocoder', () => {
       promise.then.should.be.a('function');
 
       return promise;
+    });
+
+    test('Should call stupidBatchGeocoder.batchGeocoder method only once when implemented', () => {
+      var geocoder = new Geocoder(stupidBatchGeocoder);
+      return geocoder.batchGeocode([
+        '127.0.0.1',
+        '127.0.0.1'
+      ]).then(function() {
+        assert.isTrue(stupidBatchGeocoder._batchGeocode.calledOnce);
+      });
     });
   });
 
