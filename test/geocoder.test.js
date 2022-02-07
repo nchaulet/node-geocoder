@@ -6,6 +6,7 @@ var assert = chai.assert;
 var sinon  = require('sinon');
 
 var Geocoder = require('../lib/geocoder.js');
+const AbstractGeocoder = require('../lib/geocoder/abstractgeocoder.js');
 
 var stupidGeocoder = {
   geocode: function(data, cb) {
@@ -14,14 +15,12 @@ var stupidGeocoder = {
   reverse: function(data, cb) {
     cb(null, []);
   },
-  batchGeocode: function(data, cb) {
-    throw new Error('not implemented');
-  }
+  batchGeocode: AbstractGeocoder.prototype.batchGeocode 
 };
 
 var stupidBatchGeocoder = {
   ...stupidGeocoder,
-  batchGeocode: function(data, cb) {
+  _batchGeocode: function(data, cb) {
     cb(null, data);
   }
 };
@@ -30,15 +29,13 @@ describe('Geocoder', () => {
   beforeEach(() => {
     sinon.spy(stupidGeocoder, 'geocode');
     sinon.spy(stupidGeocoder, 'reverse');
-    sinon.spy(stupidGeocoder, 'batchGeocode');
-    sinon.spy(stupidBatchGeocoder, 'batchGeocode');
+    sinon.spy(stupidBatchGeocoder, '_batchGeocode');
   });
 
   afterEach(() => {
     stupidGeocoder.geocode.restore();
     stupidGeocoder.reverse.restore();
-    stupidGeocoder.batchGeocode.restore();
-    stupidBatchGeocoder.batchGeocode.restore();
+    stupidBatchGeocoder._batchGeocode.restore();
   });
 
   describe('#constructor' , () => {
@@ -95,7 +92,7 @@ describe('Geocoder', () => {
         '127.0.0.1',
         '127.0.0.1'
       ]).then(function() {
-        assert.isTrue(stupidBatchGeocoder.batchGeocode.calledOnce);
+        assert.isTrue(stupidBatchGeocoder._batchGeocode.calledOnce);
       });
     });
   });
