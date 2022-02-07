@@ -122,3 +122,8 @@ Add suppot for osmServer option
 
 - Fixed GeoCodio Object with formattedAddress and country (#322)
 - Support language feature for open cage (#309)
+
+# 3.29.0
+
+- Add `mapbox` geocoder (#317)
+- Improve error handling of non JSON error response (#324)
