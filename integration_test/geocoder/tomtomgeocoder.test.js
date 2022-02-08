@@ -41,8 +41,8 @@ describe('Mapbox geocoder', () => {
       ]);
 
       expect(res[0]).toBeDefined();
-      expect(res[0].values[0]).toBeDefined();
-      expect(res[0].values[0]).toMatchObject({
+      expect(res[0].value[0]).toBeDefined();
+      expect(res[0].value[0]).toMatchObject({
         latitude: 45.52106,
         longitude: -73.61073,
         country: 'Canada',
@@ -52,8 +52,8 @@ describe('Mapbox geocoder', () => {
       });
 
       expect(res[1]).toBeDefined();
-      expect(res[1].values[0]).toBeDefined();
-      expect(res[1].values[0]).toMatchObject({
+      expect(res[1].value[0]).toBeDefined();
+      expect(res[1].value[0]).toMatchObject({
         latitude: 45.53383,
         longitude: -73.58328,
         country: 'Canada',
