@@ -18,3 +18,5 @@ jobs:
       - run: npm run test:integration
         env:
           MAPBOX_API_KEY: ${{ secrets.MAPBOX_API_KEY }}
+          HERE_API_KEY: ${{ secrets.HERE_API_KEY }}
+          TOMTOM_API_KEY: ${{ secrets.TOMTOM_API_KEY }}
