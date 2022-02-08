@@ -127,3 +127,5 @@ Add suppot for osmServer option
 
 - Add `mapbox` geocoder (#317)
 - Improve error handling of non JSON error response (#324)
+- Improve batch geocoding for TomTom (#325)
+- Integrations test for TomTom, Here and Mapbox 
