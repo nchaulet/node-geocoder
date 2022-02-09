@@ -80,7 +80,8 @@ const results = await geocoder.batchGeocode([
 ]);
 
 // Set specific http request headers:
-const nodeFetch = require('node-fetch');
+const undici = require('undici');
+const fetch = undici.fetch;
 
 const geocoder = NodeGeocoder({
   provider: 'google',
