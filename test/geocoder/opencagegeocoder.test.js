@@ -68,6 +68,25 @@
 
             });
 
+            test('Should make a request with no_annotations option', () => {
+
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').withArgs('http://api.opencagedata.com/geocode/v1/json', {
+                    key: 'API_KEY',
+                    q: '1 champs élysée Paris',
+                    no_annotations: 1,
+                }).once().returns({then: function (err,result) {}});
+
+                var ocgAdapter = new OpenCageGeocoder(mockedHttpAdapter, 'API_KEY', {
+                    noAnnotations: 1
+                });
+
+                ocgAdapter.geocode('1 champs élysée Paris');
+
+                mock.verify();
+
+            });
+
             test(
                 'Should call httpAdapter get method with components if called with object',
                 () => {
@@ -215,10 +234,29 @@
                     done();
                 });
             });
-
         });
 
         describe('#reverse' , () => {
+
+            test('Should make a request with no_annotations option', () => {
+
+                var mock = sinon.mock(mockedHttpAdapter);
+                mock.expects('get').withArgs('http://api.opencagedata.com/geocode/v1/json', {
+                    key: 'API_KEY',
+                    q: '13.3826786867678 52.51921145',
+                    no_annotations: 1,
+                }).once().returns({then: function (err,result) {}});
+
+                var ocgAdapter = new OpenCageGeocoder(mockedHttpAdapter, 'API_KEY', {
+                    noAnnotations: 1
+                });
+
+                ocgAdapter.reverse({lat:13.3826786867678, lon:52.51921145});
+
+                mock.verify();
+
+            });
+
             test('Should return geocoded address', done => {
                 var mock = sinon.mock(mockedHttpAdapter);
                 mock.expects('get').once().callsArgWith(2, false, {
