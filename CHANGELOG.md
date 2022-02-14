@@ -132,3 +132,5 @@ Add suppot for osmServer option
 - Integrations test for TomTom, Here and Mapbox 
 
 # 4.0.0
+
+- Remove http adapter (#332)
