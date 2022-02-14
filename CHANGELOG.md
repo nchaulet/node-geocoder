@@ -130,3 +130,5 @@ Add suppot for osmServer option
 - Improve batch geocoding for TomTom (#325)
 - Here batchGeocoding using the Here Batch API (#329)
 - Integrations test for TomTom, Here and Mapbox 
+
+# 4.0.0
