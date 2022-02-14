@@ -128,10 +128,6 @@ const geocoder = NodeGeocoder({
 - `virtualearth`: VirtualEarthGeocoder (Bing maps). Supports address geocoding. You need to specify `options.apiKey`
 - `yandex`: Yandex support address geocoding, you can use `options.language` to specify language
 
-## Http adapter
-
-Http adapter is deprecated, you can now use the `fetch` to provide your own fetch method compatible with the Fetch API [https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
-
 ## Fetch option
 
 With the `options.fetch` you can provide your own method to fetch data. This method should be compatible with the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
