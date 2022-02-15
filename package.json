@@ -3,6 +3,9 @@
   "version": "4.0.0",
   "description": "Node Geocoder, node geocoding library, supports google maps, mapquest, open street map, tom tom, promise",
   "main": "index.js",
+  "engines": {
+    "node": ">=12"
+  },
   "scripts": {
     "test": "jest --maxWorkers=2 ./test",
     "lint": "eslint lib",

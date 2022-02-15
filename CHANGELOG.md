@@ -133,4 +133,6 @@ Add suppot for osmServer option
 
 # 4.0.0
 
+- Support nodejs >= 12
 - Remove http adapter (#332)
+- Remove deprecated option from here geocoder (#333)
