@@ -17,7 +17,7 @@
       test('an http adapter must be set', () => {
         expect(function() {
           new LocationIQGeocoder();
-        }).to.throw(Error, 'ocationIQGeocoder need an httpAdapter');
+        }).to.throw(Error, 'LocationIQGeocoder need an httpAdapter');
       });
 
       test('must have an api key as second argument', () => {
@@ -189,7 +189,7 @@
       test('should ignore "format" and "addressdetails" arguments', done => {
         var mock = sinon.mock(mockedHttpAdapter);
         mock.expects('get').once().callsArgWith(2, false, [])
-          .withArgs('http://locationiq.org/v1/search.php', {
+          .withArgs('http://us1.locationiq.com/v1/search', {
             addressdetails: '1',
             format: 'json',
             key: 'API_KEY',
@@ -213,7 +213,7 @@
       test('Should correctly set extra arguments', done => {
         var mock = sinon.mock(mockedHttpAdapter);
         mock.expects('get').once().callsArgWith(2, false, [])
-          .withArgs('http://osm1.unwiredlabs.com/locationiq/v1/reverse.php', {
+          .withArgs('http://us1.locationiq.com/v1/reverse', {
             addressdetails: '1',
             format: 'json',
             key: 'API_KEY',
@@ -237,7 +237,7 @@
       test('should ignore "format" and "addressdetails" arguments', done => {
         var mock = sinon.mock(mockedHttpAdapter);
         mock.expects('get').once().callsArgWith(2, false, [])
-          .withArgs('http://osm1.unwiredlabs.com/locationiq/v1/reverse.php', {
+          .withArgs('http://us1.locationiq.com/v1/reverse', {
             addressdetails: '1',
             format: 'json',
             key: 'API_KEY',
