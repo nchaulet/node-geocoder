@@ -129,10 +129,14 @@ Add suppot for osmServer option
 - Improve error handling of non JSON error response (#324)
 - Improve batch geocoding for TomTom (#325)
 - Here batchGeocoding using the Here Batch API (#329)
-- Integrations test for TomTom, Here and Mapbox 
+- Integrations test for TomTom, Here and Mapbox
 
 # 4.0.0
 
 - Support nodejs >= 12
 - Remove http adapter (#332)
 - Remove deprecated option from here geocoder (#333)
+
+# 4.1.0
+
+- Changes to LocationIQ API URLs
