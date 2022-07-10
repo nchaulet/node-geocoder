@@ -513,6 +513,28 @@
           done();
         });
       });
+
+      test('Should handle an unauthorized response', done => {
+        var mock = sinon.mock(mockedHttpAdapter);
+        mock
+          .expects('get')
+          .once()
+          .callsArgWith(2, false, {
+            error: 'Unauthorized',
+            error_description: 'apiKey invalid. apiKey not found.'
+          });
+
+        var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
+          apiKey: 'API_KEY'
+        });
+
+        hereAdapter.geocode('1 champs élysées Paris', function (err, results) {
+          err.message.should.to.equal('apiKey invalid. apiKey not found.');
+
+          mock.verify();
+          done();
+        });
+      });
     });
 
     describe('#reverse', () => {
