@@ -140,3 +140,8 @@ Add suppot for osmServer option
 # 4.1.0
 
 - Changes to LocationIQ API URLs
+
+# 4.2.0
+
+- Handle unathorized error from HERE when a wrong API Key is provided. Related with: Crash with HereGeocoder when bad apiKey given #342
+- Fix limit param for TomTom #342
