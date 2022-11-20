@@ -1,6 +1,6 @@
 const NodeGeocoder = require('../../index');
 
-describe('Mapbox geocoder', () => {
+describe('Openstreetmap geocoder', () => {
   let geocoder;
 
   beforeAll(() => {
@@ -26,7 +26,7 @@ describe('Mapbox geocoder', () => {
       });
     });
 
-    it('works with openstreammap params', async () => {
+    it('works with openstreetmap params', async () => {
       const res = await geocoder.geocode({
         q: '1231 Av. Lajoie, Montreal',
         limit: 2
