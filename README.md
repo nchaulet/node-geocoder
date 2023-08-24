@@ -20,7 +20,7 @@ const options = {
 
   // Optional depending on the providers
   fetch: customFetchImplementation,
-  apiKey: 'YOUR_API_KEY', // for Mapquest, OpenCage, Google Premier
+  apiKey: 'YOUR_API_KEY', // for Mapquest, OpenCage, APlace, Google Premier
   formatter: null // 'gpx', 'string', ...
 };
 
@@ -99,6 +99,10 @@ const geocoder = NodeGeocoder({
 ## Geocoder Providers (in alphabetical order)
 
 - `agol` : ArcGis Online Geocoding service. Supports geocoding and reverse. Requires a client_id & client_secret
+- `aplace` : APlace.io Geocoding service. Supports geocoding and reverse. Requires an access token ([read about access tokens here](https://aplace.io/en/documentation/general/authentication)) using `options.apiKey`
+  - For `geocode` you can use simple string parameter or an object containing the different parameters (`type`, `address`, `zip`, `city`, `country`, `countryCode` and `countries`). See available values for `type` and `countries` parameters [here](https://aplace.io/en/documentation/rest-api/search)
+  - For `reverse`, you can pass over `{lat, lon}`
+  - For both methods, use `options.language` (either `fr` or `en`) to specify the language of the results
 - `datasciencetoolkit` : DataScienceToolkitGeocoder. Supports IPv4 geocoding and address geocoding. Use `options.host` to specify a local instance
 - `freegeoip` : FreegeoipGeocoder. Supports IP geocoding
 - `geocodio`: Geocodio, Supports address geocoding and reverse geocoding (US only)
