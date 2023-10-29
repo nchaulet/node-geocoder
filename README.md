@@ -1,7 +1,6 @@
 # node-geocoder
 
-[![Build Status](https://img.shields.io/travis/nchaulet/node-geocoder.svg?style=flat-square)](https://travis-ci.org/nchaulet/node-geocoder)
-![Dependency status](https://img.shields.io/david/nchaulet/node-geocoder.svg?style=flat-square)
+[![Test Status](https://github.com/nchaulet/node-geocoder/actions/workflows/test.yml/badge.svg)](https://github.com/nchaulet/node-geocoder/actions/workflows/test.yml)
 [![npm version](https://img.shields.io/npm/v/node-geocoder.svg?style=flat-square)](https://www.npmjs.com/package/node-geocoder)
 
 Node library for geocoding and reverse geocoding. Can be used as a nodejs library
