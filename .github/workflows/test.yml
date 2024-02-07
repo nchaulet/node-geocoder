@@ -2,18 +2,17 @@ name: Test CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 15.x, 16.x]
+        node-version: [18.x, 20.x, 21.x]
 
     steps:
       - uses: actions/checkout@v2
