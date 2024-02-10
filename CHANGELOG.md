@@ -145,3 +145,9 @@ Add suppot for osmServer option
 
 - Handle unathorized error from HERE when a wrong API Key is provided. Related with: Crash with HereGeocoder when bad apiKey given #342
 - Fix limit param for TomTom #342
+
+# 4.3.0
+
+- Remove support for node < 18
+- Add new geocoder APlace.io (#349)
+- Handling undefined values in here geocoder (#351)
