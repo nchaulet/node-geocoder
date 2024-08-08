@@ -151,3 +151,8 @@ Add suppot for osmServer option
 - Remove support for node < 18
 - Add new geocoder APlace.io (#349)
 - Handling undefined values in here geocoder (#351)
+
+# 4.4.0
+
+- fix: body used already error fix #340 (#346)
+- Fix: Cannot read properties of undefined (reading 'country_code') (#354)
