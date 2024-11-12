@@ -191,6 +191,26 @@ describe('AGOLGeocoder', () => {
           });
   });
 
+  test('Should handle a not "OK" status status with object response', done => {
+    var mock = sinon.mock(mockedRequestifyAdapter);
+
+    mock.expects('get').once().callsArgWith(2, false,
+      {"error":{"code":498,"message":"Invalid Token","details":[]}}
+    );
+    var geocoder = new AGOLGeocoder(mockedRequestifyAdapter,mockedOptions);
+
+    //Force valid tokens (this was tested separately)
+    geocoder._getToken = function(callback) {
+      callback(false,"ABCD");
+    };
+    geocoder.geocode('380 New York St, Redlands, CA 92373', function(err, results) {
+      //err.should.to.equal(false);
+      err.should.to.deep.equal({"code":498,"message":"Invalid Token","details":[]});
+      mock.verify();
+      done();
+    });
+  });
+
   describe('#reverse' , () => {
     test('Should call httpAdapter get method', () => {
 
