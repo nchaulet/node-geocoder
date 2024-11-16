@@ -156,3 +156,7 @@ Add suppot for osmServer option
 
 - fix: body used already error fix #340 (#346)
 - Fix: Cannot read properties of undefined (reading 'country_code') (#354)
+
+# 4.4.1
+
+- fix: agol geocoder convert to json only if response typeof is string (#361)
