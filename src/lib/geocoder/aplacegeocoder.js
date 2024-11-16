@@ -43,11 +43,9 @@ var APlaceGeocoder = function (httpAdapter, options) {
   }
 
   if (!this.options.apiKey) {
-    throw new Error('You must specify a apiKey (see https://aplace.io/en/documentation/general/authentication)');
-  }
-
-  if (this.options.apiKey && !httpAdapter.supportsHttps()) {
-    throw new Error('You must use https http adapter');
+    throw new Error(
+      'You must specify a apiKey (see https://aplace.io/en/documentation/general/authentication)'
+    );
   }
 
   this.options = options;
@@ -58,7 +56,6 @@ util.inherits(APlaceGeocoder, AbstractGeocoder);
 // APlace geocoding API endpoint
 APlaceGeocoder.prototype._geocoderEndpoint =
   'https://api.aplace.io/api/v1.0/search';
-
 
 // APlace reverse API endpoint
 APlaceGeocoder.prototype._reverseEndpoint =
@@ -106,18 +103,18 @@ APlaceGeocoder.prototype.geocode = function (value, callback) {
  */
 APlaceGeocoder.prototype.batchGeocode = function (values, callback) {
   Promise.all(
-    values.map(value =>
-      new Promise(resolve => {
-        this.geocode(value, (error, value) => {
-          resolve({
-            error,
-            value
+    values.map(
+      value =>
+        new Promise(resolve => {
+          this.geocode(value, (error, value) => {
+            resolve({
+              error,
+              value
+            });
           });
-        });
-      })
+        })
     )
-  )
-    .then(data => callback(null, data));
+  ).then(data => callback(null, data));
 };
 
 APlaceGeocoder.prototype._reverse = function (query, callback) {
@@ -136,34 +133,38 @@ APlaceGeocoder.prototype._reverse = function (query, callback) {
       lon: lon
     };
 
-    this.httpAdapter.get(this._reverseEndpoint, params, function (err, response) {
-      if (err) {
-        return callback(err);
-      } else {
-        if (!response.session_id) {
-          return callback(
-            new Error(
-              'Status is ' +
-              response.status +
-              '.' +
-              (response.error_message ? ' ' + response.error_message : '')
-            ),
-            { raw: response }
-          );
-        }
-        var results = [];
+    this.httpAdapter.get(
+      this._reverseEndpoint,
+      params,
+      function (err, response) {
+        if (err) {
+          return callback(err);
+        } else {
+          if (!response.session_id) {
+            return callback(
+              new Error(
+                'Status is ' +
+                  response.status +
+                  '.' +
+                  (response.error_message ? ' ' + response.error_message : '')
+              ),
+              { raw: response }
+            );
+          }
+          var results = [];
 
-        if (response.data && response.data.length > 0) {
-          results.push(that._formatResult(response.data[0]));
+          if (response.data && response.data.length > 0) {
+            results.push(that._formatResult(response.data[0]));
+          }
+          results.raw = response;
+          callback(false, results);
         }
-        results.raw = response;
-        callback(false, results);
       }
-    });
+    );
   } catch (error) {
     return callback(error);
   }
-}
+};
 
 APlaceGeocoder.prototype._geocode = function (value, callback) {
   try {
@@ -197,11 +198,22 @@ APlaceGeocoder.prototype._geocode = function (value, callback) {
       }
     }
 
-    const validResultsTypes = ['house_number', 'road', 'quarter', 'city', 'county', 'state', 'region', 'country'];
+    const validResultsTypes = [
+      'house_number',
+      'road',
+      'quarter',
+      'city',
+      'county',
+      'state',
+      'region',
+      'country'
+    ];
     if (params.type) {
       if (typeof params.type === 'string') {
         if (validResultsTypes.indexOf(params.type) === -1) {
-          throw new Error('type must be one of ' + validResultsTypes.join(', '));
+          throw new Error(
+            'type must be one of ' + validResultsTypes.join(', ')
+          );
         }
       }
     }
@@ -212,34 +224,38 @@ APlaceGeocoder.prototype._geocode = function (value, callback) {
       }
     }
 
-    this.httpAdapter.get(this._geocoderEndpoint, params, function (err, response) {
-      if (err) {
-        return callback(err);
-      } else {
-        if (!response.session_id) {
-          return callback(
-            new Error(
-              'Status is ' +
-              response.status +
-              '.' +
-              (response.error_message ? ' ' + response.error_message : '')
-            ),
-            { raw: response }
-          );
-        }
-        var results = [];
+    this.httpAdapter.get(
+      this._geocoderEndpoint,
+      params,
+      function (err, response) {
+        if (err) {
+          return callback(err);
+        } else {
+          if (!response.session_id) {
+            return callback(
+              new Error(
+                'Status is ' +
+                  response.status +
+                  '.' +
+                  (response.error_message ? ' ' + response.error_message : '')
+              ),
+              { raw: response }
+            );
+          }
+          var results = [];
 
-        if (response.data && response.data.length > 0) {
-          results.push(that._formatResult(response.data[0]));
+          if (response.data && response.data.length > 0) {
+            results.push(that._formatResult(response.data[0]));
+          }
+          results.raw = response;
+          callback(false, results);
         }
-        results.raw = response;
-        callback(false, results);
       }
-    });
+    );
   } catch (error) {
     return callback(error);
   }
-}
+};
 
 APlaceGeocoder.prototype._formatResult = function (result) {
   let formattedAddress = result.match;
@@ -271,21 +287,24 @@ APlaceGeocoder.prototype._formatResult = function (result) {
 
       case 'country':
         extractedObj.administrativeLevels.level1long = result.address.country;
-        extractedObj.administrativeLevels.level1short = result.address.country_code;
+        extractedObj.administrativeLevels.level1short =
+          result.address.country_code;
         extractedObj.extra.country = result.address.country;
         extractedObj.extra.countryCode = result.address.country_code;
         break;
 
       case 'region':
         extractedObj.administrativeLevels.level2long = result.address.region;
-        extractedObj.administrativeLevels.level2short = result.address.region_code;
+        extractedObj.administrativeLevels.level2short =
+          result.address.region_code;
         extractedObj.extra.region = result.address.region;
         extractedObj.extra.regionCode = result.address.region_code;
         break;
 
       case 'state':
         extractedObj.administrativeLevels.level3long = result.address.state;
-        extractedObj.administrativeLevels.level3short = result.address.state_code;
+        extractedObj.administrativeLevels.level3short =
+          result.address.state_code;
         extractedObj.extra.state = result.address.state;
         extractedObj.extra.stateCode = result.address.state_code;
         break;

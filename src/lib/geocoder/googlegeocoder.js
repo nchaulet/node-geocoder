@@ -25,10 +25,6 @@ var GoogleGeocoder = function GoogleGeocoder(httpAdapter, options) {
   if (this.options.clientId && !this.options.apiKey) {
     throw new Error('You must specify a apiKey (privateKey)');
   }
-
-  if (this.options.apiKey && !httpAdapter.supportsHttps()) {
-    throw new Error('You must use https http adapter');
-  }
 };
 
 util.inherits(GoogleGeocoder, AbstractGeocoder);

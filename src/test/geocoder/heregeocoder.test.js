@@ -10,9 +10,6 @@
   var mockedHttpAdapter = {
     get: function () {
       return {};
-    },
-    supportsHttps: function () {
-      return true;
     }
   };
 
@@ -516,13 +513,10 @@
 
       test('Should handle an unauthorized response', done => {
         var mock = sinon.mock(mockedHttpAdapter);
-        mock
-          .expects('get')
-          .once()
-          .callsArgWith(2, false, {
-            error: 'Unauthorized',
-            error_description: 'apiKey invalid. apiKey not found.'
-          });
+        mock.expects('get').once().callsArgWith(2, false, {
+          error: 'Unauthorized',
+          error_description: 'apiKey invalid. apiKey not found.'
+        });
 
         var hereAdapter = new HereGeocoder(mockedHttpAdapter, {
           apiKey: 'API_KEY'

@@ -11,9 +11,6 @@ var HttpAdapter = require('../../lib/httpadapter/fetchadapter.js');
 var mockedHttpAdapter = {
   get: function () {
     return {};
-  },
-  supportsHttps: function () {
-    return true;
   }
 };
 
@@ -403,14 +400,11 @@ describe('GoogleGeocoder', () => {
 
     test('Should handle a not "OK" status', done => {
       var mock = sinon.mock(mockedHttpAdapter);
-      mock
-        .expects('get')
-        .once()
-        .callsArgWith(2, false, {
-          status: 'OVER_QUERY_LIMIT',
-          error_message: 'You have exceeded your rate-limit for this API.',
-          results: []
-        });
+      mock.expects('get').once().callsArgWith(2, false, {
+        status: 'OVER_QUERY_LIMIT',
+        error_message: 'You have exceeded your rate-limit for this API.',
+        results: []
+      });
 
       var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
 
@@ -842,14 +836,11 @@ describe('GoogleGeocoder', () => {
 
     test('Should handle a not "OK" status', done => {
       var mock = sinon.mock(mockedHttpAdapter);
-      mock
-        .expects('get')
-        .once()
-        .callsArgWith(2, false, {
-          status: 'OVER_QUERY_LIMIT',
-          error_message: 'You have exceeded your rate-limit for this API.',
-          results: []
-        });
+      mock.expects('get').once().callsArgWith(2, false, {
+        status: 'OVER_QUERY_LIMIT',
+        error_message: 'You have exceeded your rate-limit for this API.',
+        results: []
+      });
 
       var googleAdapter = new GoogleGeocoder(mockedHttpAdapter);
 
