@@ -1,4 +1,5 @@
-'use strict';
+import { StringFormatter } from './formatter/stringformatter';
+import { GpxFormatter } from './formatter/gpxformatter';
 
 const Helper = require('./helper.js');
 const Geocoder = require('./geocoder.js');
@@ -28,26 +29,47 @@ const OpendataFranceGeocoder = require('./geocoder/opendatafrancegeocoder.js');
 const MapBoxGeocoder = require('./geocoder/mapboxgeocoder.js');
 const APlaceGeocoder = require('./geocoder/aplacegeocoder.js');
 
+function getFetchAdapter(options: any) {
+  return new FetchAdapter(options);
+}
+
+export type GeocoderName =
+  | 'google'
+  | 'here'
+  | 'agol'
+  | 'freegeoip'
+  | 'datasciencetoolkit'
+  | 'openstreetmap'
+  | 'pickpoint'
+  | 'locationiq'
+  | 'mapquest'
+  | 'mapzen'
+  | 'openmapquest'
+  | 'yandex'
+  | 'geocodio'
+  | 'opencage'
+  | 'nominatimmapquest'
+  | 'tomtom'
+  | 'virtualearth'
+  | 'smartystreets'
+  | 'teleport'
+  | 'opendatafrance'
+  | 'mapbox'
+  | 'aplace';
 /**
  * Geocoder Facotry
  */
 const GeocoderFactory = {
   /**
-   * Return an http adapter by name
-   * @param  <string> adapterName adapter name
-   * @return <object>
-   */
-  _getHttpAdapter: function (adapterName, options) {
-    if (adapterName === 'fetch') {
-      return new FetchAdapter(options);
-    }
-  },
-  /**
    * Return a geocoder adapter by name
    * @param  <string> adapterName adapter name
    * @return <object>
    */
-  _getGeocoder: function (geocoderName, adapter, extra) {
+  _getGeocoder: function (
+    geocoderName: GeocoderName,
+    adapter: any,
+    extra: any
+  ) {
     if (geocoderName === 'google') {
       return new GoogleGeocoder(adapter, {
         clientId: extra.clientId,
@@ -162,16 +184,12 @@ const GeocoderFactory = {
    * @param  <string> adapterName adapter name
    * @return <object>
    */
-  _getFormatter: function (formatterName, extra) {
+  _getFormatter: function (formatterName: any, extra: any) {
     if (formatterName === 'gpx') {
-      var GpxFormatter = require('./formatter/gpxformatter.js');
-
       return new GpxFormatter();
     }
 
     if (formatterName === 'string') {
-      var StringFormatter = require('./formatter/stringformatter.js');
-
       return new StringFormatter(extra.formatterPattern);
     }
   },
@@ -181,38 +199,22 @@ const GeocoderFactory = {
    * @param  <array>         extra           Extra parameters array
    * @return <object>
    */
-  getGeocoder: function (geocoderAdapter, extra) {
-    if (typeof geocoderAdapter === 'object') {
-      extra = geocoderAdapter;
-      geocoderAdapter = null;
+  getGeocoder: function (provider: GeocoderName, options: any = {}) {
+    if (!options) {
+      options = {};
     }
 
-    if (!extra) {
-      extra = {};
-    }
+    const httpAdapter = getFetchAdapter(options);
 
-    if (extra.provider) {
-      geocoderAdapter = extra.provider;
-    }
+    const geocoderAdapter = this._getGeocoder(provider, httpAdapter, options);
 
-    if (!geocoderAdapter) {
-      geocoderAdapter = 'google';
-    }
-
-    const httpAdapter = this._getHttpAdapter('fetch', extra);
-
-    if (Helper.isString(geocoderAdapter)) {
-      geocoderAdapter = this._getGeocoder(geocoderAdapter, httpAdapter, extra);
-    }
-
-    var formatter = extra.formatter;
-
+    let formatter = options.formatter;
     if (Helper.isString(formatter)) {
-      formatter = this._getFormatter(formatter, extra);
+      formatter = this._getFormatter(formatter, options);
     }
 
     return new Geocoder(geocoderAdapter, formatter);
   }
 };
 
-module.exports = GeocoderFactory;
+export { GeocoderFactory };

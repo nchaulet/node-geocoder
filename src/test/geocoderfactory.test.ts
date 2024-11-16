@@ -1,3 +1,7 @@
+import { GpxFormatter } from '../lib/formatter/gpxformatter';
+import { StringFormatter } from '../lib/formatter/stringformatter';
+import { GeocoderFactory, GeocoderName } from '../lib/geocoderfactory';
+
 const chai = require('chai');
 const should = chai.should();
 const expect = chai.expect;
@@ -5,16 +9,12 @@ const sinon = require('sinon');
 
 const GoogleGeocoder = require('../lib/geocoder/googlegeocoder.js');
 const HereGeocoder = require('../lib/geocoder/heregeocoder.js');
-const GeocoderFactory = require('../lib/geocoderfactory.js');
 const DataScienceToolkitGeocoder = require('../lib/geocoder/datasciencetoolkitgeocoder.js');
 const OpenStreetMapGeocoder = require('../lib/geocoder/openstreetmapgeocoder.js');
 const LocationIQGeocoder = require('../lib/geocoder/locationiqgeocoder.js');
 const PickPointGeocoder = require('../lib/geocoder/pickpointgeocoder.js');
 
 const FetchAdapter = require('../lib/httpadapter/fetchadapter.js');
-
-const GpxFormatter = require('../lib/formatter/gpxformatter.js');
-const StringFormatter = require('../lib/formatter/stringformatter.js');
 
 describe('GeocoderFactory', () => {
   describe('getGeocoder', () => {
@@ -33,8 +33,7 @@ describe('GeocoderFactory', () => {
     });
 
     test('called with "google", and extra business key must return google geocoder with business key', () => {
-      const geocoder = GeocoderFactory.getGeocoder({
-        provider: 'google',
+      const geocoder = GeocoderFactory.getGeocoder('google', {
         clientId: 'CLIENT_ID',
         apiKey: 'API_KEY'
       });
@@ -130,8 +129,7 @@ describe('GeocoderFactory', () => {
     });
 
     test('called with "here", "http" and extra business key must return here geocoder with business key', () => {
-      const geocoder = GeocoderFactory.getGeocoder({
-        provider: 'here',
+      const geocoder = GeocoderFactory.getGeocoder('here', {
         appId: 'APP_ID',
         appCode: 'APP_CODE'
       });
@@ -288,7 +286,7 @@ describe('GeocoderFactory', () => {
 
     test('called with "zaertyazeaze" must throw an error', () => {
       expect(function () {
-        GeocoderFactory.getGeocoder('zaertyazeaze');
+        GeocoderFactory.getGeocoder('zaertyazeaze' as GeocoderName);
       }).to.throw(Error, 'No geocoder provider find for : zaertyazeaze');
     });
 

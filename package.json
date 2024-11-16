@@ -7,9 +7,10 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "tsc --declaration",
+    "build": "tsc",
+    "check": "tsc --noEmit ",
     "clean": "rm -rf dist",
-    "test": "jest --maxWorkers=2 ./src/test",
+    "test": "jest --maxWorkers=2 ./src",
     "lint": "eslint lib",
     "ci": "npm run lint && npm run test",
     "test:integration": "jest --maxWorkers=2 ./integration_test"
@@ -39,10 +40,11 @@
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
     "chai": "^3.5.0",
     "eslint": "^6.8.0",
-    "jest": "^27.5.0",
     "sinon": "^1.17.3",
+    "ts-jest": "^29.2.5",
     "typescript": "^5.6.3"
   },
   "eslintConfig": {
@@ -70,8 +72,5 @@
       "comma-spacing": 0,
       "no-unreachable": 1
     }
-  },
-  "jest": {
-    "testEnvironment": "node"
   }
 }

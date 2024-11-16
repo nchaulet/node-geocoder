@@ -1,13 +1,11 @@
 'use strict';
 
 import type Geocoder from './lib/geocoder';
-import GeocoderFactory from './lib/geocoderfactory';
+import { GeocoderFactory, type GeocoderName } from './lib/geocoderfactory';
 
-// const GeocoderFactory = require('./lib/geocoderfactory.js');
-
-export type { Geocoder };
+export type { Geocoder, GeocoderName };
 
 // TODO: types options
-export function getGeocoder(geocoderAdapter: string, options: any): Geocoder {
-  return GeocoderFactory.getGeocoder(geocoderAdapter, options);
+export function getGeocoder(provider: GeocoderName, options: any): Geocoder {
+  return GeocoderFactory.getGeocoder(provider, options);
 }
