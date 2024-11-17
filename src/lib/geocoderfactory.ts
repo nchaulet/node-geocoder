@@ -2,7 +2,7 @@ import { StringFormatter } from './formatter/stringformatter';
 import { GpxFormatter } from './formatter/gpxformatter';
 
 const Helper = require('./helper.js');
-const Geocoder = require('./geocoder.js');
+import { Geocoder } from './geocoder';
 
 const FetchAdapter = require('./httpadapter/fetchadapter.js');
 

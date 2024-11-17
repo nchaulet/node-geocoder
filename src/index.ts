@@ -1,6 +1,6 @@
 'use strict';
 
-import type Geocoder from './lib/geocoder';
+import type { Geocoder } from './lib/geocoder';
 import { GeocoderFactory, type GeocoderName } from './lib/geocoderfactory';
 
 export type { Geocoder, GeocoderName };

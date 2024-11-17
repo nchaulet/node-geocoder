@@ -23,7 +23,7 @@ describe('GeocoderFactory', () => {
         clientId: 'CLIENT_ID',
         apiKey: 'API_KEY'
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(GoogleGeocoder);
@@ -38,6 +38,7 @@ describe('GeocoderFactory', () => {
         apiKey: 'API_KEY'
       });
 
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(GoogleGeocoder);
@@ -52,7 +53,7 @@ describe('GeocoderFactory', () => {
         apiKey: 'API_KEY',
         excludePartialMatches: true
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(GoogleGeocoder);
@@ -68,7 +69,7 @@ describe('GeocoderFactory', () => {
         apiKey: 'API_KEY',
         excludePartialMatches: true
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(GoogleGeocoder);
@@ -83,7 +84,7 @@ describe('GeocoderFactory', () => {
         language: 'fr',
         region: 'de'
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(GoogleGeocoder);
@@ -96,8 +97,9 @@ describe('GeocoderFactory', () => {
       const geocoder = GeocoderFactory.getGeocoder('google', {
         formatter: 'gpx'
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
+      // @ts-expect-error
       const formatter = geocoder._formatter;
 
       geocoderAdapter.should.be.instanceof(GoogleGeocoder);
@@ -110,8 +112,9 @@ describe('GeocoderFactory', () => {
         formatter: 'string',
         formatterPattern: 'PATTERN'
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
+      // @ts-expect-error
       const formatter = geocoder._formatter;
 
       geocoderAdapter.should.be.instanceof(GoogleGeocoder);
@@ -121,7 +124,7 @@ describe('GeocoderFactory', () => {
 
     test('called with "google" must return google geocoder with fetch adapter', () => {
       const geocoder = GeocoderFactory.getGeocoder('google');
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(GoogleGeocoder);
@@ -133,7 +136,7 @@ describe('GeocoderFactory', () => {
         appId: 'APP_ID',
         appCode: 'APP_CODE'
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(HereGeocoder);
@@ -147,7 +150,7 @@ describe('GeocoderFactory', () => {
         appId: 'APP_ID',
         appCode: 'APP_CODE'
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(HereGeocoder);
@@ -162,7 +165,7 @@ describe('GeocoderFactory', () => {
         appCode: 'APP_CODE',
         language: 'en'
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(HereGeocoder);
@@ -176,7 +179,7 @@ describe('GeocoderFactory', () => {
         appCode: 'APP_CODE',
         politicalView: 'GRE'
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(HereGeocoder);
@@ -190,7 +193,7 @@ describe('GeocoderFactory', () => {
         appCode: 'APP_CODE',
         country: 'FR'
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(HereGeocoder);
@@ -204,7 +207,7 @@ describe('GeocoderFactory', () => {
         appCode: 'APP_CODE',
         state: 'Île-de-France'
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(HereGeocoder);
@@ -219,7 +222,9 @@ describe('GeocoderFactory', () => {
         formatter: 'gpx'
       });
 
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
+      // @ts-expect-error
       const formatter = geocoder._formatter;
 
       geocoderAdapter.should.be.instanceof(HereGeocoder);
@@ -234,8 +239,9 @@ describe('GeocoderFactory', () => {
         formatter: 'string',
         formatterPattern: 'PATTERN'
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
+      // @ts-expect-error
       const formatter = geocoder._formatter;
 
       geocoderAdapter.should.be.instanceof(HereGeocoder);
@@ -245,7 +251,7 @@ describe('GeocoderFactory', () => {
 
     test('called with "datasciencetoolkit" and "http" must return datasciencetoolkit geocoder', () => {
       const geocoder = GeocoderFactory.getGeocoder('datasciencetoolkit');
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(DataScienceToolkitGeocoder);
@@ -256,7 +262,7 @@ describe('GeocoderFactory', () => {
       const geocoder = GeocoderFactory.getGeocoder('datasciencetoolkit', {
         host: 'raoul.io'
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(DataScienceToolkitGeocoder);
@@ -266,7 +272,7 @@ describe('GeocoderFactory', () => {
 
     test('called with "openstreetmap" and "http" must return openstreetmap geocoder with adapter', () => {
       const geocoder = GeocoderFactory.getGeocoder('openstreetmap');
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(OpenStreetMapGeocoder);
@@ -277,7 +283,7 @@ describe('GeocoderFactory', () => {
       const geocoder = GeocoderFactory.getGeocoder('locationiq', {
         apiKey: 'API_KEY'
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(LocationIQGeocoder, 'api-key');
@@ -297,7 +303,7 @@ describe('GeocoderFactory', () => {
         apiKey: 'API_KEY',
         timeout: timeout
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(GoogleGeocoder);
@@ -309,7 +315,7 @@ describe('GeocoderFactory', () => {
       const geocoder = GeocoderFactory.getGeocoder('pickpoint', {
         apiKey: 'API_KEY'
       });
-
+      // @ts-expect-error
       const geocoderAdapter = geocoder._geocoder;
 
       geocoderAdapter.should.be.instanceof(PickPointGeocoder);
